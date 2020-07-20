@@ -74,13 +74,14 @@ include "includes/sidebar.php";
                               </div>
                             </div>
                           </div>
+
                           <div class="row">
                             <div class="col-md-6">
                               <div class="form-group row">
                                 <label class="col-sm-3 col-form-label">Unit Price</label>
                                 <div class="col-sm-9">
                                   <div class="input-group">
-                                    <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+                                    <input type="text" class="form-control" >
                                       <div class="input-group-prepend">
                                         <span class="input-group-text bg-gradient-primary text-white">Birr</span>
                                       </div>
@@ -93,7 +94,7 @@ include "includes/sidebar.php";
                                 <label class="col-sm-3 col-form-label">Total Price</label>
                                 <div class="col-sm-9">
                                 <div class="input-group">
-                                    <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+                                    <input type="text" class="form-control">
                                       <div class="input-group-prepend">
                                         <span class="input-group-text bg-gradient-primary text-white">Birr</span>
                                       </div>
@@ -104,6 +105,17 @@ include "includes/sidebar.php";
                           </div>
                       </div>
                       
+                      <div class="row">
+                            <div class="col-md-12">
+                              <div class="form-group row">
+                                <label class="col-sm-2 col-form-label">Remark</label>
+                                <div class="col-sm-10">
+                                  <input type="text" class="form-control" />
+                                </div>
+                              </div>
+                            </div>
+                      </div>
+
                       <div class="row">
                         <div class="col-md-12">
                           <div class="form-group row">
