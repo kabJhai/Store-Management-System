@@ -8,7 +8,9 @@ include "includes/sidebar.php";
           <div class="col-12">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Store Requisition Voucher (SRV)</h4>
+                    <h4 class="card-title">Store Requisition Voucher (SRV)
+                      <span class="record_number">Number: 205032</span>
+                    </h4>
                     <form class="form-sample">
                       <p class="card-description">
                       <strong>Date <span id="date"></span></strong><br/>
@@ -18,41 +20,56 @@ include "includes/sidebar.php";
                     document.getElementById('date').innerHTML = d.getDate()+" - "+(d.getUTCMonth()+1)+" - "+d.getFullYear();
                         </script>
                       </p>
+
+                      <p class="card-description">S.N 1 </p>
                       <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                           <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">First Name</label>
-                            <div class="col-sm-9">
+                            <label class="col-sm-4 col-form-label">Code</label>
+                            <div class="col-sm-8">
                               <input type="text" class="form-control" />
                             </div>
                           </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-8">
                           <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Last Name</label>
+                            <label class="col-sm-3 col-form-label">Material Description</label>
                             <div class="col-sm-9">
                               <input type="text" class="form-control" />
                             </div>
                           </div>
                         </div>
                       </div>
+
                       <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                           <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Gender</label>
-                            <div class="col-sm-9">
+                            <label class="col-sm-4 col-form-label">Unit</label>
+                            <div class="col-sm-8">
                               <select class="form-control">
-                                <option>Male</option>
-                                <option>Female</option>
+                                <option>Dozen</option>
+                                <option>Inch</option>
+                                <option>Kilogram</option>
+                                <option>Meter</option>
+                                <option>Liter</option>
+                                <option>Peice</option>
                               </select>
                             </div>
                           </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-4">
                           <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Date of Birth</label>
-                            <div class="col-sm-9">
-                              <input class="form-control" placeholder="dd/mm/yyyy" />
+                            <label class="col-sm-5 col-form-label">Qty. Requested</label>
+                            <div class="col-sm-7">
+                              <input class="form-control" placeholder="" />
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col-md-4">
+                          <div class="form-group row">
+                            <label class="col-sm-5 col-form-label">Qty. Issued</label>
+                            <div class="col-sm-7">
+                              <input class="form-control" placeholder="" />
                             </div>
                           </div>
                         </div>
@@ -60,91 +77,17 @@ include "includes/sidebar.php";
                       <div class="row">
                         <div class="col-md-6">
                           <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Category</label>
+                            <label class="col-sm-3 col-form-label">Unit Price</label>
                             <div class="col-sm-9">
-                              <select class="form-control">
-                                <option>Category1</option>
-                                <option>Category2</option>
-                                <option>Category3</option>
-                                <option>Category4</option>
-                              </select>
+                              <input class="form-control" placeholder="" />
                             </div>
                           </div>
                         </div>
                         <div class="col-md-6">
                           <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Membership</label>
-                            <div class="col-sm-4">
-                              <div class="form-check">
-                                <label class="form-check-label">
-                                  <input type="radio" class="form-check-input" name="membershipRadios" id="membershipRadios1" value="" checked> Free </label>
-                              </div>
-                            </div>
-                            <div class="col-sm-5">
-                              <div class="form-check">
-                                <label class="form-check-label">
-                                  <input type="radio" class="form-check-input" name="membershipRadios" id="membershipRadios2" value="option2"> Professional </label>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <p class="card-description"> Address </p>
-                      <div class="row">
-                        <div class="col-md-6">
-                          <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Address 1</label>
+                            <label class="col-sm-3 col-form-label">Total Price</label>
                             <div class="col-sm-9">
-                              <input type="text" class="form-control" />
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">State</label>
-                            <div class="col-sm-9">
-                              <input type="text" class="form-control" />
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-md-6">
-                          <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Address 2</label>
-                            <div class="col-sm-9">
-                              <input type="text" class="form-control" />
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Postcode</label>
-                            <div class="col-sm-9">
-                              <input type="text" class="form-control" />
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-md-6">
-                          <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">City</label>
-                            <div class="col-sm-9">
-                              <input type="text" class="form-control" />
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Country</label>
-                            <div class="col-sm-9">
-                              <select class="form-control">
-                                <option>America</option>
-                                <option>Italy</option>
-                                <option>Russia</option>
-                                <option>Britain</option>
-                              </select>
+                              <input class="form-control" placeholder="" />
                             </div>
                           </div>
                         </div>
@@ -154,20 +97,19 @@ include "includes/sidebar.php";
                           <div class="form-group row">
                             <label class="col-sm-5 col-form-label">Requested By</label>
                             <div class="col-sm-7">
+                            <p class="form-control">
                               Abebe Kebede Chanyalew
+                            </p>
                             </div>
                           </div>
                         </div>
                         <div class="col-md-6">
                           <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Country</label>
+                            <label class="col-sm-3 col-form-label">Approved By</label>
                             <div class="col-sm-9">
-                              <select class="form-control">
-                                <option>America</option>
-                                <option>Italy</option>
-                                <option>Russia</option>
-                                <option>Britain</option>
-                              </select>
+                              <p class="form-control">
+                                Not Approved
+                              </p>
                             </div>
                           </div>
                         </div>
