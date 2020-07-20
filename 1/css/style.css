@@ -1,0 +1,516 @@
+@import 'awesome/font-awesome.min.css';
+@import 'animate.css';
+*{
+    margin:0;
+    padding:0;
+    overflow:hidden;
+    /*"Adobe Gothic Std B"*/
+    font-family: "Yu Gothic";
+    z-index:0;
+    color:#404040;
+}
+aside{
+    width: 20%;
+    float: left;
+}
+/* Right Side Body*/
+.main_body{
+    overflow-y: scroll;
+    height: 100%;
+    background-color: #eee;
+}
+/* Header css*/
+header{
+    background:#0B0F2E;
+    color: white;
+    width: 82%;float: left;
+}
+.logo{
+    height: 100px;
+    width: 100px;
+    margin-left:25%;
+    margin-bottom: 2%;
+
+}
+/* Left menu css*/
+.church_name{
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    border-top-style: ridge;
+    border-bottom-style: ridge;
+    border-width: 1px;
+}
+.left_menu{
+    background-color: #202340;
+    height: 100%;
+    padding-top:5%;
+    font-size: 14px;
+}
+.left_menu_items{
+    overflow: hidden;
+    margin-top: 6%;
+    width:330px;
+}
+.left_menu_items i{
+    color: white;
+}
+.left_menu a{
+    color: #ffffff;
+    text-decoration: none;
+    width: 100%;
+    padding-left: 5%;
+    padding-right: 40%;
+}
+.left_menu .left_menu_items li:hover a,.left_menu .left_menu_items li:hover i{
+    font-weight: bold;
+    color: #ff3f05;
+}
+.left_menu .left_menu_items li:hover {
+    background-color: #fff;
+    -webkit-animation-name: pulse;
+    animation-name: pulse;
+    -webkit-animation-duration: 1s;
+    animation-duration: 1s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+    overflow-y:  hidden;
+    border-style: inset;
+}
+.left_menu .left_menu_items  li{
+    list-style: none;
+    overflow: hidden;
+}
+/* Left Menu Dropdown*/
+#members_dropdown,#admins_dropdown{
+    position: absolute;
+    display: none;
+    background-color:white;
+    margin-top: 16%;
+    z-index: 1;
+    width: 20%;
+}
+#members_dropdown,#admins_dropdown a{
+    width:29%;
+}
+#admins_dropdown{
+    margin-top: 19%;
+}
+
+#members_dropdown a,#admins_dropdown a{
+    color: #404040;
+}
+#members_dropdown a:hover,#admins_dropdown a:hover{
+    color: #ff3f05;
+}
+/*Login Page*/
+#login_form{
+    margin: auto;
+    margin-top: 10%;
+    overflow: hidden;
+    width:20%
+}
+#login_form .logo{
+    margin-left:30%;
+    margin-bottom:5%
+}
+#login_form button{
+    width:98%;
+    margin-left: 1%;
+    background-color: #0B0F2E;
+    color: white;
+    border-style: none;
+}
+#login_form button:hover{
+    background-color: #e3e3e3;
+}
+#login_form input{
+    padding: 2%;
+    margin: 1%;
+    border-style:solid;
+    border-color:#404040;
+    width:-webkit-fill-available;
+    width: -moz-available;
+}
+#login_body{
+    background-color: #efefef;
+}
+#photo_id{
+    width: 300px;
+}
+/* Adminstrator page*/
+#register_form,#register_members_form{
+    width: 90%;
+}
+#register_form input,#register_members_form input{
+    width: 98%
+}
+#register_form input,#register_form select,#register_members_form input,#register_members_form select{
+    border-style: solid
+}
+#register_form select,#register_members_form select{
+    width: 98%
+}
+#register{
+    border-style: none;
+}
+#position,#register{
+    width: 98%;
+}
+#register{
+    background-color: #0B0F2E;
+    color: white;
+}
+#register_form {
+    padding: 15%;
+    margin: auto;
+}
+#register_members_form {
+    padding-left: 15%;
+    padding-right: 15%;
+    padding-top: 2%;
+    padding-bottom: 8%;
+    margin: auto;
+}
+#register_form input ,#register_form button,#register_form select,#register_members_form input ,#register_members_form button,#register_members_form select{
+    margin: 1%;
+}
+#members_photo{
+    padding-top:8%;
+    margin: auto;
+}
+#members_photo img{
+    margin: 2%;
+}
+/* Animations*/
+@keyframes pulse {
+    0% {
+        -webkit-transform: scale(1);
+        -ms-transform: scale(1);
+        transform: scale(1);
+    }
+
+    50% {
+        -webkit-transform: scale(1.2);
+        -ms-transform: scale(1.2);
+        transform: scale(1.2);
+    }
+
+    100% {
+        -webkit-transform: scale(1);
+        -ms-transform: scale(1);
+        transform: scale(1);
+    }
+}
+/*Content Section*/
+section{
+    padding: 1%;
+}
+section .center-logo{
+    margin-left: 40%;
+    width: 200px
+}
+#page_title{
+    text-align: center;
+    margin-top: 3%;
+}
+#page_content{
+    text-align:justify;
+}
+.feature_list li{
+    margin-left: 2%;
+}
+/* View Admins Style*/
+#show_admins{
+    width: 100%;
+
+}
+#show_admins tr:nth-of-type(odd){
+    background-color: #D5E2FF;
+}
+#show_admins tr:nth-of-type(odd){
+    animation-delay: .6s;
+
+}
+#show_admins tr:nth-of-type(even){
+    animation-delay: .3s;
+
+}
+#show_admins tr:nth-of-type(odd):hover,#show_admins tr:nth-of-type(even):hover{
+    background-color: #D5E2AA;
+}
+#show_admins tr:nth-of-type(1):hover{
+    background-color:#D5E2FF;
+}
+#show_admins tr:nth-of-type(even){
+    background-color: #EFFFE9;
+}
+#show_admins a{
+    border-style: none;
+    background-color: transparent;
+    font-size: 20px;
+    text-align: center;
+}
+#show_admins a:hover i{
+    color: #0B0F2E;
+}
+
+/* Error */
+.error{
+    background-color: #ff3a3a;
+    color: white;
+    text-align: center;
+}
+/* Success */
+.success{
+    background-color: #15a302;
+    text-align: center;
+    color: white;
+}
+/* View Member*/
+#paper_form,.paper_form{
+    background-color: white;
+    width:90%;
+    margin-left:4%;
+    border-style: solid;
+    border-width: 0.1px;
+    border-color: #ccc;
+    padding: 2%;
+    margin-bottom: 10%;
+}
+#header_of_paper{
+    text-align: center;
+    border-bottom-style: solid;
+    border-width: 1px;
+    margin-bottom: 1%;
+}
+.inner_info_table{
+    width: 100%;
+}
+.inner_info_table td{
+    padding: 1%;
+}
+#user_image{
+    width: 200px;
+    height: 200px;
+}
+.view_one_user{
+    width: 100%;
+}
+.view_one_user img{
+    margin-left: 30%
+}
+.view_one_user td:nth-of-type(2){
+    font-weight: bold;
+}
+.inner_info_table td:nth-of-type(2){
+    border-bottom-style: solid;
+    border-bottom-width: 1px
+}
+.inner_info_table td:nth-of-type(2){
+    text-align: left;
+}
+.view_one_user td:nth-of-type(1){
+    width: 190px;
+}
+.view_one_user td:nth-of-type(2){
+    width: 190px;
+}
+.tajaajila td:nth-of-type(2){
+    text-align: center
+}
+#header_logo{
+    width: 60px;
+    height: 60px;
+    margin-right:10px;
+    margin-top: 10px;
+    float: left
+}
+#header_of_paper{
+    font-size: 35px
+}
+#view_methods td{
+    border-style: none;
+}
+#view_methods a{
+    text-decoration: none;
+    color:white;
+}
+#view_methods a:hover{
+    text-decoration: underline;
+}
+#view_methods{
+    border-top-style: solid;
+    border-bottom-style: solid;
+    border-width: 1px;
+    background: #404040;
+    margin-top: 1%
+}
+.dead td , .dead .fa-folder-open ,.dead .fa-pencil,.dead .fa-trash{
+    background-color: black;
+    color: white;
+    font-weight: bold;
+}
+.dead_header{
+    background: black;
+    color: white
+}
+/*Add or Edit Children page*/
+.children{
+    padding: 10%;
+}
+.children td:nth-of-type(1){
+    width: 300px;
+}
+.children td:nth-of-type(2){
+    width: 300px;
+}
+.children #register_members_form{
+    width: 900px;
+    margin-top: 5%
+}
+.children_table td:nth-of-type(3){
+    width: 20%;
+}
+.children_table tr:nth-of-type(1) td{
+    color: white;
+    background: #303030;
+}
+#waraqaa_geggeessituu{
+    background: transparent;
+    color: white;
+    border-style: none;
+    font-size: 16px
+}
+#waraqaa_geggeessituu:hover{
+    text-decoration: underline;
+}
+#church_leader_name{
+    display: block;
+    float: right;
+    margin-top: 4%;
+    margin-right: 2%;
+}
+#search_field{
+    width: 90%;
+    float: left;
+    height: 40px;
+    font-size: large;
+    border-color: #e3e3e3;
+    border-style: solid;
+    border-right-style: none;
+    padding: 1%
+}
+.search_button{
+    height: 40px;
+    width: 10%;
+    font-size: large;
+    border-style: solid;
+    float: left;
+    border-left-style: none;
+}
+.search_button,#search_field{
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+
+/*Index Style*/
+.main_report_table{
+    width: 50%;
+    margin-left: 20%;
+    margin-bottom: 10%
+}
+.main_report_table td:nth-of-type(even){
+    width: 5%;
+    text-align:center;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+}
+.main_report_table td:nth-of-type(odd){
+    width: 5%;
+    font-weight: bold;
+}
+.main_report_table td:nth-of-type(odd):hover {
+    background-color: #404040;
+    color: white
+}
+.report_title{
+    margin-left: 5%
+}
+#date{
+    margin-right: 10%;
+    font-weight: bold;
+}
+#print_report_button{
+    background-color: #0B0F2E;
+    color: white;
+    border-style: none;
+    width: 100%
+}
+/*Year End Style*/
+#print_report .main_report_table .report_anchor{
+    color: white;
+    text-decoration: none;
+    font-size: smaller;
+    font-weight: normal;
+}
+.generate_report *{
+    text-align: center;
+    width: 10%
+}
+.generate_report td{
+    background-color: #0B0F2E;
+}
+/*All Members Style*/
+.floating_button{
+    position: absolute;
+    display: block;
+    width: 110px!important;
+    height: 110px;
+    border-radius: 100px;
+    background-color: #e6b424 !important;
+    font-weight: bold;
+    font-size: 54px;
+    z-index: 1000;
+}
+.other_data{
+    width: 80px!important;
+    height: 80px;
+    font-size: 43px;
+    margin-left: 60%;
+    margin-top: 10%
+}
+.all_members_data{
+    overflow: hidden;
+}
+.all_members_header{
+    overflow: hidden;
+}
+.all_members_data{
+    height:980px
+}
+.main_body #display_kurno{
+    overflow-y: scroll;
+    padding-bottom: 10%;
+    margin-left: 20%;
+}
+.button_holder{
+}
+.button_holder td{
+    width: 100%!important;
+}
+.button_holder button{
+    width: 1070px;
+    padding: 1%;
+    font-size: 20px;
+    border-style: solid;
+    background-color:  #e6b424 !important;
+}
+#show_admins{
+    margin-bottom: 10%
+}
+.print_table_style td{
+    border-style:solid;
+    border-width: 1px;
+    border-color: black !important;
+}
