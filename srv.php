@@ -15,83 +15,108 @@ include "includes/sidebar.php";
                       <p class="card-description">
                       <strong>Date <span id="date"></span></strong><br/>
                       <strong>Requesting Department: ICT Department</strong>
-                    <script>
-                    var d = new Date();
-                    document.getElementById('date').innerHTML = d.getDate()+" - "+(d.getUTCMonth()+1)+" - "+d.getFullYear();
-                        </script>
-                      </p>
+                      <script>
+                        var d = new Date();
+                        document.getElementById('date').innerHTML = d.getDate()+" - "+(d.getUTCMonth()+1)+" - "+d.getFullYear();
+                      </script>
+                        </p>
+                      <div id='form-array-container'>
+                          <p class="card-description">S.N 1 </p>
+                          <div class="row">
+                            <div class="col-md-4">
+                              <div class="form-group row">
+                                <label class="col-sm-4 col-form-label">Code</label>
+                                <div class="col-sm-8">
+                                  <input type="text" class="form-control" />
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-md-8">
+                              <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Material Description</label>
+                                <div class="col-sm-9">
+                                  <input type="text" class="form-control" />
+                                </div>
+                              </div>
+                            </div>
+                          </div>
 
-                      <p class="card-description">S.N 1 </p>
+                          <div class="row">
+                            <div class="col-md-4">
+                              <div class="form-group row">
+                                <label class="col-sm-4 col-form-label">Unit</label>
+                                <div class="col-sm-8">
+                                  <select class="form-control">
+                                    <option>Dozen</option>
+                                    <option>Inch</option>
+                                    <option>Kilogram</option>
+                                    <option>Meter</option>
+                                    <option>Liter</option>
+                                    <option>Peice</option>
+                                  </select>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="form-group row">
+                                <label class="col-sm-5 col-form-label">Qty. Requested</label>
+                                <div class="col-sm-7">
+                                  <input class="form-control" placeholder="" />
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-md-4">
+                              <div class="form-group row">
+                                <label class="col-sm-5 col-form-label">Qty. Issued</label>
+                                <div class="col-sm-7">
+                                  <input class="form-control" placeholder="" />
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-6">
+                              <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Unit Price</label>
+                                <div class="col-sm-9">
+                                  <div class="input-group">
+                                    <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+                                      <div class="input-group-prepend">
+                                        <span class="input-group-text bg-gradient-primary text-white">Birr</span>
+                                      </div>
+                                    </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Total Price</label>
+                                <div class="col-sm-9">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)">
+                                      <div class="input-group-prepend">
+                                        <span class="input-group-text bg-gradient-primary text-white">Birr</span>
+                                      </div>
+                                    </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                      </div>
+                      
                       <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-12">
                           <div class="form-group row">
-                            <label class="col-sm-4 col-form-label">Code</label>
-                            <div class="col-sm-8">
-                              <input type="text" class="form-control" />
+                            <div class="col-sm-2">
                             </div>
-                          </div>
-                        </div>
-                        <div class="col-md-8">
-                          <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Material Description</label>
-                            <div class="col-sm-9">
-                              <input type="text" class="form-control" />
+                            <button type="button" class="btn btn-gradient-success btn-icon-text col-sm-8">
+                                <i class="mdi mdi-file-plus btn-icon-prepend"></i> Add More Item</button>
+                            <div class="col-sm-2">
                             </div>
-                          </div>
+                            </div>
                         </div>
                       </div>
 
-                      <div class="row">
-                        <div class="col-md-4">
-                          <div class="form-group row">
-                            <label class="col-sm-4 col-form-label">Unit</label>
-                            <div class="col-sm-8">
-                              <select class="form-control">
-                                <option>Dozen</option>
-                                <option>Inch</option>
-                                <option>Kilogram</option>
-                                <option>Meter</option>
-                                <option>Liter</option>
-                                <option>Peice</option>
-                              </select>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-md-4">
-                          <div class="form-group row">
-                            <label class="col-sm-5 col-form-label">Qty. Requested</label>
-                            <div class="col-sm-7">
-                              <input class="form-control" placeholder="" />
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-md-4">
-                          <div class="form-group row">
-                            <label class="col-sm-5 col-form-label">Qty. Issued</label>
-                            <div class="col-sm-7">
-                              <input class="form-control" placeholder="" />
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-md-6">
-                          <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Unit Price</label>
-                            <div class="col-sm-9">
-                              <input class="form-control" placeholder="" />
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-md-6">
-                          <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Total Price</label>
-                            <div class="col-sm-9">
-                              <input class="form-control" placeholder="" />
-                            </div>
-                          </div>
-                        </div>
-                      </div>
                       <div class="row">
                         <div class="col-md-6">
                           <div class="form-group row">
@@ -108,12 +133,26 @@ include "includes/sidebar.php";
                             <label class="col-sm-3 col-form-label">Approved By</label>
                             <div class="col-sm-9">
                               <p class="form-control">
-                                Not Approved
+                                Not Approved Yet
                               </p>
                             </div>
                           </div>
                         </div>
                       </div>
+
+                      <div class="row">
+                        <div class="col-md-12">
+                          <div class="form-group row">
+                            <div class="col-sm-2">
+                            </div>
+                            <button type="button" class="btn btn-gradient-primary btn-icon-text col-sm-8">
+                                <i class="mdi mdi-file-check btn-icon-prepend"></i> Submit SRV</button>
+                            <div class="col-sm-2">
+                            </div>
+                            </div>
+                        </div>
+                      </div>
+
                     </form>
                   </div>
                 </div>

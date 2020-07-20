@@ -42,6 +42,7 @@
     + Todo List
   * Landing screens
     + Auth
+  *Custom CSS
 -------------------------------------------------------------------*/
 /*-------------------------------------------------------------------*/
 /* === Import Bootstrap functions and variables === */
@@ -13377,4 +13378,8 @@ dl {
   -ms-flex-positive: 1;
   flex-grow: 1; }
 
+.card-title .record_number{
+  float: right;
+  color: rgba(40,40,40,.5) !important;
+}
 /*# sourceMappingURL=style.css.map */
