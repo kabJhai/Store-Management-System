@@ -1,5 +1,6 @@
 <?php
 include "includes/head.php";
+
 include "includes/navbar.php";
 include "includes/sidebar.php";
 ?>
@@ -21,7 +22,11 @@ include "includes/sidebar.php";
                       </script>
                         </p>
                       <div id='form-array-container'>
-                          <p class="card-description">S.N 1 </p>
+                      <div class="row">
+                              <div class="col-md-12 line">
+                              </div>
+                      </div>
+                      <p class="card-description">Serial Number 1</p>
                           <div class="row">
                             <div class="col-md-4">
                               <div class="form-group row">
@@ -103,9 +108,7 @@ include "includes/sidebar.php";
                               </div>
                             </div>
                           </div>
-                      </div>
-                      
-                      <div class="row">
+                          <div class="row">
                             <div class="col-md-12">
                               <div class="form-group row">
                                 <label class="col-sm-2 col-form-label">Remark</label>
@@ -115,13 +118,15 @@ include "includes/sidebar.php";
                               </div>
                             </div>
                       </div>
+                    </div>
+                      
 
                       <div class="row">
                         <div class="col-md-12">
                           <div class="form-group row">
                             <div class="col-sm-2">
                             </div>
-                            <button type="button" class="btn btn-gradient-success btn-icon-text col-sm-8">
+                            <button type="button" onclick="add()" class="btn btn-gradient-success btn-icon-text col-sm-8">
                                 <i class="mdi mdi-file-plus btn-icon-prepend"></i> Add More Item</button>
                             <div class="col-sm-2">
                             </div>

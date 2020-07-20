@@ -13382,4 +13382,10 @@ dl {
   float: right;
   color: rgba(40,40,40,.5) !important;
 }
+.line{
+  border-style: solid;
+  border-color: rgba(40,40,40,0.5);
+  border-width: 0.2px;
+  margin-bottom: 30px
+}
 /*# sourceMappingURL=style.css.map */
