@@ -1,11 +1,15 @@
 function add() {
-    var d = document.getElementById('form-array-container')
-    var previous = d.innerHTML
+    var form_container = document.getElementById('form-array-container');
+    var item_count_container = document.getElementById('item_count');
+    var count = parseInt(item_count_container.innerText)+1;
+    item_count_container.innerText = count;
+    var previous = document.getElementById('form-array-container').innerHTML;
+    console.log(previous);
     var serial = "<div class='row'>\
     <div class='col-md-12 line'>\
     </div>\
     </div>\
-    <p class='card-description'>Serial Number "+1+" </p>";
+    <p class='card-description'>Serial Number "+count+" </p>";
     var row1 = "<div class='row'>\
                 <div class='col-md-4'>\
                 <div class='form-group row'>\
@@ -44,7 +48,7 @@ function add() {
         <div class='form-group row'>\
           <label class='col-sm-5 col-form-label'>Qty. Requested</label>\
           <div class='col-sm-7'>\
-            <input class='form-control' placeholder='' />\
+            <input class='form-control' id='qtyreq"+count+"' placeholder='' />\
           </div>\
         </div>\
       </div>\
@@ -52,7 +56,7 @@ function add() {
         <div class='form-group row'>\
           <label class='col-sm-5 col-form-label'>Qty. Issued</label>\
           <div class='col-sm-7'>\
-            <input class='form-control' placeholder='' />\
+            <input class='form-control' id='qtyreq"+count+"' placeholder='' />\
           </div>\
         </div>\
       </div>\
@@ -64,7 +68,7 @@ function add() {
           <label class='col-sm-3 col-form-label'>Unit Price</label>\
           <div class='col-sm-9'>\
             <div class='input-group'>\
-              <input type='text' class='form-control' >\
+              <input type='text' id='unit"+count+"' oninput='calculate("+count+")' class='form-control' >\
                 <div class='input-group-prepend'>\
                   <span class='input-group-text bg-gradient-primary text-white'>Birr</span>\
                 </div>\
@@ -77,7 +81,7 @@ function add() {
           <label class='col-sm-3 col-form-label'>Total Price</label>\
           <div class='col-sm-9'>\
           <div class='input-group'>\
-              <input type='text' class='form-control'/>\
+              <input type='text' id='total"+count+"' class='form-control'/>\
                 <div class='input-group-prepend'>\
                   <span class='input-group-text bg-gradient-primary text-white'>Birr</span>\
                 </div>\
@@ -96,5 +100,12 @@ function add() {
         </div>\
       </div>\
 </div>";
-d.innerHTML = previous+serial+row1+row2+row3+row4;
+form_container.innerHTML = previous+serial+row1+row2+row3+row4;
+}
+
+function calculate(formNum) {
+  let unitPrice = document.getElementById("unit"+formNum);
+  let reqQuantity = document.getElementById("qtyreq"+formNum);
+  let totalPrice = document.getElementById("total"+formNum);
+  totalPrice.value = parseFloat(unitPrice.value) * parseFloat(reqQuantity.value);
 }

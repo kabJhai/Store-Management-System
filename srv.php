@@ -6,6 +6,7 @@ include "includes/sidebar.php";
 ?>
   <div class="main-panel">
           <div class="content-wrapper">
+            
           <div class="col-12">
                 <div class="card">
                   <div class="card-body">
@@ -15,7 +16,8 @@ include "includes/sidebar.php";
                     <form class="form-sample">
                       <p class="card-description">
                       <strong>Date <span id="date"></span></strong><br/>
-                      <strong>Requesting Department: ICT Department</strong>
+                      <strong>Requesting Department: ICT Department</strong><br/>
+                      <strong>Items: <span id="item_count">1</span></strong>
                       <script>
                         var d = new Date();
                         document.getElementById('date').innerHTML = d.getDate()+" - "+(d.getUTCMonth()+1)+" - "+d.getFullYear();
@@ -66,7 +68,7 @@ include "includes/sidebar.php";
                               <div class="form-group row">
                                 <label class="col-sm-5 col-form-label">Qty. Requested</label>
                                 <div class="col-sm-7">
-                                  <input class="form-control" placeholder="" />
+                                  <input class="form-control" id="qtyreq1" placeholder="" />
                                 </div>
                               </div>
                             </div>
@@ -86,7 +88,7 @@ include "includes/sidebar.php";
                                 <label class="col-sm-3 col-form-label">Unit Price</label>
                                 <div class="col-sm-9">
                                   <div class="input-group">
-                                    <input type="text" class="form-control" >
+                                    <input type="number" oninput="calculate(1)" id="unit1" class="form-control" >
                                       <div class="input-group-prepend">
                                         <span class="input-group-text bg-gradient-primary text-white">Birr</span>
                                       </div>
@@ -99,7 +101,7 @@ include "includes/sidebar.php";
                                 <label class="col-sm-3 col-form-label">Total Price</label>
                                 <div class="col-sm-9">
                                 <div class="input-group">
-                                    <input type="text" class="form-control">
+                                    <input type="number" id="total1" class="form-control">
                                       <div class="input-group-prepend">
                                         <span class="input-group-text bg-gradient-primary text-white">Birr</span>
                                       </div>
