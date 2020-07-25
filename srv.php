@@ -13,11 +13,11 @@ include "includes/sidebar.php";
                     <h4 class="card-title">Store Requisition Voucher (SRV)
                       <span class="record_number">Number: 205032</span>
                     </h4>
-                    <form class="form-sample">
+                    <form class="form-sample" method="POST" action="">
                       <p class="card-description">
                         <strong>Date <span id="date"></span></strong><br/>
                         <strong>Requesting Department: ICT Department</strong><br/>
-                        <strong>Items: <span id="item_count">1</span></strong>
+                        <strong>Items: <span id="item_count">0</span></strong>
                       <script>
                         var d = new Date();
                         document.getElementById('date').innerHTML = d.getDate()+" - "+(d.getUTCMonth()+1)+" - "+d.getFullYear();
@@ -29,13 +29,14 @@ include "includes/sidebar.php";
                                 <div class="form-group row">
                                   <label class="col-sm-4 col-form-label">Number of Items to Order</label>
                                   <div class="col-sm-8">
-                                    <input type="text" placeholder="1" id="items" oninput="add()" class="form-control" />
+                                    <input type="number" min="0" placeholder="1" id="items-needed" oninput="add()" class="form-control" />
                                   </div>
                                 </div>
                               </div>
                         </div>
                       </div>
                       <div id='form-array-container'>
+                      </div>
 
                       <div class="row">
                         <div class="col-md-6">
