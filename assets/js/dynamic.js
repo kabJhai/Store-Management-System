@@ -6,7 +6,6 @@ function add() {
     item_count_container.innerText = item_count_input.value;
     form_container.innerHTML = "";
     for (let count = 1; count <= items; count++) {
-      console.log(count);
       var previous = form_container.innerHTML;
       var serial = "<div class='row'>\
       <div class='col-md-12 line'>\
@@ -18,7 +17,7 @@ function add() {
                   <div class='form-group row'>\
                       <label class='col-sm-4 col-form-label'>Code</label>\
                           <div class='col-sm-8'>\
-                              <input type='text' name='code[]' class='form-control' />\
+                              <input type='text' name='code[]' class='form-control' required/>\
                           </div>\
                           </div>\
                           </div>\
@@ -26,7 +25,7 @@ function add() {
                               <div class='form-group row'>\
                                  <label class='col-sm-3 col-form-label'>Material Description</label>\
                                       <div class='col-sm-9'>\
-                                          <input type='text' name='description[]' class='form-control' />  \
+                                          <input type='text' name='description[]' class='form-control' required/>  \
                                       </div>\
                                   </div> \
                               </div>\
@@ -36,7 +35,7 @@ function add() {
           <div class='form-group row'>\
             <label class='col-sm-4 col-form-label'>Unit</label>\
             <div class='col-sm-8'>\
-              <select name='unit[]' class='form-control'>\
+              <select name='unit[]' class='form-control' required>\
                 <option name='Dozen' >Dozen</option>\
                 <option name='Inch' >Inch</option>\
                 <option name='Kilogram'>Kilogram</option>\
@@ -51,7 +50,7 @@ function add() {
           <div class='form-group row'>\
             <label class='col-sm-5 col-form-label'>Qty. Requested</label>\
             <div class='col-sm-7'>\
-              <input class='form-control' name='qty_requested[]' id='qtyreq"+count+"' placeholder='' />\
+              <input class='form-control' name='qty_requested[]' id='qtyreq"+count+"' placeholder='' required/>\
             </div>\
           </div>\
         </div>\
@@ -59,7 +58,7 @@ function add() {
           <div class='form-group row'>\
             <label class='col-sm-5 col-form-label'>Qty. Issued</label>\
             <div class='col-sm-7'>\
-              <input class='form-control' name='qty_issued[]' id='qtyreq"+count+"' placeholder='' />\
+              <input class='form-control' name='qty_issued[]' id='qtyreq"+count+"' placeholder='' required/>\
             </div>\
           </div>\
         </div>\
@@ -71,7 +70,7 @@ function add() {
             <label class='col-sm-3 col-form-label'>Unit Price</label>\
             <div class='col-sm-9'>\
               <div class='input-group'>\
-                <input type='text' id='unit"+count+"' name='unit_price[]' oninput='calculate("+count+")' class='form-control' >\
+                <input type='text' id='unit"+count+"' name='unit_price[]' oninput='calculate("+count+")' class='form-control' required >\
                   <div class='input-group-prepend'>\
                     <span class='input-group-text bg-gradient-primary text-white'>Birr</span>\
                   </div>\
@@ -84,7 +83,7 @@ function add() {
             <label class='col-sm-3 col-form-label'>Total Price</label>\
             <div class='col-sm-9'>\
             <div class='input-group'>\
-                <input type='text' id='total"+count+"' name='total_price[]' class='form-control'/>\
+                <input type='text' id='total"+count+"' name='total_price[]' class='form-control' required/>\
                   <div class='input-group-prepend'>\
                     <span class='input-group-text bg-gradient-primary text-white'>Birr</span>\
                   </div>\
@@ -98,7 +97,7 @@ function add() {
           <div class='form-group row'>\
             <label class='col-sm-2 col-form-label'>Remark</label>\
             <div class='col-sm-10'>\
-              <input type='text' name='remark[]' class='form-control' />\
+              <input type='text' name='remark[]' class='form-control' required/>\
             </div>\
           </div>\
         </div>\

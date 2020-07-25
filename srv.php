@@ -44,9 +44,7 @@ include "includes/sidebar.php";
                           <div class="form-group row">
                             <label class="col-sm-5 col-form-label">Requested By</label>
                             <div class="col-sm-7">
-                            <p class="form-control">
-                              Abebe Kebede Chanyalew
-                            </p>
+                            <input type="text" name="requested_by"  value="Abebe Kebede Chanyalew" class="form-control" />
                             </div>
                           </div>
                         </div>
@@ -54,9 +52,7 @@ include "includes/sidebar.php";
                           <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Approved By</label>
                             <div class="col-sm-9">
-                              <p class="form-control">
-                                Not Approved Yet
-                              </p>
+                            <input type="text" name="approved_by" value="Not approved yet" id="items-needed" class="form-control" />
                             </div>
                           </div>
                         </div>
