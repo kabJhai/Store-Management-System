@@ -10,14 +10,15 @@ include "includes/sidebar.php";
           <div class="col-12">
                 <div class="card">
                   <div class="card-body">
-                    <h4 class="card-title">Store Requisition Voucher (SRV)
-                      <span class="record_number">Number: 205032</span>
-                    </h4>
                     <form class="form-sample" method="POST" action="includes/routes">
+                    <h4 class="card-title">Store Requisition Voucher (SRV)
+                      <span class="record_number">Number: 205032<input style="display:none" name="serial_number" type="text" value="205032"></span>
+                    </h4>
 
                       <p class="card-description">
                         <strong>Date <span id="date"></span></strong><br/>
-                        <strong>Requesting Department: ICT Department</strong><br/>
+                        <strong>Requesting Department: ICT Department<input style="display:none" name="DID" type="text" value="ICT Department"></strong><br/>
+                        
                         <strong>Items: <span id="item_count">0</span></strong>
                       <script>
                         var d = new Date();
@@ -30,7 +31,7 @@ include "includes/sidebar.php";
                                 <div class="form-group row">
                                   <label class="col-sm-4 col-form-label">Number of Items to Order</label>
                                   <div class="col-sm-8">
-                                    <input type="number" min="0" placeholder="1" id="items-needed" oninput="add()" class="form-control" />
+                                    <input type="number" min="0" value=0 id="items-needed" oninput="add()" class="form-control" />
                                   </div>
                                 </div>
                               </div>
@@ -44,16 +45,16 @@ include "includes/sidebar.php";
                           <div class="form-group row">
                             <label class="col-sm-5 col-form-label">Requested By</label>
                             <div class="col-sm-7">
-                            <input type="text" name="requested_by"  value="Abebe Kebede Chanyalew" class="form-control" />
+                            <input type="text" name="requested_by"  value="Abebe Kebede Chanyalew" class="form-control"/>
                             </div>
                           </div>
                         </div>
-                        
+
                         <div class="col-md-6">
                           <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Approved By</label>
                             <div class="col-sm-9">
-                            <input type="text" name="approved_by" value="Not approved yet" id="items-needed" class="form-control" />
+                            <input type="text" name="approved_by" value="Not approved yet" id="items-needed" class="form-control"/>
                             </div>
                           </div>
                         </div>
