@@ -13,7 +13,8 @@ include "includes/sidebar.php";
                     <h4 class="card-title">Store Requisition Voucher (SRV)
                       <span class="record_number">Number: 205032</span>
                     </h4>
-                    <form class="form-sample" method="POST" action="">
+                    <form class="form-sample" method="POST" action="includes/routes">
+
                       <p class="card-description">
                         <strong>Date <span id="date"></span></strong><br/>
                         <strong>Requesting Department: ICT Department</strong><br/>
@@ -66,7 +67,7 @@ include "includes/sidebar.php";
                           <div class="form-group row">
                             <div class="col-sm-2">
                             </div>
-                            <button type="button" class="btn btn-gradient-primary btn-icon-text col-sm-8">
+                            <button type="submit" name="srv" class="btn btn-gradient-primary btn-icon-text col-sm-8">
                                 <i class="mdi mdi-file-check btn-icon-prepend"></i> Submit SRV</button>
                             <div class="col-sm-2">
                             </div>
