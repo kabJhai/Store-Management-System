@@ -3,8 +3,7 @@ function add() {
     var item_count_container = document.getElementById('item_count');
     var count = parseInt(item_count_container.innerText)+1;
     item_count_container.innerText = count;
-    var previous = document.getElementById('form-array-container').innerHTML;
-    console.log(previous);
+    var previous = form_container.innerHTML;
     var serial = "<div class='row'>\
     <div class='col-md-12 line'>\
     </div>\

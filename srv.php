@@ -15,126 +15,27 @@ include "includes/sidebar.php";
                     </h4>
                     <form class="form-sample">
                       <p class="card-description">
-                      <strong>Date <span id="date"></span></strong><br/>
-                      <strong>Requesting Department: ICT Department</strong><br/>
-                      <strong>Items: <span id="item_count">1</span></strong>
+                        <strong>Date <span id="date"></span></strong><br/>
+                        <strong>Requesting Department: ICT Department</strong><br/>
+                        <strong>Items: <span id="item_count">1</span></strong>
                       <script>
                         var d = new Date();
                         document.getElementById('date').innerHTML = d.getDate()+" - "+(d.getUTCMonth()+1)+" - "+d.getFullYear();
                       </script>
                         </p>
-                      <div id='form-array-container'>
-                      <div class="row">
-                              <div class="col-md-12 line">
-                              </div>
-                      </div>
-                      <p class="card-description">Serial Number 1</p>
-                          <div class="row">
-                            <div class="col-md-4">
-                              <div class="form-group row">
-                                <label class="col-sm-4 col-form-label">Code</label>
-                                <div class="col-sm-8">
-                                  <input type="text" class="form-control" />
+                      <div id="form-items-count">
+                        <div class="row">
+                              <div class="col-md-12">
+                                <div class="form-group row">
+                                  <label class="col-sm-4 col-form-label">Number of Items to Order</label>
+                                  <div class="col-sm-8">
+                                    <input type="text" placeholder="1" id="items" oninput="add()" class="form-control" />
+                                  </div>
                                 </div>
                               </div>
-                            </div>
-                            <div class="col-md-8">
-                              <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Material Description</label>
-                                <div class="col-sm-9">
-                                  <input type="text" class="form-control" />
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div class="row">
-                            <div class="col-md-4">
-                              <div class="form-group row">
-                                <label class="col-sm-4 col-form-label">Unit</label>
-                                <div class="col-sm-8">
-                                  <select class="form-control">
-                                    <option>Dozen</option>
-                                    <option>Inch</option>
-                                    <option>Kilogram</option>
-                                    <option>Meter</option>
-                                    <option>Liter</option>
-                                    <option>Peice</option>
-                                  </select>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="col-md-4">
-                              <div class="form-group row">
-                                <label class="col-sm-5 col-form-label">Qty. Requested</label>
-                                <div class="col-sm-7">
-                                  <input class="form-control" id="qtyreq1" placeholder="" />
-                                </div>
-                              </div>
-                            </div>
-                            <div class="col-md-4">
-                              <div class="form-group row">
-                                <label class="col-sm-5 col-form-label">Qty. Issued</label>
-                                <div class="col-sm-7">
-                                  <input class="form-control" placeholder="" />
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-
-                          <div class="row">
-                            <div class="col-md-6">
-                              <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Unit Price</label>
-                                <div class="col-sm-9">
-                                  <div class="input-group">
-                                    <input type="number" oninput="calculate(1)" id="unit1" class="form-control" >
-                                      <div class="input-group-prepend">
-                                        <span class="input-group-text bg-gradient-primary text-white">Birr</span>
-                                      </div>
-                                    </div>
-                                </div>
-                              </div>
-                            </div>
-                            <div class="col-md-6">
-                              <div class="form-group row">
-                                <label class="col-sm-3 col-form-label">Total Price</label>
-                                <div class="col-sm-9">
-                                <div class="input-group">
-                                    <input type="number" id="total1" class="form-control">
-                                      <div class="input-group-prepend">
-                                        <span class="input-group-text bg-gradient-primary text-white">Birr</span>
-                                      </div>
-                                    </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="row">
-                            <div class="col-md-12">
-                              <div class="form-group row">
-                                <label class="col-sm-2 col-form-label">Remark</label>
-                                <div class="col-sm-10">
-                                  <input type="text" class="form-control" />
-                                </div>
-                              </div>
-                            </div>
-                      </div>
-                    </div>
-                      
-
-                      <div class="row">
-                        <div class="col-md-12">
-                          <div class="form-group row">
-                            <div class="col-sm-2">
-                            </div>
-                            <button type="button" onclick="add()" class="btn btn-gradient-success btn-icon-text col-sm-8">
-                                <i class="mdi mdi-file-plus btn-icon-prepend"></i> Add More Item</button>
-                            <div class="col-sm-2">
-                            </div>
-                            </div>
                         </div>
                       </div>
+                      <div id='form-array-container'>
 
                       <div class="row">
                         <div class="col-md-6">
