@@ -1,4 +1,6 @@
 <?php
+include "data.php"
+
 if(isset($_POST['srv'])){
     $code = $_POST['code'];
     $unit = $_POST['unit'];
