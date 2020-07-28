@@ -36,7 +36,7 @@ include "includes/sidebar.php";
                                 <div class="form-group row">
                                   <strong class="col-sm-4 col-form-label">To:</strong>
                                   <div class="col-sm-8">
-                                  <input name="to" type="text" class="form-control issuing">                                  </div>
+                                  <input name="send_to" type="text" class="form-control issuing">                                  </div>
                                 </div>
                               </div>
                         </div>

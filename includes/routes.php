@@ -98,7 +98,7 @@ if(isset($_POST['siv'])){
 if(isset($_POST['pr'])){
     $serial_number = $_POST['serial_number'];
     $did = $_POST['DID'];
-    $to = $_POST['to'];
+    $to = $_POST['send_to'];
     $deliver_to = $_POST['deliver_to'];
     $item = $_POST['item'];
     $description = $_POST['description'];
@@ -123,7 +123,7 @@ if(isset($_POST['pr'])){
          remark,
          requested_by,
          approved_by,
-         to,
+         send_to,
          deliver_to)
         VALUES
         (".$serial_number.",'".$did."','".$item[$i]."'
