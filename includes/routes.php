@@ -208,4 +208,60 @@ if(isset($_POST['po'])){
 }
 }
 
+if(isset($_POST['grn'])){
+    $serial_number = $_POST['serial_number'];
+    $supplier = $_POST['supplier'];
+    $supplier_invoice = $_POST['supplier_invoice'];
+    $pr_po_no = $_POST['pr_po_no'];
+    $code = $_POST['code'];
+    $description = $_POST['description'];
+    $unit = $_POST['unit'];
+    $qty_req = $_POST['qty'];
+    $unit_price = $_POST['unit_price'];
+    $total_price = $_POST['total_price'];
+    $remark = $_POST['remark'];
+    $store_keeper = $_POST['store_keeper'];
+    $delivered_by = $_POST['delivered_by'];
+    
+    $total_qty = $_POST['total_qty'];
+    $total_unit = $_POST['total_unit'];
+    $grand_total = $_POST['grand_total'];
+    $receipt_type = $_POST['receipt_type'];
+
+    $sending_store = $_POST['sending_store'];
+    echo $serial_number;
+    $length = count($code);
+
+    for ($i=0; $i < $length; $i++) { 
+        if($query = $DBcon->query("INSERT INTO
+         grn(serial_number,
+         supplier,
+         supplier_invoice,
+         pr_po_no,
+         code,
+         description,
+         unit,
+         qty,
+         unit_price,
+         total_price,
+         remark,
+         store_keeper,
+         delivered_by,
+         total_qty,
+         total_unit,
+         grand_total,
+         receipt_type,
+         sending_store)
+        VALUES
+        (".$serial_number.",'".$supplier."','".$supplier_invoice."','".$pr_po_no."','".$code[$i]."','".$description[$i]."','".$unit[$i]."','".$qty_req[$i]."',
+        '".$unit_price[$i]."','".$total_price[$i]."','".$remark[$i]."','".$store_keeper."','".$delivered_by."'
+        ,'".$total_qty."','".$total_unit."','".$grand_total."'
+        ,'".$receipt_type."','".$sending_store."')")){
+            echo "Successfully saved";
+    }else{
+        echo "There is an error!";
+    }
+}
+}
+
 ?>

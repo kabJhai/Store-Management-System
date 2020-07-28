@@ -22,7 +22,7 @@ include "includes/sidebar.php";
                                 <div class="form-group row">
                                   <strong class="col-sm-4 col-form-label">Supplier:</strong>
                                   <div class="col-sm-8">
-                                  <input class="form-control issuing" name="supplier" type="text" value="ICT Department">                                  </div>
+                                  <input class="form-control issuing" name="supplier" type="text">                                  </div>
                                 </div>
                               </div>
                         </div>
@@ -31,7 +31,7 @@ include "includes/sidebar.php";
                                 <div class="form-group row">
                                   <strong class="col-sm-4 col-form-label">Supplier Invoice No:</strong>
                                   <div class="col-sm-8">
-                                  <input name="supplier_invoice" type="text" class="form-control issuing">                                  </div>
+                                  <input name="supplier_invoice" type="number" class="form-control issuing">                                  </div>
                                 </div>
                               </div>
                         </div>
@@ -56,7 +56,7 @@ include "includes/sidebar.php";
                                 <div class="form-group row">
                                   <label class="col-sm-4 col-form-label">Number of Items to Order</label>
                                   <div class="col-sm-8">
-                                    <input type="number" min="0" value=0 id="items-needed" oninput="add()" class="form-control" />
+                                    <input type="number" min="0" value=0 id="items-needed" oninput="addgrn()" class="form-control" />
                                   </div>
                                 </div>
                               </div>
@@ -143,7 +143,7 @@ include "includes/sidebar.php";
                           <div class="form-group row">
                             <label class="col-sm-3 col-form-label">Delivered By Name</label>
                             <div class="col-sm-9">
-                            <input type="text" name="recepient_name" id="items-needed" class="form-control"/>
+                            <input type="text" name="delivered_by" id="items-needed" class="form-control"/>
                             </div>
                           </div>
                         </div>
@@ -164,8 +164,8 @@ include "includes/sidebar.php";
                           <div class="form-group row">
                             <div class="col-sm-2">
                             </div>
-                            <button type="submit" name="siv" class="btn btn-gradient-primary btn-icon-text col-sm-8">
-                                <i class="mdi mdi-file-check btn-icon-prepend"></i> Submit SIV</button>
+                            <button type="submit" name="grn" class="btn btn-gradient-primary btn-icon-text col-sm-8">
+                                <i class="mdi mdi-file-check btn-icon-prepend"></i> Submit GRN</button>
                             <div class="col-sm-2">
                             </div>
                             </div>
