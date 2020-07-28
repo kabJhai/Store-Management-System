@@ -398,3 +398,16 @@ form_container.innerHTML = previous+serial+row1+row2+row3+row4;
 
   }
 }
+
+
+function checkValues() {
+  password = document.getElementById("password").value;
+  cpassword = document.getElementById("cpassword").value;
+  if(password==cpassword){
+    document.getElementById("submit").removeAttribute("disabled")
+    document.getElementById("submit").innerText = "Register"
+  }else{
+    document.getElementById("submit").setAttribute("disabled","")
+    document.getElementById("submit").innerText = "Password Doesnot match"
+  }
+}

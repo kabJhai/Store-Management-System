@@ -1,4 +1,5 @@
 <?php
+include "includes/data.php";
 include "includes/head.php";
 ?>
     <div class="container-scroller">
@@ -11,35 +12,47 @@ include "includes/head.php";
                   <img src="../../assets/images/tlogo.png">
                 </div>
                 <h4>New here?</h4>
-                <h6 class="font-weight-light">Signing up is easy. It only takes a few steps</h6>
-                <form class="pt-3">
-                  <div class="form-group">
-                    <input type="text" class="form-control form-control-lg" id="exampleInputUsername1" placeholder="Username">
+                <h6 class="font-weight-light">All the fields are required</h6>
+                <form class="pt-3" method="POST" action="includes/routes">
+                <div class="form-group">
+                    <input type="text" class="form-control form-control-lg" name="fn" placeholder="First Name" required>
                   </div>
                   <div class="form-group">
-                    <input type="email" class="form-control form-control-lg" id="exampleInputEmail1" placeholder="Email">
+                    <input type="text" class="form-control form-control-lg" name="ln" placeholder="Last Name" required>
                   </div>
                   <div class="form-group">
-                    <select class="form-control form-control-lg" id="exampleFormControlSelect2">
-                      <option>Country</option>
-                      <option>United States of America</option>
-                      <option>United Kingdom</option>
-                      <option>India</option>
-                      <option>Germany</option>
-                      <option>Argentina</option>
+                    <input type="phone" class="form-control form-control-lg" name="phone" placeholder="Phone Number" required>
+                  </div>
+                  <div class="form-group">
+                    <input type="email" class="form-control form-control-lg" name="email" placeholder="Email" required>
+                  </div>
+                  <div class="form-group">
+                    <select class="form-control form-control-lg" name="department" required>
+                    <option value="">Select Department</option>
+                    <?php
+                        $query = $DBcon->query("SELECT * FROM departments");
+                        while ($row = $query->fetch_assoc()) {
+                    ?>
+                      <option value="<?php echo $row['DID'];?>"><?php echo $row['department_name'];?></option>
+                     <?php
+                        } 
+                     ?>
                     </select>
                   </div>
                   <div class="form-group">
-                    <input type="password" class="form-control form-control-lg" id="exampleInputPassword1" placeholder="Password">
+                    <input type="password" id="password" class="form-control form-control-lg" name="password" placeholder="Password" required>
+                  </div>
+                  <div class="form-group">
+                    <input type="password" id="cpassword" class="form-control form-control-lg" oninput="checkValues()" placeholder="Confirm Password" required>
                   </div>
                   <div class="mb-4">
                     <div class="form-check">
                       <label class="form-check-label text-muted">
-                        <input type="checkbox" class="form-check-input"> I agree to all Terms & Conditions </label>
+                        <input type="checkbox" class="form-check-input" required> I agree to all Terms & Conditions </label>
                     </div>
                   </div>
                   <div class="mt-3">
-                    <a class="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn" href="index">SIGN UP</a>
+                    <button id="submit" class="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn" name="register" disabled>Register</button>
                   </div>
                   <div class="text-center mt-4 font-weight-light"> Already have an account? <a href="login.php" class="text-primary">Login</a>
                   </div>

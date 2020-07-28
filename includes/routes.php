@@ -264,4 +264,38 @@ if(isset($_POST['grn'])){
 }
 }
 
+if(isset($_POST['register'])){
+    $fn = $_POST['fn'];
+    $ln = $_POST['ln'];
+    $phone = $_POST['phone'];
+    $email = $_POST['email'];
+    $department = $_POST['department'];
+    $password = $_POST['password'];
+    $dept = explode("-",$department);
+    echo $department;
+        if($query = $DBcon->query("INSERT INTO
+         employee(
+        first_name,
+        last_name,
+        phone,
+        email,
+        pass,
+        DID
+         )
+        VALUES
+        (
+        '".$fn."',
+        '".$ln."',
+        '".$phone."',
+        '".$email."',
+        '".$password."',
+        '".$department."'
+        )")){
+            echo "Successfully saved";
+    
+    }else{
+        echo "There is an error!";
+    }
+}
+
 ?>
