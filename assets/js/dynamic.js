@@ -254,7 +254,8 @@ function addpo() {
       </div>\
     </div>";
 
-    var row3 = "<div class='row'>\
+    var row3 = "
+    <div class='row'>\
       <div class='col-md-6'>\
         <div class='form-group row'>\
           <label class='col-sm-3 col-form-label'>Unit Price</label>\

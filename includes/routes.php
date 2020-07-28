@@ -138,40 +138,70 @@ if(isset($_POST['pr'])){
 }
 
 
-if(isset($_POST['srv'])){
+if(isset($_POST['po'])){
     $serial_number = $_POST['serial_number'];
-    $did = $_POST['DID'];
-    $code = $_POST['code'];
+    $project_name = $_POST['project_name'];
+    $part_no = $_POST['part_no'];
+
     $description = $_POST['description'];
     $unit = $_POST['unit'];
-    $qty_req = $_POST['qty_requested'];
-    $qty_issued = $_POST['qty_issued'];
+    $qty_req = $_POST['qty_ordered'];
     $unit_price = $_POST['unit_price'];
     $total_price = $_POST['total_price'];
     $remark = $_POST['remark'];
-    $requested_by = $_POST['requested_by'];
-    $approved_by = $_POST['approved_by'];
+
+    $supplier = $_POST['supplier'];
+    $performa = $_POST['proforma'];
+    $offer_date = date('y-m-d',strtotime($_POST['offer_date']));
+    $total_birr = $_POST['total_birr'];
+    $tax_birr = $_POST['tax_birr'];
+    $net_birr = $_POST['net_birr'];
+    $terms = $_POST['terms'];
+    $delivery_time =date('y-m-d',strtotime($_POST['delivery_time']));
+    $prepared_by = $_POST['prepared_by'];
+    $checked_by = $_POST['checked_by'];
+
+
+
+
     echo $serial_number;
-    $length = count($code);
+    $length = count($part_no);
 
     for ($i=0; $i < $length; $i++) { 
         if($query = $DBcon->query("INSERT INTO
-         srv(serial_number,
-         DID,
-         code,
+         po(serial_number,
+         project_name,
+         part_no,
          description,
          unit,
-         qty_requested,
-         qty_issued,
+         qty_ordered,
          unit_price,
          total_price,
          remark,
-         requested_by,
-         approved_by)
+         prepared_by,
+         checked_by,
+
+         supplier,
+         performa,
+         offer_date,
+         total_birr,
+         tax_birr,
+         net_birr,
+         terms,
+         delivery_time)
         VALUES
-        (".$serial_number.",'".$did."','".$code[$i]."','".$description[$i]."','".$unit[$i]."','".$qty_req[$i]."','".$qty_issued[$i]."',
-        '".$unit_price[$i]."','".$total_price[$i]."','".$remark[$i]."','".$requested_by."','".$approved_by."')")){
+        (".$serial_number.",'".$project_name."','".$part_no[$i]."','".$description[$i]."','".$unit[$i]."','".$qty_req[$i]."',
+        '".$unit_price[$i]."','".$total_price[$i]."','".$remark[$i]."','".$prepared_by."','".$checked_by."'
+        ,'".$supplier."'
+        ,'".$performa."'
+        ,'".$offer_date."'
+        ,'".$total_birr."',
+        '".$tax_birr."',
+        '".$net_birr."'
+        ,'".$terms."',
+        '".$delivery_time."')")){
             echo "Successfully saved";
+    
     }else{
         echo "There is an error!";
     }

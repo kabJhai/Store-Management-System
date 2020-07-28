@@ -11,7 +11,7 @@ include "includes/sidebar.php";
                 <div class="card">
                   <div class="card-body">
                     <form class="form-sample" method="POST" action="includes/routes">
-                    <h4 class="card-title">Purchase Order (PO)
+                    <h4 class="card-title">Goods Receiving Note (GRN)
                       <span class="record_number">Number: 205032<input style="display:none" name="serial_number" type="text" value="205032"></span>
                     </h4>
 
@@ -20,27 +20,27 @@ include "includes/sidebar.php";
                         <div class="row">
                               <div class="col-md-12">
                                 <div class="form-group row">
-                                  <strong class="col-sm-4 col-form-label">Project Name:</strong>
-                                  <div class="col-sm-8">
-                                  <input class="form-control issuing" name="project_name" type="text" value="ICT Department">                                  </div>
-                                </div>
-                              </div>
-                        </div>
-                        <div class="row">
-                              <div class="col-md-12">
-                                <div class="form-group row">
                                   <strong class="col-sm-4 col-form-label">Supplier:</strong>
                                   <div class="col-sm-8">
-                                  <input name="supplier" type="text" class="form-control issuing">                                  </div>
+                                  <input class="form-control issuing" name="supplier" type="text" value="ICT Department">                                  </div>
                                 </div>
                               </div>
                         </div>
                         <div class="row">
                               <div class="col-md-12">
                                 <div class="form-group row">
-                                  <strong class="col-sm-4 col-form-label">Proforma Invoice No:</strong>
+                                  <strong class="col-sm-4 col-form-label">Supplier Invoice No:</strong>
                                   <div class="col-sm-8">
-                                  <input name="proforma" type="number" class="form-control">                                  </div>
+                                  <input name="supplier_invoice" type="text" class="form-control issuing">                                  </div>
+                                </div>
+                              </div>
+                        </div>
+                        <div class="row">
+                              <div class="col-md-12">
+                                <div class="form-group row">
+                                  <strong class="col-sm-4 col-form-label">PR/PO/RFQ/SRIV/GITN No:</strong>
+                                  <div class="col-sm-8">
+                                  <input name="pr_po_no" type="number" class="form-control">                                  </div>
                                 </div>
                               </div>
                         </div>
@@ -50,14 +50,13 @@ include "includes/sidebar.php";
                         document.getElementById('date').innerHTML = d.getDate()+" - "+(d.getUTCMonth()+1)+" - "+d.getFullYear();
                       </script>
                         </p>
-                        <p class="card-description">Please supply the under mentioned items as per offer dated <input class="inline-form" name="offer_date" type="date"> and in accordance with the terms and conditions stated here.</p>
                       <div id="form-items-count">
                         <div class="row">
                               <div class="col-md-12">
                                 <div class="form-group row">
                                   <label class="col-sm-4 col-form-label">Number of Items to Order</label>
                                   <div class="col-sm-8">
-                                    <input type="number" min="0" value=0 id="items-needed" oninput="addpo()" class="form-control" />
+                                    <input type="number" min="0" value=0 id="items-needed" oninput="add()" class="form-control" />
                                   </div>
                                 </div>
                               </div>
@@ -65,83 +64,70 @@ include "includes/sidebar.php";
                       </div>
                       <div id='form-array-container'>
                       </div>
-                      
-                    <div class='row'> 
-                      <div class='col-md-6'> 
-                        <div class='form-group row'> 
-                          <label class='col-sm-3 col-form-label'>Total Birr</label> 
-                          <div class='col-sm-9'> 
-                            <div class='input-group'> 
-                              <input type='text' id='unit"+count+"' name='total_birr' oninput='calculate("+count+")' class='form-control' required > 
-                                <div class='input-group-prepend'> 
-                                  <span class='input-group-text bg-gradient-primary text-white'>Birr</span> 
-                                </div> 
-                              </div> 
-                          </div> 
-                        </div> 
-                      </div> 
-                      <div class='col-md-6'> 
-                        <div class='form-group row'> 
-                          <label class='col-sm-3 col-form-label'>Taxes Birr</label> 
-                          <div class='col-sm-9'> 
-                          <div class='input-group'> 
-                              <input type='text' id='total"+count+"' name='tax_birr' class='form-control' required/> 
-                                <div class='input-group-prepend'> 
-                                  <span class='input-group-text bg-gradient-primary text-white'>Birr</span> 
+
+                      <div class='row'> 
+                        <div class='col-md-4'> 
+                          <div class='form-group row'> 
+                            <label class='col-sm-4 col-form-label'>Total Qty.</label> 
+                            <div class='col-sm-8'> 
+                                <input type='text' id='unit"+count+"' name='total_qty' oninput='calculate("+count+")' class='form-control' required > 
                                 </div> 
                             </div> 
                           </div> 
-                        </div> 
-                      </div> 
-                    </div>
-                    <div class="row">
-                              <div class="col-md-12">
-                                <div class="form-group row">
-                                  <label class="col-sm-4 col-form-label">Net Birr:</label>
-                                  <div class="col-sm-8">
-                                    <div class='input-group'> 
-                                    <input type='text' id='total"+count+"' name='net_birr' class='form-control' required/> 
-                                      <div class='input-group-prepend'> 
-                                        <span class='input-group-text bg-gradient-primary text-white'>Birr</span> 
-                                      </div> 
+                        <div class='col-md-4'> 
+                          <div class='form-group row'> 
+                            <label class='col-sm-4 col-form-label'>Total Unit Price</label> 
+                            <div class='col-sm-8'> 
+                            <div class='input-group'> 
+                                <input type='text' id='total"+count+"' name='total_unit' class='form-control' required/> 
+                                  <div class='input-group-prepend'> 
+                                    <span class='input-group-text bg-gradient-primary text-white'>Birr</span> 
                                   </div> 
-                                </div>
-                      </div>
-                      <div class="row">
-                        <div class="col-md-6">
-                          <div class="form-group row">
-                            <label class="col-sm-5 col-form-label">Terms of Payment</label>
-                            <div class="col-sm-7">
-                            <input type="text" name="terms"   class="form-control"/>
-                            </div>
-                          </div>
-                        </div>
-
-                        <div class="col-md-6">
-                          <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Delivery Time</label>
-                            <div class="col-sm-9">
-                            <input type="date" name="delivery_time" id="items-needed" class="form-control"/>
-                            </div>
-                          </div>
-                        </div>
+                              </div> 
+                            </div> 
+                          </div> 
+                        </div> 
+                        <div class='col-md-4'> 
+                          <div class='form-group row'> 
+                            <label class='col-sm-4 col-form-label'>Grand Total</label> 
+                            <div class='col-sm-8'> 
+                            <div class='input-group'> 
+                                <input type='text' id='total"+count+"' name='grand_total' class='form-control' required/> 
+                                  <div class='input-group-prepend'> 
+                                    <span class='input-group-text bg-gradient-primary text-white'>Birr</span> 
+                                  </div> 
+                              </div> 
+                            </div> 
+                          </div> 
+                        </div> 
                       </div>
 
                       <div class="row">
                         <div class="col-md-6">
                           <div class="form-group row">
-                            <label class="col-sm-5 col-form-label">Prepared By</label>
+                            <label class="col-sm-5 col-form-label">Store Keepers Name</label>
                             <div class="col-sm-7">
-                            <input type="text" name="prepared_by"   class="form-control"/>
+                            <input type="text" name="store_keeper"  value="Abebe Kebede Chanyalew" class="form-control"/>
                             </div>
                           </div>
                         </div>
 
                         <div class="col-md-6">
                           <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Checked By</label>
+                            <label class="col-sm-3 col-form-label">Delivered By Name</label>
                             <div class="col-sm-9">
-                            <input type="text" name="checked_by" id="items-needed" class="form-control"/>
+                            <input type="text" name="recepient_name" id="items-needed" class="form-control"/>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-6">
+                          <div class="form-group row">
+                            <label class="col-sm-5 col-form-label">Sending Store</label>
+                            <div class="col-sm-7">
+                            <input type="text" name="sending_store" class="form-control"/>
                             </div>
                           </div>
                         </div>
@@ -151,8 +137,8 @@ include "includes/sidebar.php";
                           <div class="form-group row">
                             <div class="col-sm-2">
                             </div>
-                            <button type="submit" name="po" class="btn btn-gradient-primary btn-icon-text col-sm-8">
-                                <i class="mdi mdi-file-check btn-icon-prepend"></i> Submit PO</button>
+                            <button type="submit" name="siv" class="btn btn-gradient-primary btn-icon-text col-sm-8">
+                                <i class="mdi mdi-file-check btn-icon-prepend"></i> Submit SIV</button>
                             <div class="col-sm-2">
                             </div>
                             </div>
