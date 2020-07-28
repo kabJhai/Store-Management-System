@@ -14,6 +14,12 @@ if(isset($_POST['login'])){
         $password_db = $row['pass'];
         if($password_db == $password){
             $_SESSION['user'] = $row['email'];
+            $_SESSION['fn'] = $row['first_name'];
+            $_SESSION['ln'] = $row['last_name'];
+            $_SESSION['did'] = $row['DID'];
+            $query = $DBcon->query("SELECT * FROM departments WHERE DID = '".$row['DID']."'");
+            $row=$query->fetch_array();
+            $_SESSION['department_name'] = $row['department_name'];
             header("Location:../index");
         }else{
             header("Location:../login");

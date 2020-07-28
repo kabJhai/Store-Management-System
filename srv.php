@@ -1,4 +1,5 @@
 <?php
+include "includes/data.php";
 include "includes/head.php";
 
 include "includes/navbar.php";
@@ -12,12 +13,16 @@ include "includes/sidebar.php";
                   <div class="card-body">
                     <form class="form-sample" method="POST" action="includes/routes">
                     <h4 class="card-title">Store Requisition Voucher (SRV)
-                      <span class="record_number">Number: 205032<input style="display:none" name="serial_number" type="text" value="205032"></span>
+                    <?php 
+                     $query = $DBcon->query("SELECT * FROM sno WHERE document_type = 'srv'");
+                     $row=$query->fetch_array();
+                    ?>
+                      <span class="record_number">Number: <?php echo $row['current_number'];?><input style="display:none" name="serial_number" type="text" value="<?php echo $row['current_number'];?>"></span>
                     </h4>
 
                       <p class="card-description">
                         <strong>Date <span id="date"></span></strong><br/>
-                        <strong>Requesting Department: ICT Department<input style="display:none" name="DID" type="text" value="ICT Department"></strong><br/>
+                        <strong>Requesting Department: <?php echo $_SESSION['department_name'];?><input style="display:none" name="DID" type="text" value="<?php echo $_SESSION['did'];?>"></strong><br/>
                         
                         <strong>Items: <span id="item_count">0</span></strong>
                       <script>
@@ -45,7 +50,7 @@ include "includes/sidebar.php";
                           <div class="form-group row">
                             <label class="col-sm-5 col-form-label">Requested By</label>
                             <div class="col-sm-7">
-                            <input type="text" name="requested_by"  value="Abebe Kebede Chanyalew" class="form-control"/>
+                            <input type="text" name="requested_by"  value="<?php echo $_SESSION['fn']." ".$_SESSION['ln'];?>" class="form-control"/>
                             </div>
                           </div>
                         </div>
