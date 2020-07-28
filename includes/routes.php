@@ -17,6 +17,7 @@ if(isset($_POST['login'])){
             $_SESSION['fn'] = $row['first_name'];
             $_SESSION['ln'] = $row['last_name'];
             $_SESSION['did'] = $row['DID'];
+            $_SESSION['USERID'] = $row['USERID'];
             $query = $DBcon->query("SELECT * FROM departments WHERE DID = '".$row['DID']."'");
             $row=$query->fetch_array();
             $_SESSION['department_name'] = $row['department_name'];
@@ -71,7 +72,7 @@ if(isset($_POST['srv'])){
         '".$_SESSION['user']."')")){
             echo "Successfully saved";
     }else{
-        echo "There is an error notification!";
+        echo "There is an error!";
     }
     $query = $DBcon->query("SELECT * FROM heads WHERE DID = '".$did."'");
     $row=$query->fetch_array();
@@ -353,5 +354,31 @@ if(isset($_POST['register'])){
     }
 }
 
-
+if (isset($_POST['approve'])) {
+    $sn = $_POST['sn'];
+    $uid = $_POST['uid'];
+    if($query = $DBcon->query("UPDATE srv SET is_approved = 1 WHERE serial_number = ".$sn)){
+        echo "Success";
+            if($query = $DBcon->query("INSERT INTO
+            notifications
+            (
+            title,
+            notification_body,
+            notify,
+            serial_number
+            )
+        VALUES
+        (
+        'SRV Approved',
+        '".$_SESSION['fn']." ".$_SESSION['ln']." approved your SRV...',
+        '".$uid."',
+        '".$sn."'
+        )")){
+            echo "Successfully saved notification";
+        }else{
+        echo "There is an error notification!";
+        }
+    
+    }
+}
 ?>

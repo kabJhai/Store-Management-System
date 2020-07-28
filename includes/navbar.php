@@ -1,5 +1,6 @@
 <?php
 session_start();
+include "includes/data.php";
 if(!isset($_SESSION['user'])){
   header("Location:login");
 }
@@ -93,49 +94,54 @@ if(!isset($_SESSION['user'])){
               </div>
             </li>
             <li class="nav-item dropdown">
-              <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" href="#" data-toggle="dropdown">
+              <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" data-toggle="dropdown">             
                 <i class="mdi mdi-bell-outline"></i>
+                <?php $query = $DBcon->query("SELECT * FROM notifications WHERE notify = '".$_SESSION['USERID']."' and unred = 0"); $count = mysqli_num_rows($query); if($count > 0){?>
                 <span class="count-symbol bg-danger"></span>
+                <?php }?>
               </a>
               <div class="dropdown-menu dropdown-menu-right navbar-dropdown preview-list" aria-labelledby="notificationDropdown">
                 <h6 class="p-3 mb-0">Notifications</h6>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item preview-item">
-                  <div class="preview-thumbnail">
-                    <div class="preview-icon bg-success">
-                      <i class="mdi mdi-calendar"></i>
-                    </div>
-                  </div>
-                  <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-                    <h6 class="preview-subject font-weight-normal mb-1">Event today</h6>
-                    <p class="text-gray ellipsis mb-0"> Just a reminder that you have an event today </p>
-                  </div>
-                </a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item preview-item">
-                  <div class="preview-thumbnail">
-                    <div class="preview-icon bg-warning">
-                      <i class="mdi mdi-settings"></i>
-                    </div>
-                  </div>
-                  <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-                    <h6 class="preview-subject font-weight-normal mb-1">Settings</h6>
-                    <p class="text-gray ellipsis mb-0"> Update dashboard </p>
-                  </div>
-                </a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item preview-item">
-                  <div class="preview-thumbnail">
-                    <div class="preview-icon bg-info">
-                      <i class="mdi mdi-link-variant"></i>
-                    </div>
-                  </div>
-                  <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
-                    <h6 class="preview-subject font-weight-normal mb-1">Launch Admin</h6>
-                    <p class="text-gray ellipsis mb-0"> New admin wow! </p>
-                  </div>
-                </a>
-                <div class="dropdown-divider"></div>
+                  <?php
+                  if ($count > 0) {
+                        while ($row = $query->fetch_assoc()) {
+                    ?>
+                      <a class="dropdown-item preview-item" href="<?php echo $row['notif_type'].'_approve?from='.$row['USERID'].'&sn='.$row['serial_number'];?>">
+                        <div class="preview-thumbnail">
+                          <div class="preview-icon bg-warning">
+                            <i class="mdi mdi-settings"></i>
+                          </div>
+                        </div>
+                        <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
+                          <h6 class="preview-subject font-weight-normal mb-1"><?php echo $row['title'];?></h6>
+                          <p class="text-gray ellipsis mb-0"><?php echo $row['notification_body'];?></p>
+                        </div>
+                      </a>
+
+                      <div class="dropdown-divider"></div>
+                     <?php
+                        } 
+                      }else{
+                        ?>
+                      <a class="dropdown-item preview-item">
+                        <div class="preview-thumbnail">
+                          <div class="preview-icon bg-warning">
+                            <i class="mdi mdi-empty"></i>
+                          </div>
+                        </div>
+                        <div class="preview-item-content d-flex align-items-start flex-column justify-content-center">
+                          <h6 class="preview-subject font-weight-normal mb-1">No Notifications</h6>
+                          <p class="text-gray ellipsis mb-0">....</p>
+                        </div>
+                      </a>
+
+                      <div class="dropdown-divider"></div>
+
+                        <?php
+                      }
+                     ?>
+
                 <h6 class="p-3 mb-0 text-center">See all notifications</h6>
               </div>
             </li>
