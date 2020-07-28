@@ -52,7 +52,7 @@ include "includes/head.php";
                     </div>
                   </div>
                   <div class="mt-3">
-                    <button id="submit" class="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn" name="register" disabled>Register</button>
+                    <button id="submit" class="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn" name="register" disabled>REGISTER</button>
                   </div>
                   <div class="text-center mt-4 font-weight-light"> Already have an account? <a href="login.php" class="text-primary">Login</a>
                   </div>

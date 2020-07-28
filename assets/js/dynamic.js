@@ -405,7 +405,7 @@ function checkValues() {
   cpassword = document.getElementById("cpassword").value;
   if(password==cpassword){
     document.getElementById("submit").removeAttribute("disabled")
-    document.getElementById("submit").innerText = "Register"
+    document.getElementById("submit").innerText = "REGISTER"
   }else{
     document.getElementById("submit").setAttribute("disabled","")
     document.getElementById("submit").innerText = "Password Doesnot match"
