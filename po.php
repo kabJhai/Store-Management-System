@@ -57,7 +57,7 @@ include "includes/sidebar.php";
                                 <div class="form-group row">
                                   <label class="col-sm-4 col-form-label">Number of Items to Order</label>
                                   <div class="col-sm-8">
-                                    <input type="number" min="0" value=0 id="items-needed" oninput="add()" class="form-control" />
+                                    <input type="number" min="0" value=0 id="items-needed" oninput="addpo()" class="form-control" />
                                   </div>
                                 </div>
                               </div>
@@ -72,7 +72,7 @@ include "includes/sidebar.php";
                           <label class='col-sm-3 col-form-label'>Total Birr</label> 
                           <div class='col-sm-9'> 
                             <div class='input-group'> 
-                              <input type='text' id='unit"+count+"' name='unit_price[]' oninput='calculate("+count+")' class='form-control' required > 
+                              <input type='text' id='unit"+count+"' name='total_birr[]' oninput='calculate("+count+")' class='form-control' required > 
                                 <div class='input-group-prepend'> 
                                   <span class='input-group-text bg-gradient-primary text-white'>Birr</span> 
                                 </div> 
@@ -85,7 +85,7 @@ include "includes/sidebar.php";
                           <label class='col-sm-3 col-form-label'>Taxes Birr</label> 
                           <div class='col-sm-9'> 
                           <div class='input-group'> 
-                              <input type='text' id='total"+count+"' name='total_price[]' class='form-control' required/> 
+                              <input type='text' id='total"+count+"' name='tax_birr[]' class='form-control' required/> 
                                 <div class='input-group-prepend'> 
                                   <span class='input-group-text bg-gradient-primary text-white'>Birr</span> 
                                 </div> 
@@ -100,7 +100,7 @@ include "includes/sidebar.php";
                                   <label class="col-sm-4 col-form-label">Net Birr:</label>
                                   <div class="col-sm-8">
                                     <div class='input-group'> 
-                                    <input type='text' id='total"+count+"' name='total_price[]' class='form-control' required/> 
+                                    <input type='text' id='total"+count+"' name='net_birr[]' class='form-control' required/> 
                                       <div class='input-group-prepend'> 
                                         <span class='input-group-text bg-gradient-primary text-white'>Birr</span> 
                                       </div> 
@@ -152,7 +152,7 @@ include "includes/sidebar.php";
                             <div class="col-sm-2">
                             </div>
                             <button type="submit" name="siv" class="btn btn-gradient-primary btn-icon-text col-sm-8">
-                                <i class="mdi mdi-file-check btn-icon-prepend"></i> Submit SIV</button>
+                                <i class="mdi mdi-file-check btn-icon-prepend"></i> Submit PO</button>
                             <div class="col-sm-2">
                             </div>
                             </div>
