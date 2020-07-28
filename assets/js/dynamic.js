@@ -113,3 +113,84 @@ function calculate(formNum) {
   let totalPrice = document.getElementById("total"+formNum);
   totalPrice.value = parseFloat(unitPrice.value) * parseFloat(reqQuantity.value);
 }
+
+function addpr() {
+  var form_container = document.getElementById('form-array-container');
+  var item_count_container = document.getElementById('item_count');
+  var item_count_input = document.getElementById('items-needed');
+  var items = parseInt(item_count_input.value);
+  item_count_container.innerText = item_count_input.value;
+  form_container.innerHTML = "";
+  for (let count = 1; count <= items; count++) {
+    var previous = form_container.innerHTML;
+    var serial = "<div class='row'>\
+    <div class='col-md-12 line'>\
+    </div>\
+    </div>\
+    <p class='card-description'>Serial Number "+count+" </p>";
+    var row1 = "<div class='row'>\
+                <div class='col-md-4'>\
+                <div class='form-group row'>\
+                    <label class='col-sm-4 col-form-label'>ITEM</label>\
+                        <div class='col-sm-8'>\
+                            <input type='text' name='item[]' class='form-control' required/>\
+                        </div>\
+                        </div>\
+                        </div>\
+                        <div class='col-md-8'>\
+                            <div class='form-group row'>\
+                               <label class='col-sm-3 col-form-label'>Description</label>\
+                                    <div class='col-sm-9'>\
+                                        <input type='text' name='description[]' class='form-control' required/>  \
+                                    </div>\
+                                </div> \
+                            </div>\
+                        </div>";
+    var row2 = "<div class='row'>\
+      <div class='col-md-4'>\
+        <div class='form-group row'>\
+          <label class='col-sm-4 col-form-label'>Unit</label>\
+          <div class='col-sm-8'>\
+            <select name='unit[]' class='form-control' required>\
+              <option name='Dozen' >Dozen</option>\
+              <option name='Inch' >Inch</option>\
+              <option name='Kilogram'>Kilogram</option>\
+              <option name='Meter'>Meter</option>\
+              <option name='Liter'>Liter</option>\
+              <option name='Peice'>Peice</option>\
+            </select>\
+          </div>\
+        </div>\
+      </div>\
+      <div class='col-md-4'>\
+        <div class='form-group row'>\
+          <label class='col-sm-5 col-form-label'>Qty</label>\
+          <div class='col-sm-7'>\
+            <input class='form-control' name='qty[]' placeholder='' required/>\
+          </div>\
+        </div>\
+      </div>\
+      <div class='col-md-4'>\
+        <div class='form-group row'>\
+          <label class='col-sm-5 col-form-label'>Stock Balance</label>\
+          <div class='col-sm-7'>\
+            <input class='form-control' name='stock_balance[]'  placeholder='' required/>\
+          </div>\
+        </div>\
+      </div>\
+    </div>";
+
+    var row4 = "<div class='row'>\
+      <div class='col-md-12'>\
+        <div class='form-group row'>\
+          <label class='col-sm-2 col-form-label'>Remark</label>\
+          <div class='col-sm-10'>\
+            <input type='text' name='remark[]' class='form-control' required/>\
+          </div>\
+        </div>\
+      </div>\
+</div>";
+form_container.innerHTML = previous+serial+row1+row2+row4;
+
+  }
+}

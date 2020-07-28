@@ -57,7 +57,7 @@ include "includes/sidebar.php";
                                 <div class="form-group row">
                                   <label class="col-sm-4 col-form-label">Number of Items to Order</label>
                                   <div class="col-sm-8">
-                                    <input type="number" min="0" value=0 id="items-needed" oninput="add()" class="form-control" />
+                                    <input type="number" min="0" value=0 id="items-needed" oninput="addpr()" class="form-control" />
                                   </div>
                                 </div>
                               </div>
@@ -69,40 +69,30 @@ include "includes/sidebar.php";
                       <div class="row">
                         <div class="col-md-6">
                           <div class="form-group row">
-                            <label class="col-sm-5 col-form-label">Store Keepers Name</label>
+                            <label class="col-sm-5 col-form-label">Requested By</label>
                             <div class="col-sm-7">
-                            <input type="text" name="store_keeper"  value="Abebe Kebede Chanyalew" class="form-control"/>
+                            <input type="text" name="requested_by"  value="Abebe Kebede Chanyalew" class="form-control"/>
                             </div>
                           </div>
                         </div>
 
                         <div class="col-md-6">
                           <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Recepients Name</label>
+                            <label class="col-sm-3 col-form-label">Approved By</label>
                             <div class="col-sm-9">
-                            <input type="text" name="recepient_name" id="items-needed" class="form-control"/>
+                            <input type="text" name="approved_by" value="Not approved yet" id="items-needed" class="form-control"/>
                             </div>
                           </div>
                         </div>
                       </div>
 
-                      <div class="row">
-                        <div class="col-md-6">
-                          <div class="form-group row">
-                            <label class="col-sm-5 col-form-label">Authorized By</label>
-                            <div class="col-sm-7">
-                            <input type="text" name="authorized_by"  value="Abebe Kebede Chanyalew" class="form-control"/>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
                       <div class="row">
                         <div class="col-md-12">
                           <div class="form-group row">
                             <div class="col-sm-2">
                             </div>
-                            <button type="submit" name="siv" class="btn btn-gradient-primary btn-icon-text col-sm-8">
-                                <i class="mdi mdi-file-check btn-icon-prepend"></i> Submit SIV</button>
+                            <button type="submit" name="pr" class="btn btn-gradient-primary btn-icon-text col-sm-8">
+                                <i class="mdi mdi-file-check btn-icon-prepend"></i> Submit PR</button>
                             <div class="col-sm-2">
                             </div>
                             </div>

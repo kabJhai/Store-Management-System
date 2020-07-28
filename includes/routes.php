@@ -94,4 +94,47 @@ if(isset($_POST['siv'])){
          }
 }
 }
+
+if(isset($_POST['pr'])){
+    $serial_number = $_POST['serial_number'];
+    $did = $_POST['DID'];
+    $to = $_POST['to'];
+    $deliver_to = $_POST['deliver_to'];
+    $item = $_POST['item'];
+    $description = $_POST['description'];
+    $unit = $_POST['unit'];
+    $qty = $_POST['qty'];
+    $stock_balance = $_POST['stock_balance'];
+    $remark = $_POST['remark'];
+    $requested_by = $_POST['requested_by'];
+    $approved_by = $_POST['approved_by'];
+    echo $serial_number;
+    $length = count($item);
+
+    for ($i=0; $i < $length; $i++) { 
+        if($query = $DBcon->query("INSERT INTO
+         pr(serial_number,
+         DID,
+         item,
+         description,
+         unit,
+         qty,
+         stock_balance,
+         remark,
+         requested_by,
+         approved_by,
+         to,
+         deliver_to)
+        VALUES
+        (".$serial_number.",'".$did."','".$item[$i]."'
+        ,'".$description[$i]."','".$unit[$i]."','".$qty[$i]."'
+        ,'".$stock_balance[$i]."','".$remark[$i]."','".$requested_by."'
+        ,'".$approved_by."','".$to."','".$deliver_to."')")){
+            echo "Successfully saved";
+    }else{
+        echo "There is an error!";
+    }
+}
+}
+
 ?>
