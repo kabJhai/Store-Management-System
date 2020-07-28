@@ -64,6 +64,33 @@ include "includes/sidebar.php";
                       </div>
                       <div id='form-array-container'>
                       </div>
+                      <div class="row">
+                              <div class="col-md-12">
+                              <div class="form-group row">
+                              <label class='col-sm-3 col-form-label'>Type of Receipt: </label>
+                              <div class='col-sm-3'>
+                                    <div class="form-check form-check-primary">
+                                      <label class="form-check-label">
+                                        <input type="radio" class="form-check-input" name="receipt_type"> Purchase </label>
+                                    </div>
+                                  </div>  
+                                  <div class='col-sm-3'>
+                                    <div class="form-check form-check-success">
+                                      <label class="form-check-label">
+                                        <input type="radio" class="form-check-input"  name="receipt_type"> Transfer </label>
+                                        
+                                    </div>
+                                  </div>                                  
+                                  <div class='col-sm-3'>
+                                    <div class="form-check form-check-info">
+                                      <label class="form-check-label">
+                                        <input type="radio" class="form-check-input" name="receipt_type"> Return </label>
+                                    </div>
+                                  </div>                                  
+                                </div>
+                              </div>
+                      
+                      </div>
 
                       <div class='row'> 
                         <div class='col-md-4'> 
