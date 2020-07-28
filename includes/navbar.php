@@ -34,8 +34,10 @@
                 <a class="dropdown-item" href="#">
                   <i class="mdi mdi-cached mr-2 text-success"></i> Activity Log </a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">
-                  <i class="mdi mdi-logout mr-2 text-primary"></i> Signout </a>
+                <form method="POST" action="includes/routes">
+                <button class="dropdown-item" type="submit" name="logout">
+                  <i class="mdi mdi-logout mr-2 text-primary"></i> Signout </button>
+                </form>
               </div>
             </li>
             <li class="nav-item d-none d-lg-block full-screen-link">

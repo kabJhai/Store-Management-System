@@ -1,6 +1,32 @@
 <?php
 include "data.php";
 
+session_start();
+if(isset($_POST['login'])){
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $query = $DBcon->query("SELECT * FROM employee WHERE email = '".$email."'");
+    $count = mysqli_num_rows($query);
+    if($count == 0) {
+        header("Location:../login");
+    }else{
+        $row=$query->fetch_array();
+        $password_db = $row['pass'];
+        if($password_db == $password){
+            $_SESSION['user'] = $row['email'];
+            header("Location:../index");
+        }else{
+            header("Location:../login");
+        }
+    }
+}
+
+if (isset($_POST['logout'])) {
+    session_destroy();
+    unset($_SESSION['user']);
+    header("Location:../login");
+}
+
 if(isset($_POST['srv'])){
     $serial_number = $_POST['serial_number'];
     $did = $_POST['DID'];
@@ -297,5 +323,6 @@ if(isset($_POST['register'])){
         echo "There is an error!";
     }
 }
+
 
 ?>
