@@ -51,7 +51,8 @@ if(isset($_POST['srv'])){
 
     for ($i=0; $i < $length; $i++) { 
         if($query = $DBcon->query("INSERT INTO
-         srv(serial_number,
+         srv(
+         serial_number,
          DID,
          code,
          description,
@@ -62,14 +63,36 @@ if(isset($_POST['srv'])){
          total_price,
          remark,
          requested_by,
-         approved_by)
+         approved_by,
+         email)
         VALUES
         (".$serial_number.",'".$did."','".$code[$i]."','".$description[$i]."','".$unit[$i]."','".$qty_req[$i]."','".$qty_issued[$i]."',
-        '".$unit_price[$i]."','".$total_price[$i]."','".$remark[$i]."','".$requested_by."','".$approved_by."')")){
+        '".$unit_price[$i]."','".$total_price[$i]."','".$remark[$i]."','".$requested_by."','".$approved_by."',
+        '".$_SESSION['user']."')")){
             echo "Successfully saved";
     }else{
-        echo "There is an error!";
+        echo "There is an error notification!";
     }
+    $query = $DBcon->query("SELECT * FROM heads WHERE DID = '".$did."'");
+    $row=$query->fetch_array();
+    $head_id = $row['USERID'];
+    if($query = $DBcon->query("INSERT INTO
+    notifications
+    (
+    title,
+    notification_body,
+    notify)
+   VALUES
+   (
+   'SRV Approval',
+   '".$_SESSION['fn']." ".$_SESSION['ln']." is waiting for your approval...',
+   '".$head_id."'
+   )")){
+       echo "Successfully saved notification";
+}else{
+   echo "There is an error notification!";
+}
+
 }
 }
 
