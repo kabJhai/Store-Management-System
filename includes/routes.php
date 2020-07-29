@@ -51,53 +51,43 @@ if(isset($_POST['srv'])){
     $length = count($code);
 
     for ($i=0; $i < $length; $i++) { 
-        if($query = $DBcon->query("INSERT INTO
-         srv(
-         serial_number,
-         DID,
-         code,
-         description,
-         unit,
-         qty_requested,
-         qty_issued,
-         unit_price,
-         total_price,
-         remark,
-         requested_by,
-         approved_by,
-         email)
-        VALUES
-        (".$serial_number.",'".$did."','".$code[$i]."','".$description[$i]."','".$unit[$i]."','".$qty_req[$i]."','".$qty_issued[$i]."',
-        '".$unit_price[$i]."','".$total_price[$i]."','".$remark[$i]."','".$requested_by."','".$approved_by."',
-        '".$_SESSION['user']."')")){
-            echo "Successfully saved";
-            $serial_number++;
-        $query = $DBcon->query("UPDATE sno SET current_number = ".$serial_number."  WHERE document_type = 'srv'");
+        try{
+                if($query = $DBcon->query("INSERT INTO
+                srv(
+                serial_number,
+                DID,
+                code,
+                description,
+                unit,
+                qty_requested,
+                qty_issued,
+                unit_price,
+                total_price,
+                remark,
+                requested_by,
+                approved_by,
+                USERID)
+                VALUES
+                (".$serial_number.",'".$did."','".$code[$i]."','".$description[$i]."','".$unit[$i]."','".$qty_req[$i]."','0',
+                '".$unit_price[$i]."','".$total_price[$i]."','".$remark[$i]."','".$requested_by."','".$approved_by."',
+                '".$_SESSION['USERID']."')")){
+                    echo "Successfully saved";
 
-    }else{
-        echo "There is an error!";
-    }
-    $query = $DBcon->query("SELECT * FROM heads WHERE DID = '".$did."'");
-    $row=$query->fetch_array();
-    $head_id = $row['USERID'];
-    if($query = $DBcon->query("INSERT INTO
-    notifications
-    (
-    title,
-    notification_body,
-    notify)
-   VALUES
-   (
-   'SRV Approval',
-   '".$_SESSION['fn']." ".$_SESSION['ln']." is waiting for your approval...',
-   '".$head_id."'
-   )")){
-       echo "Successfully saved notification";
-}else{
-   echo "There is an error notification!";
-}
+            }else{
+                echo "There is an error!";
+            }
+        }catch (Exception $e) {
+            echo 'Caught exception: ',  $e->getMessage(), "\n";
+         }
+        }
+        $query = $DBcon->query("SELECT * FROM heads WHERE DID = '".$did."'");
+        $row=$query->fetch_array();
+        $head_id = $row['USERID'];
+        Send_Notification('SRV Approval',$_SESSION['fn']." ".$_SESSION['ln'].' is waiting for your approval...',$head_id,$serial_number,'srv',$_SESSION['USERID'],$DBcon);
+    
+    $serial_number++;
+    $query = $DBcon->query("UPDATE sno SET current_number = ".$serial_number."  WHERE document_type = 'srv'");
 
-}
 }
 
 if(isset($_POST['siv'])){
@@ -117,6 +107,7 @@ if(isset($_POST['siv'])){
     $recepient_name = $_POST['recepient_name'];
     $authorized_by = $_POST['authorized_by'];
     $uid = $_POST['uid'];
+    $sn = $_POST['sn'];
     $total_value = $_POST['total_val'];
     echo $serial_number;
     $length = count($code);
@@ -148,13 +139,15 @@ if(isset($_POST['siv'])){
                $stock_balance = $total_value[$i] - $qty_req[$i];
                 //Update the bin log
                 Log_Transaction($uid,$code[$i],$serial_number,$stock_balance,"siv",$DBcon);
+                $query = $DBcon->query("UPDATE srv SET is_provided = 1  WHERE serial_number = '".$sn."' AND code='".$code[$i]."'");
             }else{
                 echo "There is an error!";
             }
         }
         $serial_number++;
+        $query = $DBcon->query("UPDATE notifications SET unred = 1 WHERE serial_number = ".$sn." AND USERID='".$uid."'");
         $query = $DBcon->query("UPDATE sno SET current_number = ".$serial_number."  WHERE document_type = 'siv'");
-        Send_Notification("SIV Done",$_SESSION['fn']." ".$_SESSION['ln']." finished SIV...",$uid,$serial_number,'',$DBcon);
+        Send_Notification("SIV Done",$_SESSION['fn']." ".$_SESSION['ln']." finished SIV...",$uid,$serial_number,"sivdone",0,$DBcon);
 }
 
 if(isset($_POST['pr'])){
@@ -193,11 +186,16 @@ if(isset($_POST['pr'])){
         ,'".$stock_balance[$i]."','".$remark[$i]."','".$requested_by."'
         ,'".$approved_by."','".$to."','".$deliver_to."')")){
             echo "Successfully saved";
-            $serial_number++;
-            $query = $DBcon->query("UPDATE sno SET current_number = ".$serial_number."  WHERE document_type = 'pr'");
     }else{
         echo "There is an error!";
     }
+    $query = $DBcon->query("SELECT * FROM heads WHERE DID = 'TACON-PC'");
+    $row=$query->fetch_array();
+    $head_id = $row['USERID'];
+    Send_Notification('PR Request',$_SESSION['fn']." ".$_SESSION['ln'].' is waiting for your approval...',$head_id,$serial_number,'pr',$_SESSION['USERID'],$DBcon);
+    $serial_number++;
+    $query = $DBcon->query("UPDATE sno SET current_number = ".$serial_number."  WHERE document_type = 'pr'");
+
 }
 }
 
@@ -430,4 +428,15 @@ if (isset($_POST['request_siv'])) {
 
 }
 
+//Approve PR
+if (isset($_POST['approve_pr'])) {
+    $sn = $_POST['sn'];
+    $uid = $_POST['uid'];
+    if($query = $DBcon->query("UPDATE pr SET is_approved = 1,approved_by='".$_SESSION['fn']." ".$_SESSION['ln']."' WHERE serial_number = ".$sn)){
+        echo "Success";
+        $query = $DBcon->query("UPDATE notifications SET unred = 1 WHERE serial_number = ".$sn." AND USERID='".$uid."'");
+        Send_Notification('PR Approved',$_SESSION['fn']." ".$_SESSION['ln']." approved your PR...",$uid,$sn,'pr_approved',0,$DBcon);
+        Send_Notification('Prepare a PO',$_SESSION['fn']." ".$_SESSION['ln']." approved a PR...",0,$sn,'pc_handle',$uid,$DBcon);
+    }
+}
 ?>
