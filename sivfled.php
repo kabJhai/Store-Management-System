@@ -63,6 +63,11 @@ if (isset($_GET['sn'])) {
                           $i = 1;
                           $query = $DBcon->query("SELECT * FROM srv WHERE serial_number='".$serial_number."'");
                           while ($row = $query->fetch_assoc()) {
+                            $query2 = $DBcon->query("SELECT * FROM material WHERE code=".$row['code']."");
+                            $row2=$query2->fetch_array();
+                            if($row['qty_requested']>$row2['available_quantity']){
+                               continue;
+                            }
                             $authorized_by = $row['approved_by'];
                       ?>
                           <div class='row'> 
@@ -94,12 +99,12 @@ if (isset($_GET['sn'])) {
                                   <label class='col-sm-4 col-form-label'>Unit</label> 
                                   <div class='col-sm-8'> 
                                     <select name='unit[]' class='form-control' required> 
-                                      <option name='Dozen' >Dozen</option> 
-                                      <option name='Inch' >Inch</option> 
-                                      <option name='Kilogram'>Kilogram</option> 
-                                      <option name='Meter'>Meter</option> 
-                                      <option name='Liter'>Liter</option> 
-                                      <option name='Peice'>Peice</option> 
+                                      <option name='Dozen' <?php if(strcasecmp($row['unit'],'Dozen')==0){echo "selected";};?> >Dozen</option> 
+                                      <option name='Inch'<?php if(strcasecmp($row['unit'],'Inch')==0){echo "selected";};?>  >Inch</option> 
+                                      <option name='Kilogram' <?php if(strcasecmp($row['unit'],'Kilogram')==0){echo "selected";};?> >Kilogram</option> 
+                                      <option name='Meter' <?php if(strcasecmp($row['unit'],'Meter')==0){echo "selected";};?> >Meter</option> 
+                                      <option name='Liter'<?php if(strcasecmp($row['unit'],'Liter')==0){echo "selected";};?> >Liter</option> 
+                                      <option name='Peice'<?php if(strcasecmp($row['unit'],'Piece')==0){echo "selected";};?> >Peice</option> 
                                     </select> 
                                   </div> 
                                 </div> 
