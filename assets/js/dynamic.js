@@ -107,12 +107,7 @@ function add() {
     }
 }
 
-function calculate(formNum) {
-  let unitPrice = document.getElementById("unit"+formNum);
-  let reqQuantity = document.getElementById("qtyreq"+formNum);
-  let totalPrice = document.getElementById("total"+formNum);
-  totalPrice.value = parseFloat(unitPrice.value) * parseFloat(reqQuantity.value);
-}
+
 
 function addpr() {
   var form_container = document.getElementById('form-array-container');
@@ -410,4 +405,29 @@ function checkValues() {
     document.getElementById("submit").setAttribute("disabled","")
     document.getElementById("submit").innerText = "Password Doesnot match"
   }
+}
+
+function calculatePO(formNum) {
+  let unitPrice = document.getElementById("unit"+formNum);
+  let reqQuantity = document.getElementById("qtyreq"+formNum);
+  let totalPrice = document.getElementById("total"+formNum);
+  let totalSum = document.getElementById("total_sum");
+  let totalTax = document.getElementById("total_tax");
+  let netBirr = document.getElementById("net_birr");
+  let sum = 0.0;
+  totalPrice.value = parseFloat(unitPrice.value) * parseFloat(reqQuantity.value);
+  for (let index = 0; index < formNum; index++) {
+    sum = sum + parseFloat(document.getElementById("total"+formNum).value);
+  }
+  totalSum.value = sum; 
+  totalTax.value = sum*0.15;
+  netBirr.value = parseFloat(totalSum.value) + parseFloat(totalTax.value);
+
+}
+
+function calculate(formNum) {
+  let unitPrice = document.getElementById("unit"+formNum);
+  let reqQuantity = document.getElementById("qtyreq"+formNum);
+  let totalPrice = document.getElementById("total"+formNum);
+  totalPrice.value = parseFloat(unitPrice.value) * parseFloat(reqQuantity.value);
 }

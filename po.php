@@ -53,25 +53,12 @@ if (isset($_GET['sn'])) {
                                 </div>
                               </div>
                         </div>
-                        <strong>Items: <span id="item_count">0</span></strong>
                       <script>
                         var d = new Date();
                         document.getElementById('date').innerHTML = d.getDate()+" - "+(d.getUTCMonth()+1)+" - "+d.getFullYear();
                       </script>
                         </p>
                         <p class="card-description">Please supply the under mentioned items as per offer dated <input class="inline-form" name="offer_date" type="date"> and in accordance with the terms and conditions stated here.</p>
-                      <div id="form-items-count">
-                        <div class="row">
-                              <div class="col-md-12">
-                                <div class="form-group row">
-                                  <label class="col-sm-4 col-form-label">Number of Items to Order</label>
-                                  <div class="col-sm-8">
-                                    <input type="number" min="0" value=0 id="items-needed" oninput="addpo()" class="form-control" />
-                                  </div>
-                                </div>
-                              </div>
-                        </div>
-                      </div>
                       <div id='form-array-container'>
                       <?php
                           $i = 1;
@@ -134,7 +121,7 @@ if (isset($_GET['sn'])) {
                                 <label class='col-sm-3 col-form-label'>Unit Price</label> 
                                 <div class='col-sm-9'> 
                                   <div class='input-group'> 
-                                    <input type='text' id='unit<?php echo $i;?>' name='unit_price[]' oninput='calculate(<?php echo $i;?>)' class='form-control' required > 
+                                    <input type='number' value='0' id='unit<?php echo $i;?>' name='unit_price[]' oninput='calculatePO(<?php echo $i;?>)' class='form-control' required > 
                                       <div class='input-group-prepend'> 
                                         <span class='input-group-text bg-gradient-primary text-white'>Birr</span> 
                                       </div> 
@@ -147,7 +134,7 @@ if (isset($_GET['sn'])) {
                                 <label class='col-sm-3 col-form-label'>Total Price</label> 
                                 <div class='col-sm-9'> 
                                 <div class='input-group'> 
-                                    <input type='text' id='total<?php echo $i;?>' name='total_price[]' class='form-control' required/> 
+                                    <input type='number' value='0' id='total<?php echo $i;?>' name='total_price[]' class='form-control' required/> 
                                       <div class='input-group-prepend'> 
                                         <span class='input-group-text bg-gradient-primary text-white'>Birr</span> 
                                       </div> 
@@ -180,7 +167,7 @@ if (isset($_GET['sn'])) {
                           <label class='col-sm-3 col-form-label'>Total Birr</label> 
                           <div class='col-sm-9'> 
                             <div class='input-group'> 
-                              <input type='text' id='total_sum' name='total_birr' oninput='calculate(<?php echo $i;?>)' class='form-control' required > 
+                              <input type='number' value='0' id='total_sum' name='total_birr' class='form-control' required > 
                                 <div class='input-group-prepend'> 
                                   <span class='input-group-text bg-gradient-primary text-white'>Birr</span> 
                                 </div> 
@@ -193,7 +180,7 @@ if (isset($_GET['sn'])) {
                           <label class='col-sm-3 col-form-label'>Taxes Birr</label> 
                           <div class='col-sm-9'> 
                           <div class='input-group'> 
-                              <input type='text' id='total_tax' name='tax_birr' class='form-control' required/> 
+                              <input type='number' value='0' id='total_tax' name='tax_birr' class='form-control' value required/> 
                                 <div class='input-group-prepend'> 
                                   <span class='input-group-text bg-gradient-primary text-white'>Birr</span> 
                                 </div> 
@@ -208,7 +195,7 @@ if (isset($_GET['sn'])) {
                                   <label class="col-sm-4 col-form-label">Net Birr:</label>
                                   <div class="col-sm-8">
                                     <div class='input-group'> 
-                                    <input type='text' id='net_birr' name='net_birr' class='form-control' required/> 
+                                    <input type='number' value='0' id='net_birr' name='net_birr' class='form-control' required/> 
                                       <div class='input-group-prepend'> 
                                         <span class='input-group-text bg-gradient-primary text-white'>Birr</span> 
                                       </div> 
@@ -240,7 +227,7 @@ if (isset($_GET['sn'])) {
                           <div class="form-group row">
                             <label class="col-sm-5 col-form-label">Prepared By</label>
                             <div class="col-sm-7">
-                            <input type="text" name="prepared_by"   class="form-control"/>
+                            <input type="text" name="prepared_by" value="<?php echo $_SESSION['fn']." ".$_SESSION['ln'];?>" class="form-control"/>
                             </div>
                           </div>
                         </div>

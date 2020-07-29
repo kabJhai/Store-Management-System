@@ -223,9 +223,6 @@ if(isset($_POST['po'])){
     $prepared_by = $_POST['prepared_by'];
     $checked_by = $_POST['checked_by'];
 
-
-
-
     echo $serial_number;
     $length = count($part_no);
 
@@ -262,13 +259,12 @@ if(isset($_POST['po'])){
         '".$net_birr."'
         ,'".$terms."',
         '".$delivery_time."')")){
-            echo "Successfully saved";
-            $serial_number++;
-            $query = $DBcon->query("UPDATE sno SET current_number = ".$serial_number."  WHERE document_type = 'po'");
-    
+            echo "Successfully saved";    
     }else{
         echo "There is an error!";
     }
+    $serial_number++;
+    $query = $DBcon->query("UPDATE sno SET current_number = ".$serial_number."  WHERE document_type = 'po'");
 }
 }
 
