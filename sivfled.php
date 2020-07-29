@@ -113,7 +113,7 @@ if (isset($_GET['sn'])) {
                                 <div class='form-group row'> 
                                   <label class='col-sm-5 col-form-label'>Qty. Requested</label> 
                                   <div class='col-sm-7'> 
-                                    <input class='form-control' name='qty_requested[]' id='qtyreq"+count+"' value="<?php echo $row['qty_requested'];?>" required/> 
+                                    <input class='form-control' name='qty_requested[]' id='qtyreq<?php echo $i;?>' value="<?php echo $row['qty_requested'];?>" required/> 
                                   </div> 
                                 </div> 
                               </div> 
@@ -130,20 +130,20 @@ if (isset($_GET['sn'])) {
                                       $total_quantity = $row2['available_quantity'];
                                       if($row2['available_quantity']>$row['qty_requested']){
                                         ?>
-                                    <input class='form-control' name='qty_issued[]' id='qtyreq"+count+"' value="<?php echo $row['qty_requested'];?>" placeholder='' required/> 
+                                    <input class='form-control' name='qty_issued[]' id='qtyreq<?php echo $i;?>' value="<?php echo $row['qty_requested'];?>" placeholder='' required/> 
                                         <?php
                                       }else if($row2['available_quantity']>0){
                                         ?>
-                                        <input class='form-control' name='qty_issued[]' id='qtyreq"+count+"' value="<?php echo $row2['available_quantity'];?>" placeholder='' required/> 
+                                        <input class='form-control' name='qty_issued[]' id='qtyreq<?php echo $i;?>' value="<?php echo $row2['available_quantity'];?>" placeholder='' required/> 
                                         <?php
                                       }else {
                                         ?>
-                                        <input class='form-control' name='qty_issued[]' id='qtyreq"+count+"' value="0" placeholder='' required/> 
+                                        <input class='form-control' name='qty_issued[]' id='qtyreq<?php echo $i;?>' value="0" placeholder='' required/> 
                                         <?php
                                       }
                                     }else{
                                       ?>
-                                      <input class='form-control' name='qty_issued[]' id='qtyreq"+count+"' value="0" placeholder='' required/> 
+                                      <input class='form-control' name='qty_issued[]' id='qtyreq<?php echo $i;?>' value="0" placeholder='' required/> 
                                       <?php
                                   }
                                     ?>
@@ -158,7 +158,7 @@ if (isset($_GET['sn'])) {
                                   <label class='col-sm-3 col-form-label'>Unit Price</label> 
                                   <div class='col-sm-9'> 
                                     <div class='input-group'> 
-                                      <input type='text' id='unit"+count+"' name='unit_price[]' oninput='calculate("+count+")' class='form-control' value="<?php echo $row['unit_price'];?>" required > 
+                                      <input type='text' id='unit<?php echo $i;?>' name='unit_price[]' oninput='calculate(<?php echo $i;?>)' class='form-control' value="<?php echo $row['unit_price'];?>" required > 
                                         <div class='input-group-prepend'> 
                                           <span class='input-group-text bg-gradient-primary text-white'>Birr</span> 
                                         </div> 
@@ -171,7 +171,7 @@ if (isset($_GET['sn'])) {
                                   <label class='col-sm-3 col-form-label'>Total Price</label> 
                                   <div class='col-sm-9'> 
                                   <div class='input-group'> 
-                                      <input type='text' id='total"+count+"' name='total_price[]' class='form-control' value="<?php echo $row['total_price'];?>" required/> 
+                                      <input type='text' id='total<?php echo $i;?>' name='total_price[]' class='form-control' value="<?php echo $row['total_price'];?>" required/> 
                                         <div class='input-group-prepend'> 
                                           <span class='input-group-text bg-gradient-primary text-white'>Birr</span> 
                                         </div> 
