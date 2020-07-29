@@ -6,6 +6,7 @@ include "includes/navbar.php";
 include "includes/sidebar.php";
 if (isset($_GET['sn'])) { 
   $serial_number = $_GET['sn']; 
+  $from_user = $_GET['from']; 
 }
 ?>
   <div class="main-panel">
@@ -115,7 +116,33 @@ if (isset($_GET['sn'])) {
                                 <div class='form-group row'> 
                                   <label class='col-sm-5 col-form-label'>Qty. Issued</label> 
                                   <div class='col-sm-7'> 
-                                    <input class='form-control' name='qty_issued[]' id='qtyreq"+count+"' placeholder='' required/> 
+                                  <?php
+                                    $query2 = $DBcon->query("SELECT * FROM material WHERE code=".$row['code']."");
+                                    $row2=$query2->fetch_array();
+                                    $count = mysqli_num_rows($query2);
+                                  
+                                    if ($count > 0) {
+                                      $total_quantity = $row2['available_quantity'];
+                                      if($row2['available_quantity']>$row['qty_requested']){
+                                        ?>
+                                    <input class='form-control' name='qty_issued[]' id='qtyreq"+count+"' value="<?php echo $row['qty_requested'];?>" placeholder='' required/> 
+                                        <?php
+                                      }else if($row2['available_quantity']>0){
+                                        ?>
+                                        <input class='form-control' name='qty_issued[]' id='qtyreq"+count+"' value="<?php echo $row2['available_quantity'];?>" placeholder='' required/> 
+                                        <?php
+                                      }else {
+                                        ?>
+                                        <input class='form-control' name='qty_issued[]' id='qtyreq"+count+"' value="0" placeholder='' required/> 
+                                        <?php
+                                      }
+                                    }else{
+                                      ?>
+                                      <input class='form-control' name='qty_issued[]' id='qtyreq"+count+"' value="0" placeholder='' required/> 
+                                      <?php
+                                  }
+                                    ?>
+                                  <input name="total_val[]"  style="display:none" value="<?php echo $total_quantity; ?>">
                                   </div> 
                                 </div> 
                               </div> 
@@ -169,7 +196,7 @@ if (isset($_GET['sn'])) {
                           <div class="form-group row">
                             <label class="col-sm-5 col-form-label">Store Keepers Name</label>
                             <div class="col-sm-7">
-                            <input type="text" name="store_keeper"  class="form-control"/>
+                            <input type="text" name="store_keeper" value="<?php echo $_SESSION['fn']." ".$_SESSION['ln'];?>" class="form-control"/>
                             </div>
                           </div>
                         </div>
@@ -199,6 +226,8 @@ if (isset($_GET['sn'])) {
                           <div class="form-group row">
                             <div class="col-sm-2">
                             </div>
+                            <input name="sn"  style="display:none" value="<?php echo $serial_number; ?>">
+                            <input name="uid"  style="display:none" value="<?php echo $from_user; ?>">
                             <button type="submit" name="siv" class="btn btn-gradient-primary btn-icon-text col-sm-8">
                                 <i class="mdi mdi-file-check btn-icon-prepend"></i> Submit SIV</button>
                             <div class="col-sm-2">

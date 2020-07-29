@@ -96,7 +96,7 @@ if(!isset($_SESSION['user'])){
             <li class="nav-item dropdown">
               <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" data-toggle="dropdown">             
                 <i class="mdi mdi-bell-outline"></i>
-                <?php $query = $DBcon->query("SELECT * FROM notifications WHERE notify = '".$_SESSION['USERID']."' and unred = 0"); $count = mysqli_num_rows($query); if($count > 0){?>
+                <?php $query = $DBcon->query("SELECT * FROM notifications WHERE notify = '".$_SESSION['USERID']."' and unred = 0  ORDER BY ID DESC"); $count = mysqli_num_rows($query); if($count > 0){?>
                 <span class="count-symbol bg-danger"></span>
                 <?php }?>
               </a>
@@ -110,9 +110,15 @@ if(!isset($_SESSION['user'])){
                       <a class="dropdown-item preview-item" 
                       <?php
                       if(strcmp($row['notif_type'],"")>2){
+                        if(strcmp($row['notif_type'],"rsiv")==0){
+                          ?>
+                          href="<?php echo 'sivfled?from='.$row['USERID'].'&sn='.$row['serial_number'];?>"
+                          <?php    
+                        }else{
                       ?>
                       href="<?php echo $row['notif_type'].'_approve?from='.$row['USERID'].'&sn='.$row['serial_number'];?>"
                       <?php
+                        }
                       }else{
                         ?>
                       href="<?php echo 'is_instore?sn='.$row['serial_number'];?>"

@@ -93,14 +93,18 @@ if (isset($_GET['sn'])) {
                     <div class="row">
                         <div class="col-md-12">
                           <div class="form-group row">
-                            <div class="col-sm-1">
-                            </div>
                             <input name="sn"  style="display:none" value="<?php echo $serial_number; ?>">
-                            <!-- <input name="uid"  style="display:none" value="<?php echo $user_id; ?>"> -->
-                            <a name="approve" class="btn btn-gradient-success btn-icon-text col-sm-4 floating" href="sivfled?sn=<?php echo $serial_number;?>">
-                              Fill SIV</a>
-                            <div class="col-sm-2">
+                            <input name="uid"  style="display:none" value="<?php echo $_SESSION['USERID']; ?>">
+                            <button name="request_siv" class="btn btn-gradient-primary btn-icon-text col-sm-3 floating">
+                              Request SIV</button>
+                              <div class="col-sm-2">
                             </div>
+                            <button name="request_pr" class="btn btn-gradient-warning btn-icon-text col-sm-3 floating">
+                              Request PR</button>
+                              <div class="col-sm-2">
+                            </div>
+                              <button name="done_srv" class="btn btn-gradient-success btn-icon-text col-sm-2 floating">
+                              Done</button>
                             </div>
                             </div>
                         </div>

@@ -1,5 +1,5 @@
 <?php
-include "data.php";
+include "functions.php";
 
 session_start();
 if(isset($_POST['login'])){
@@ -116,11 +116,12 @@ if(isset($_POST['siv'])){
     $store_keeper = $_POST['store_keeper'];
     $recepient_name = $_POST['recepient_name'];
     $authorized_by = $_POST['authorized_by'];
+    $uid = $_POST['uid'];
+    $total_value = $_POST['total_val'];
     echo $serial_number;
     $length = count($code);
 
     for ($i=0; $i < $length; $i++) { 
-        try {
             if($query = $DBcon->query("INSERT INTO
             siv(serial_number,
             DID,
@@ -144,16 +145,16 @@ if(isset($_POST['siv'])){
            '".$remark[$i]."','".$store_keeper."','".$recepient_name."',
            '".$authorized_by."','".$issuing_store."',".$grv_number.")")){
                echo "Successfully saved";
-               $serial_number++;
-               $query = $DBcon->query("UPDATE sno SET current_number = ".$serial_number."  WHERE document_type = 'siv'");
-       }else{
-           echo "There is an error!";
-       }
-   
-         } catch (Exception $e) {
-            return $e->getMessage();
-         }
-}
+               $stock_balance = $total_value[$i] - $qty_req[$i];
+                //Update the bin log
+                Log_Transaction($uid,$code[$i],$serial_number,$stock_balance,"siv",$DBcon);
+            }else{
+                echo "There is an error!";
+            }
+        }
+        $serial_number++;
+        $query = $DBcon->query("UPDATE sno SET current_number = ".$serial_number."  WHERE document_type = 'siv'");
+        Send_Notification("SIV Done",$_SESSION['fn']." ".$_SESSION['ln']." finished SIV...",$uid,$serial_number,'',$DBcon);
 }
 
 if(isset($_POST['pr'])){
@@ -392,5 +393,41 @@ if (isset($_POST['approve'])) {
         }
     
     }
+
 }
+
+if (isset($_POST['request_siv'])) {
+    $sn = $_POST['sn'];
+    $uid = $_POST['uid'];
+    $query = $DBcon->query("SELECT * FROM heads WHERE DID = 'TACON-STR'");
+    $row=$query->fetch_array();
+    $head_id = $row['USERID'];
+
+        $query = $DBcon->query("UPDATE notifications SET unred = 1 WHERE serial_number = ".$sn." AND USERID='".$uid."'");
+            if($query = $DBcon->query("INSERT INTO
+            notifications
+            (
+            title,
+            notification_body,
+            notify,
+            serial_number,
+            USERID,
+            notif_type
+            )
+        VALUES
+        (
+        'SIV Requested',
+        '".$_SESSION['fn']." ".$_SESSION['ln']." requested SIV...',
+        '".$head_id."',
+        '".$sn."',
+        '".$uid."',
+        'rsiv'
+        )")){
+            echo "Successfully saved notification";
+        }else{
+        echo "There is an error notification!";
+        }
+
+}
+
 ?>
