@@ -4,6 +4,10 @@ include "includes/head.php";
 
 include "includes/navbar.php";
 include "includes/sidebar.php";
+if (isset($_GET['sn'])) {
+  $serial_number = $_GET['sn']; 
+}
+
 ?>
   <div class="main-panel">
           <div class="content-wrapper">
@@ -69,6 +73,105 @@ include "includes/sidebar.php";
                         </div>
                       </div>
                       <div id='form-array-container'>
+                      <?php
+                          $i = 1;
+                          $query = $DBcon->query("SELECT * FROM pr WHERE serial_number='".$serial_number."' AND is_approved = 1");
+                          while ($row = $query->fetch_assoc()) {
+                            $authorized_by = $row['approved_by'];
+                      ?>
+                        <div class='row'> 
+                          <div class='col-md-12 line'> 
+                          </div> 
+                          </div> 
+                          <p class='card-description'>Item Number <?php echo $i;?> </p>
+                          <div class='row'> 
+                                      <div class='col-md-4'> 
+                                      <div class='form-group row'> 
+                                          <label class='col-sm-4 col-form-label'>Part No</label> 
+                                              <div class='col-sm-8'> 
+                                                  <input type='text' name='part_no[]' class='form-control' required/> 
+                                              </div> 
+                                              </div> 
+                                              </div> 
+                                              <div class='col-md-8'> 
+                                                  <div class='form-group row'> 
+                                                    <label class='col-sm-3 col-form-label'>Material Description</label> 
+                                                          <div class='col-sm-9'> 
+                                                              <input type='text' name='description[]' class='form-control'value=" <?php echo $row['description'];?>" required/>   
+                                                          </div> 
+                                                      </div>  
+                                                  </div> 
+                                              </div>
+                          <div class='row'> 
+                            <div class='col-md-4'> 
+                              <div class='form-group row'> 
+                                <label class='col-sm-4 col-form-label'>Unit</label> 
+                                <div class='col-sm-8'> 
+                                <select name='unit[]' class='form-control' required> 
+                                      <option name='Dozen' <?php if(strcasecmp($row['unit'],'Dozen')==0){echo "selected";};?> >Dozen</option> 
+                                      <option name='Inch'<?php if(strcasecmp($row['unit'],'Inch')==0){echo "selected";};?>  >Inch</option> 
+                                      <option name='Kilogram' <?php if(strcasecmp($row['unit'],'Kilogram')==0){echo "selected";};?> >Kilogram</option> 
+                                      <option name='Meter' <?php if(strcasecmp($row['unit'],'Meter')==0){echo "selected";};?> >Meter</option> 
+                                      <option name='Liter'<?php if(strcasecmp($row['unit'],'Liter')==0){echo "selected";};?> >Liter</option> 
+                                      <option name='Peice'<?php if(strcasecmp($row['unit'],'Piece')==0){echo "selected";};?> >Peice</option> 
+                                    </select> 
+                                </div> 
+                              </div> 
+                            </div> 
+                            <div class='col-md-4'> 
+                              <div class='form-group row'> 
+                                <label class='col-sm-5 col-form-label'>Qty. Ordered</label> 
+                                <div class='col-sm-7'> 
+                                  <input class='form-control' name='qty_ordered[]' id='qtyreq<?php echo $i;?>' placeholder=''value="<?php echo $row['qty'];?>" required/> 
+                                </div> 
+                              </div> 
+                            </div> 
+                          </div>
+
+                          <div class='row'> 
+                            <div class='col-md-6'> 
+                              <div class='form-group row'> 
+                                <label class='col-sm-3 col-form-label'>Unit Price</label> 
+                                <div class='col-sm-9'> 
+                                  <div class='input-group'> 
+                                    <input type='text' id='unit<?php echo $i;?>' name='unit_price[]' oninput='calculate(<?php echo $i;?>)' class='form-control' required > 
+                                      <div class='input-group-prepend'> 
+                                        <span class='input-group-text bg-gradient-primary text-white'>Birr</span> 
+                                      </div> 
+                                    </div> 
+                                </div> 
+                              </div> 
+                            </div> 
+                            <div class='col-md-6'> 
+                              <div class='form-group row'> 
+                                <label class='col-sm-3 col-form-label'>Total Price</label> 
+                                <div class='col-sm-9'> 
+                                <div class='input-group'> 
+                                    <input type='text' id='total<?php echo $i;?>' name='total_price[]' class='form-control' required/> 
+                                      <div class='input-group-prepend'> 
+                                        <span class='input-group-text bg-gradient-primary text-white'>Birr</span> 
+                                      </div> 
+                                  </div> 
+                                </div> 
+                              </div> 
+                            </div> 
+                          </div>
+                          <div class='row'> 
+                            <div class='col-md-12'> 
+                              <div class='form-group row'> 
+                                <label class='col-sm-2 col-form-label'>Remark</label> 
+                                <div class='col-sm-10'> 
+                                  <input type='text' name='remark[]' class='form-control' value="<?php echo $row['remark'];?>" required/> 
+                                </div> 
+                              </div> 
+                            </div> 
+                      </div>
+
+
+                      <?php
+                      $i++;
+                          }
+                      ?>
                       </div>
                       
                     <div class='row'> 
@@ -77,7 +180,7 @@ include "includes/sidebar.php";
                           <label class='col-sm-3 col-form-label'>Total Birr</label> 
                           <div class='col-sm-9'> 
                             <div class='input-group'> 
-                              <input type='text' id='unit"+count+"' name='total_birr' oninput='calculate("+count+")' class='form-control' required > 
+                              <input type='text' id='total_sum' name='total_birr' oninput='calculate(<?php echo $i;?>)' class='form-control' required > 
                                 <div class='input-group-prepend'> 
                                   <span class='input-group-text bg-gradient-primary text-white'>Birr</span> 
                                 </div> 
@@ -90,7 +193,7 @@ include "includes/sidebar.php";
                           <label class='col-sm-3 col-form-label'>Taxes Birr</label> 
                           <div class='col-sm-9'> 
                           <div class='input-group'> 
-                              <input type='text' id='total"+count+"' name='tax_birr' class='form-control' required/> 
+                              <input type='text' id='total_tax' name='tax_birr' class='form-control' required/> 
                                 <div class='input-group-prepend'> 
                                   <span class='input-group-text bg-gradient-primary text-white'>Birr</span> 
                                 </div> 
@@ -105,7 +208,7 @@ include "includes/sidebar.php";
                                   <label class="col-sm-4 col-form-label">Net Birr:</label>
                                   <div class="col-sm-8">
                                     <div class='input-group'> 
-                                    <input type='text' id='total"+count+"' name='net_birr' class='form-control' required/> 
+                                    <input type='text' id='net_birr' name='net_birr' class='form-control' required/> 
                                       <div class='input-group-prepend'> 
                                         <span class='input-group-text bg-gradient-primary text-white'>Birr</span> 
                                       </div> 

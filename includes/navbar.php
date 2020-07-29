@@ -96,7 +96,14 @@ if(!isset($_SESSION['user'])){
             <li class="nav-item dropdown">
               <a class="nav-link count-indicator dropdown-toggle" id="notificationDropdown" data-toggle="dropdown">             
                 <i class="mdi mdi-bell-outline"></i>
-                <?php $query = $DBcon->query("SELECT * FROM notifications WHERE notify = '".$_SESSION['USERID']."' and unred = 0  ORDER BY ID DESC"); $count = mysqli_num_rows($query); if($count > 0){?>
+                <?php 
+                if ($_SESSION['did']=='TACON-PC') {
+                  $q = "SELECT * FROM notifications WHERE (notify = '".$_SESSION['USERID']."' and unred = 0) or notif_type='pc_handle'  ORDER BY ID DESC";
+                } else {
+                  $q = "SELECT * FROM notifications WHERE notify = '".$_SESSION['USERID']."' and unred = 0  ORDER BY ID DESC";
+                }
+                
+                $query = $DBcon->query($q); $count = mysqli_num_rows($query); if($count > 0){?>
                 <span class="count-symbol bg-danger"></span>
                 <?php }?>
               </a>
@@ -109,12 +116,22 @@ if(!isset($_SESSION['user'])){
                     ?>
                       <a class="dropdown-item preview-item" 
                       <?php
-                      if(strcmp($row['notif_type'],"")>2){
+                      if(strcasecmp($row['notif_type']," ")>0){
                         if(strcmp($row['notif_type'],"rsiv")==0){
                           ?>
                           href="<?php echo 'sivfled?from='.$row['USERID'].'&sn='.$row['serial_number'];?>"
-                          <?php    
-                        }else{
+                          <?php 
+                        }elseif (strcmp($row['notif_type'],"sivdone")==0) {
+                          ?>
+                            href="#"
+                          <?php  
+                            
+                          }elseif ((strcmp($row['notif_type'],"pc_handle")==0 )&&($_SESSION['did']=="TACON-PC")) {
+                            ?>
+                              href="po?sn=<?php echo $row['serial_number'];?>"
+                            <?php  
+                              
+                          }else{
                       ?>
                       href="<?php echo $row['notif_type'].'_approve?from='.$row['USERID'].'&sn='.$row['serial_number'];?>"
                       <?php
