@@ -71,6 +71,9 @@ if(isset($_POST['srv'])){
         '".$unit_price[$i]."','".$total_price[$i]."','".$remark[$i]."','".$requested_by."','".$approved_by."',
         '".$_SESSION['user']."')")){
             echo "Successfully saved";
+            $serial_number++;
+        $query = $DBcon->query("UPDATE sno SET current_number = ".$serial_number."  WHERE document_type = 'srv'");
+
     }else{
         echo "There is an error!";
     }
@@ -141,6 +144,8 @@ if(isset($_POST['siv'])){
            '".$remark[$i]."','".$store_keeper."','".$recepient_name."',
            '".$authorized_by."','".$issuing_store."',".$grv_number.")")){
                echo "Successfully saved";
+               $serial_number++;
+               $query = $DBcon->query("UPDATE sno SET current_number = ".$serial_number."  WHERE document_type = 'siv'");
        }else{
            echo "There is an error!";
        }
@@ -187,6 +192,8 @@ if(isset($_POST['pr'])){
         ,'".$stock_balance[$i]."','".$remark[$i]."','".$requested_by."'
         ,'".$approved_by."','".$to."','".$deliver_to."')")){
             echo "Successfully saved";
+            $serial_number++;
+            $query = $DBcon->query("UPDATE sno SET current_number = ".$serial_number."  WHERE document_type = 'pr'");
     }else{
         echo "There is an error!";
     }
@@ -257,6 +264,8 @@ if(isset($_POST['po'])){
         ,'".$terms."',
         '".$delivery_time."')")){
             echo "Successfully saved";
+            $serial_number++;
+            $query = $DBcon->query("UPDATE sno SET current_number = ".$serial_number."  WHERE document_type = 'po'");
     
     }else{
         echo "There is an error!";
@@ -314,6 +323,8 @@ if(isset($_POST['grn'])){
         ,'".$total_qty."','".$total_unit."','".$grand_total."'
         ,'".$receipt_type."','".$sending_store."')")){
             echo "Successfully saved";
+            $serial_number++;
+            $query = $DBcon->query("UPDATE sno SET current_number = ".$serial_number."  WHERE document_type = 'grn'");
     }else{
         echo "There is an error!";
     }
@@ -357,8 +368,9 @@ if(isset($_POST['register'])){
 if (isset($_POST['approve'])) {
     $sn = $_POST['sn'];
     $uid = $_POST['uid'];
-    if($query = $DBcon->query("UPDATE srv SET is_approved = 1 WHERE serial_number = ".$sn)){
+    if($query = $DBcon->query("UPDATE srv SET is_approved = 1,approved_by='".$_SESSION['fn']." ".$_SESSION['ln']."' WHERE serial_number = ".$sn)){
         echo "Success";
+        $query = $DBcon->query("UPDATE notifications SET unred = 1 WHERE serial_number = ".$sn." AND USERID='".$uid."'");
             if($query = $DBcon->query("INSERT INTO
             notifications
             (

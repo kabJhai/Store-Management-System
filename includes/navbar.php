@@ -107,7 +107,19 @@ if(!isset($_SESSION['user'])){
                   if ($count > 0) {
                         while ($row = $query->fetch_assoc()) {
                     ?>
-                      <a class="dropdown-item preview-item" href="<?php echo $row['notif_type'].'_approve?from='.$row['USERID'].'&sn='.$row['serial_number'];?>">
+                      <a class="dropdown-item preview-item" 
+                      <?php
+                      if(strcmp($row['notif_type'],"")>2){
+                      ?>
+                      href="<?php echo $row['notif_type'].'_approve?from='.$row['USERID'].'&sn='.$row['serial_number'];?>"
+                      <?php
+                      }else{
+                        ?>
+                      href="<?php echo 'is_instore?sn='.$row['serial_number'];?>"
+                        <?php
+                      }
+                      ?>
+                      >
                         <div class="preview-thumbnail">
                           <div class="preview-icon bg-warning">
                             <i class="mdi mdi-settings"></i>
