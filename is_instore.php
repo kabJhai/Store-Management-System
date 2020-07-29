@@ -47,7 +47,7 @@ if (isset($_GET['sn'])) {
                       <tbody>
                       <?php
                           $i = 1;
-                          $query = $DBcon->query("SELECT * FROM srv WHERE serial_number=".$serial_number." AND is_approved = 1");
+                          $query = $DBcon->query("SELECT * FROM srv WHERE serial_number=".$serial_number." AND is_approved = 1 AND is_provided=0");
                           while ($row = $query->fetch_assoc()) {
                       ?>
 
@@ -99,8 +99,8 @@ if (isset($_GET['sn'])) {
                               Request SIV</button>
                               <div class="col-sm-2">
                             </div>
-                            <button name="request_pr" class="btn btn-gradient-warning btn-icon-text col-sm-3 floating">
-                              Request PR</button>
+                            <a href="prfled?sn=<?php echo $serial_number;?>" class="btn btn-gradient-warning btn-icon-text col-sm-3 floating">
+                              Make PR</a>
                               <div class="col-sm-2">
                             </div>
                               <button name="done_srv" class="btn btn-gradient-success btn-icon-text col-sm-2 floating">
@@ -109,7 +109,7 @@ if (isset($_GET['sn'])) {
                             </div>
                         </div>
                       </div>
-                    </form>
+                  </form>
 
                 </div>
               </div>
