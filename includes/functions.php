@@ -32,7 +32,7 @@ include "data.php";
         }
 }
 
-function Send_Notification($title,$body,$to,$serial_number,$type,$DBcon)
+function Send_Notification($title,$body,$to,$serial_number,$type,$userId=0,$DBcon)
 {
         //Notification
         if($query = $DBcon->query("INSERT INTO
@@ -42,7 +42,8 @@ function Send_Notification($title,$body,$to,$serial_number,$type,$DBcon)
         notification_body,
         notify,
         serial_number,
-        notif_type
+        notif_type,
+        USERID
           )
       VALUES
       (
@@ -50,7 +51,8 @@ function Send_Notification($title,$body,$to,$serial_number,$type,$DBcon)
       '".$body."',
       '".$to."',
       '".$serial_number."',
-      '".$type."'
+      '".$type."',
+      '".$userId."'
       )")){
           echo "Successfully saved notification";
       }else{
