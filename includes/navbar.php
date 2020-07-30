@@ -98,7 +98,7 @@ if(!isset($_SESSION['user'])){
                 <i class="mdi mdi-bell-outline"></i>
                 <?php 
                 if ($_SESSION['did']=='TACON-PC') {
-                  $q = "SELECT * FROM notifications WHERE (notify = '".$_SESSION['USERID']."' and unred = 0) or notif_type='pc_handle'  ORDER BY ID DESC";
+                  $q = "SELECT * FROM notifications WHERE (notify = '".$_SESSION['USERID']."' and unred = 0) or (notif_type='pc_handle'  and unred = 0)  ORDER BY ID DESC";
                 } else {
                   $q = "SELECT * FROM notifications WHERE notify = '".$_SESSION['USERID']."' and unred = 0  ORDER BY ID DESC";
                 }
@@ -128,7 +128,7 @@ if(!isset($_SESSION['user'])){
                             
                           }elseif ((strcmp($row['notif_type'],"pc_handle")==0 )&&($_SESSION['did']=="TACON-PC")) {
                             ?>
-                              href="po?sn=<?php echo $row['serial_number'];?>"
+                              href="po?sn=<?php echo $row['serial_number'].'&from='.$row['USERID'];?>"
                             <?php  
                               
                           }else{
