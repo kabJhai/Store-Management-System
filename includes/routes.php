@@ -222,6 +222,7 @@ if(isset($_POST['po'])){
     $delivery_time =date('y-m-d',strtotime($_POST['delivery_time']));
     $prepared_by = $_POST['prepared_by'];
     $checked_by = $_POST['checked_by'];
+    $ordered_by = $_POST['ordered_by'];
 
     echo $serial_number;
     $length = count($part_no);
@@ -247,7 +248,9 @@ if(isset($_POST['po'])){
          tax_birr,
          net_birr,
          terms,
-         delivery_time)
+         delivery_time,
+         ordered_by
+         )
         VALUES
         (".$serial_number.",'".$project_name."','".$part_no[$i]."','".$description[$i]."','".$unit[$i]."','".$qty_req[$i]."',
         '".$unit_price[$i]."','".$total_price[$i]."','".$remark[$i]."','".$prepared_by."','".$checked_by."'
@@ -258,14 +261,22 @@ if(isset($_POST['po'])){
         '".$tax_birr."',
         '".$net_birr."'
         ,'".$terms."',
-        '".$delivery_time."')")){
+        '".$delivery_time."',
+        '".$ordered_by."'
+        )")){
             echo "Successfully saved";    
     }else{
         echo "There is an error!";
     }
+    }
+    $query = $DBcon->query("SELECT * FROM heads WHERE DID = 'TACON-PC'");
+    $row=$query->fetch_array();
+    $head_id = $row['USERID'];
+    $query = $DBcon->query("UPDATE notifications SET unred = 1 WHERE serial_number = ".$serial_number." AND notif_type='pc_handle'");
+    Send_Notification('PO Approval',$_SESSION['fn']." ".$_SESSION['ln'].' is waiting for your approval...',$head_id,$serial_number,'po_approve',$_SESSION['USERID'],$DBcon);
     $serial_number++;
     $query = $DBcon->query("UPDATE sno SET current_number = ".$serial_number."  WHERE document_type = 'po'");
-}
+
 }
 
 if(isset($_POST['grn'])){
@@ -423,6 +434,36 @@ if (isset($_POST['request_siv'])) {
         }
 
 }
+//Approve PO
+if (isset($_POST['approve_po'])) {
+    echo "HERE";
+    $sn = $_POST['sn'];
+    $uid = $_POST['uid'];
+    try {
+        if($query = $DBcon->query("UPDATE po SET is_approved = 1,checked_by='".$_SESSION['fn']." ".$_SESSION['ln']."' WHERE serial_number = ".$sn)){
+            echo "Success";
+            $query = $DBcon->query("UPDATE notifications SET unred = 1 WHERE serial_number = ".$sn." AND USERID='".$uid."'");
+            Send_Notification('PO Approved',$_SESSION['fn']." ".$_SESSION['ln']." approved your PR...",$uid,$sn,'',0,$DBcon);
+        }
+        } catch (Exception $th) {
+            echo $th->getmessage();
+    }
+}
+//PO Completed
+if (isset($_POST['po_completed'])) {
+    echo "HERE";
+    $sn = $_POST['sn'];
+    $uid = $_POST['uid'];
+    try {
+        if($query = $DBcon->query("UPDATE po SET is_done = 1 WHERE serial_number = ".$sn)){
+            echo "Success";
+            $query = $DBcon->query("UPDATE notifications SET unred = 1 WHERE serial_number = ".$sn." AND USERID='".$uid."'");
+            Send_Notification('PO Approved',$_SESSION['fn']." ".$_SESSION['ln']." approved your PR...",$uid,$sn,'',0,$DBcon);
+        }
+        } catch (Exception $th) {
+            echo $th->getmessage();
+    }
+}
 
 //Approve PR
 if (isset($_POST['approve_pr'])) {
@@ -435,19 +476,5 @@ if (isset($_POST['approve_pr'])) {
         Send_Notification('Prepare a PO',$_SESSION['fn']." ".$_SESSION['ln']." approved a PR...",0,$sn,'pc_handle',$uid,$DBcon);
     }
 }
-//Approve PO
-if (isset($_POST['approve_po'])) {
-    echo "HERE";
-    $sn = $_POST['sn'];
-    $uid = $_POST['uid'];
-    try {
-        if($query = $DBcon->query("UPDATE po SET is_approved = 1,approved_by='".$_SESSION['fn']." ".$_SESSION['ln']."' WHERE serial_number = ".$sn)){
-            echo "Success";
-            $query = $DBcon->query("UPDATE notifications SET unred = 1 WHERE serial_number = ".$sn." AND USERID='".$uid."'");
-            Send_Notification('PO Approved',$_SESSION['fn']." ".$_SESSION['ln']." approved your PR...",$uid,$sn,'po_approved',0,$DBcon);
-        }
-        } catch (Exception $th) {
-            echo $th->getmessage();
-    }
-}
+
 ?>
