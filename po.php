@@ -6,6 +6,7 @@ include "includes/navbar.php";
 include "includes/sidebar.php";
 if (isset($_GET['sn'])) {
   $serial_number = $_GET['sn']; 
+  $ordered_by = $_GET['from']; 
 }
 
 ?>
@@ -228,13 +229,14 @@ if (isset($_GET['sn'])) {
                             <label class="col-sm-5 col-form-label">Prepared By</label>
                             <div class="col-sm-7">
                             <input type="text" name="prepared_by" value="<?php echo $_SESSION['fn']." ".$_SESSION['ln'];?>" class="form-control"/>
+                            <input type="text" name="ordered_by" value="<?php echo $ordered_by;?>" style="display:none" class="form-control"/>
                             </div>
                           </div>
                         </div>
 
                         <div class="col-md-6">
                           <div class="form-group row">
-                            <label class="col-sm-3 col-form-label">Checked By</label>
+                            <label class="col-sm-3 col-form-label">Approved By</label>
                             <div class="col-sm-9">
                             <input type="text" name="checked_by" id="items-needed" class="form-control"/>
                             </div>
