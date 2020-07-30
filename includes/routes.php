@@ -435,4 +435,19 @@ if (isset($_POST['approve_pr'])) {
         Send_Notification('Prepare a PO',$_SESSION['fn']." ".$_SESSION['ln']." approved a PR...",0,$sn,'pc_handle',$uid,$DBcon);
     }
 }
+//Approve PO
+if (isset($_POST['approve_po'])) {
+    echo "HERE";
+    $sn = $_POST['sn'];
+    $uid = $_POST['uid'];
+    try {
+        if($query = $DBcon->query("UPDATE po SET is_approved = 1,approved_by='".$_SESSION['fn']." ".$_SESSION['ln']."' WHERE serial_number = ".$sn)){
+            echo "Success";
+            $query = $DBcon->query("UPDATE notifications SET unred = 1 WHERE serial_number = ".$sn." AND USERID='".$uid."'");
+            Send_Notification('PO Approved',$_SESSION['fn']." ".$_SESSION['ln']." approved your PR...",$uid,$sn,'po_approved',0,$DBcon);
+        }
+        } catch (Exception $th) {
+            echo $th->getmessage();
+    }
+}
 ?>
