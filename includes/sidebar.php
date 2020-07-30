@@ -53,6 +53,12 @@
                 <i class="mdi mdi-file-document-box menu-icon"></i>
               </a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link" href="orders">
+                <span class="menu-title">Purchase Orders</span>
+                <i class="mdi mdi-file-document-box menu-icon"></i>
+              </a>
+            </li>
           </ul>
         </nav>
         <!-- partial -->
