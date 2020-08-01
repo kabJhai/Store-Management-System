@@ -61,5 +61,39 @@ function Send_Notification($title,$body,$to,$serial_number,$type,$userId=0,$DBco
 
 }
 
+//Add the material into database 
+function Add_Material($name,$code,$available_quantity,$DBcon)
+{
+        //Notification
+        if($query = $DBcon->query("INSERT INTO
+        material
+        (
+        material_name,
+        code,
+        available_quantity
+          )
+      VALUES
+      (
+      '".$name."',
+      ".$code.",
+      ".$available_quantity."
+      )")){
+          echo "Successfully saved material";
+      }else{
+      echo "There is an error saving the material!";
+      }
+}
+
+//Check if the material is already registered in the system
+function Find_Material($code,$DBcon)
+{
+    $query = $DBcon->query("SELECT * FROM material WHERE code = '".$code."'");
+    $count = mysqli_num_rows($query);
+    if($count == 0) {
+        return FALSE;
+    }else{
+        return TRUE;
+    }
+}
 
 ?>
