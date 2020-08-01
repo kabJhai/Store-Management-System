@@ -76,20 +76,20 @@ include "includes/sidebar.php";
                               <div class='col-sm-3'>
                                     <div class="form-check form-check-primary">
                                       <label class="form-check-label">
-                                        <input type="radio" class="form-check-input" name="receipt_type"> Purchase </label>
+                                        <input type="radio" class="form-check-input" name="receipt_type" value="Purchase"> Purchase </label>
                                     </div>
                                   </div>  
                                   <div class='col-sm-3'>
                                     <div class="form-check form-check-success">
                                       <label class="form-check-label">
-                                        <input type="radio" class="form-check-input"  name="receipt_type"> Transfer </label>
+                                        <input type="radio" class="form-check-input"  name="receipt_type" value="Transfer"> Transfer </label>
                                         
                                     </div>
                                   </div>                                  
                                   <div class='col-sm-3'>
                                     <div class="form-check form-check-info">
                                       <label class="form-check-label">
-                                        <input type="radio" class="form-check-input" name="receipt_type"> Return </label>
+                                        <input type="radio" class="form-check-input" name="receipt_type" value="Return"> Return </label>
                                     </div>
                                   </div>                                  
                                 </div>
