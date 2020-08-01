@@ -345,7 +345,7 @@ function addgrn() {
         <div class='form-group row'>\
           <label class='col-sm-5 col-form-label'>Quantity </label>\
           <div class='col-sm-7'>\
-            <input class='form-control' name='qty[]' id='qtyreq"+count+"' placeholder='' required/>\
+            <input class='form-control' name='qty[]' id='qtyreq"+count+"' oninput='calculateQuantity("+count+")' placeholder='' required/>\
           </div>\
         </div>\
       </div>\
@@ -407,8 +407,16 @@ function checkValues() {
   }
 }
 
+function calculateQuantity(formNum) {
+  let reqQuantity = document.getElementById("qtyreq"+formNum);
+  let totalSum = document.getElementById("total_quantity");
+  let sum = 0;
+  for (let index = 0; index < formNum; index++) {
+    sum = sum + parseInt(reqQuantity.value);
+  }
+  totalSum.value = sum; 
+}
 function calculatePO(formNum) {
-  let unitPrice = document.getElementById("unit"+formNum);
   let reqQuantity = document.getElementById("qtyreq"+formNum);
   let totalPrice = document.getElementById("total"+formNum);
   let totalSum = document.getElementById("total_sum");

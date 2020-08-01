@@ -59,7 +59,7 @@ include "includes/sidebar.php";
                         <div class="row">
                               <div class="col-md-12">
                                 <div class="form-group row">
-                                  <label class="col-sm-4 col-form-label">Number of Items to Order</label>
+                                  <label class="col-sm-4 col-form-label">Number of Items Received</label>
                                   <div class="col-sm-8">
                                     <input type="number" min="0" value=0 id="items-needed" oninput="addgrn()" class="form-control" />
                                   </div>
