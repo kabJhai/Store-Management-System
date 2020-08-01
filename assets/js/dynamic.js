@@ -408,11 +408,10 @@ function checkValues() {
 }
 
 function calculateQuantity(formNum) {
-  let reqQuantity = document.getElementById("qtyreq"+formNum);
   let totalSum = document.getElementById("total_quantity");
   let sum = 0;
-  for (let index = 0; index < formNum; index++) {
-    sum = sum + parseInt(reqQuantity.value);
+  for (let index = 1; index <= formNum; index++) {
+    sum = sum + parseInt(document.getElementById("qtyreq"+index).value);
   }
   totalSum.value = sum; 
 }
@@ -424,8 +423,8 @@ function calculatePO(formNum) {
   let netBirr = document.getElementById("net_birr");
   let sum = 0.0;
   totalPrice.value = parseFloat(unitPrice.value) * parseFloat(reqQuantity.value);
-  for (let index = 0; index < formNum; index++) {
-    sum = sum + parseFloat(document.getElementById("total"+formNum).value);
+  for (let index = 1; index <= formNum; index++) {
+    sum = sum + parseFloat(document.getElementById("total"+index).value);
   }
   totalSum.value = sum; 
   totalTax.value = sum*0.15;

@@ -102,7 +102,7 @@ include "includes/sidebar.php";
                           <div class='form-group row'> 
                             <label class='col-sm-4 col-form-label'>Total Qty.</label> 
                             <div class='col-sm-8'> 
-                                <input type='text' id='unit"+count+"' name='total_qty' oninput='calculate("+count+")' class='form-control' required > 
+                                <input type='text' id='total_quantity' name='total_qty' oninput='calculate("+count+")' class='form-control' required > 
                                 </div> 
                             </div> 
                           </div> 
