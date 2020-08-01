@@ -304,37 +304,38 @@ if(isset($_POST['grn'])){
     $length = count($code);
 
     for ($i=0; $i < $length; $i++) { 
-        if($query = $DBcon->query("INSERT INTO
-         grn(serial_number,
-         supplier,
-         supplier_invoice,
-         pr_po_no,
-         code,
-         description,
-         unit,
-         qty,
-         unit_price,
-         total_price,
-         remark,
-         store_keeper,
-         delivered_by,
-         total_qty,
-         total_unit,
-         grand_total,
-         receipt_type,
-         sending_store)
-        VALUES
-        (".$serial_number.",'".$supplier."','".$supplier_invoice."','".$pr_po_no."','".$code[$i]."','".$description[$i]."','".$unit[$i]."','".$qty_req[$i]."',
-        '".$unit_price[$i]."','".$total_price[$i]."','".$remark[$i]."','".$store_keeper."','".$delivered_by."'
-        ,'".$total_qty."','".$total_unit."','".$grand_total."'
-        ,'".$receipt_type."','".$sending_store."')")){
-            echo "Successfully saved";
-            $serial_number++;
-            $query = $DBcon->query("UPDATE sno SET current_number = ".$serial_number."  WHERE document_type = 'grn'");
-    }else{
-        echo "There is an error!";
+            if($query = $DBcon->query("INSERT INTO
+            grn(serial_number,
+            supplier,
+            supplier_invoice,
+            pr_po_no,
+            code,
+            description,
+            unit,
+            qty,
+            unit_price,
+            total_price,
+            remark,
+            store_keeper,
+            delivered_by,
+            total_qty,
+            total_unit,
+            grand_total,
+            receipt_type,
+            sending_store)
+            VALUES
+            (".$serial_number.",'".$supplier."','".$supplier_invoice."','".$pr_po_no."','".$code[$i]."','".$description[$i]."','".$unit[$i]."','".$qty_req[$i]."',
+            '".$unit_price[$i]."','".$total_price[$i]."','".$remark[$i]."','".$store_keeper."','".$delivered_by."'
+            ,'".$total_qty."','".$total_unit."','".$grand_total."'
+            ,'".$receipt_type."','".$sending_store."')")){
+                echo "Successfully saved";
+        }else{
+            echo "There is an error!";
+        }
     }
-}
+    $serial_number++;
+    $query = $DBcon->query("UPDATE sno SET current_number = ".$serial_number."  WHERE document_type = 'grn'");
+
 }
 
 if(isset($_POST['register'])){
@@ -476,5 +477,4 @@ if (isset($_POST['approve_pr'])) {
         Send_Notification('Prepare a PO',$_SESSION['fn']." ".$_SESSION['ln']." approved a PR...",0,$sn,'pc_handle',$uid,$DBcon);
     }
 }
-
 ?>
