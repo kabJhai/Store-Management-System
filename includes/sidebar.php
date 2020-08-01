@@ -36,6 +36,12 @@
               </div>
             </li>
             <li class="nav-item">
+              <a class="nav-link" href="grn">
+                <span class="menu-title">Good Recieving Note</span>
+                <i class="mdi mdi-file-document-box menu-icon"></i>
+              </a>
+            </li>
+            <li class="nav-item">
               <a class="nav-link" href="../../pages/icons/mdi.html">
                 <span class="menu-title">Search for Item in Store</span>
                 <i class="mdi mdi-file-find menu-icon"></i>
@@ -48,8 +54,8 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="../../pages/icons/mdi.html">
-                <span class="menu-title">Request Material for Stock</span>
+              <a class="nav-link" href="pr">
+                <span class="menu-title">Purchase Requisition</span>
                 <i class="mdi mdi-file-document-box menu-icon"></i>
               </a>
             </li>
