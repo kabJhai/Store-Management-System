@@ -160,6 +160,7 @@ if (isset($_GET['sn'])) {
                             <label class="col-sm-3 col-form-label">Approved By</label>
                             <div class="col-sm-9">
                             <input type="text" name="approved_by" value="Not approved yet" id="items-needed" class="form-control"/>
+                            <input type="text" name="srv_index" style="display:none" id="items-needed" value="<?php echo $serial_number;?>"class="form-control"/>
                             </div>
                           </div>
                         </div>

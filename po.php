@@ -66,6 +66,7 @@ if (isset($_GET['sn'])) {
                           $query = $DBcon->query("SELECT * FROM pr WHERE serial_number='".$serial_number."' AND is_approved = 1");
                           while ($row = $query->fetch_assoc()) {
                             $authorized_by = $row['approved_by'];
+                            $srv_serial = $row['srv'];
                       ?>
                         <div class='row'> 
                           <div class='col-md-12 line'> 
@@ -122,7 +123,7 @@ if (isset($_GET['sn'])) {
                                 <label class='col-sm-3 col-form-label'>Unit Price</label> 
                                 <div class='col-sm-9'> 
                                   <div class='input-group'> 
-                                    <input type='number' value='0' id='unit<?php echo $i;?>' name='unit_price[]' oninput='calculatePO(<?php echo $i;?>)' class='form-control' required > 
+                                    <input     id='unit<?php echo $i;?>' name='unit_price[]' oninput='calculatePO(<?php echo $i;?>)' class='form-control' required > 
                                       <div class='input-group-prepend'> 
                                         <span class='input-group-text bg-gradient-primary text-white'>Birr</span> 
                                       </div> 
@@ -135,7 +136,7 @@ if (isset($_GET['sn'])) {
                                 <label class='col-sm-3 col-form-label'>Total Price</label> 
                                 <div class='col-sm-9'> 
                                 <div class='input-group'> 
-                                    <input type='number' value='0' id='total<?php echo $i;?>' name='total_price[]' class='form-control' required/> 
+                                    <input     id='total<?php echo $i;?>' name='total_price[]' class='form-control' required/> 
                                       <div class='input-group-prepend'> 
                                         <span class='input-group-text bg-gradient-primary text-white'>Birr</span> 
                                       </div> 
@@ -168,7 +169,7 @@ if (isset($_GET['sn'])) {
                           <label class='col-sm-3 col-form-label'>Total Birr</label> 
                           <div class='col-sm-9'> 
                             <div class='input-group'> 
-                              <input type='number' value='0' id='total_sum' name='total_birr' class='form-control' required > 
+                              <input     id='total_sum' name='total_birr' class='form-control' required > 
                                 <div class='input-group-prepend'> 
                                   <span class='input-group-text bg-gradient-primary text-white'>Birr</span> 
                                 </div> 
@@ -181,7 +182,7 @@ if (isset($_GET['sn'])) {
                           <label class='col-sm-3 col-form-label'>Taxes Birr</label> 
                           <div class='col-sm-9'> 
                           <div class='input-group'> 
-                              <input type='number' value='0' id='total_tax' name='tax_birr' class='form-control' value required/> 
+                              <input     id='total_tax' name='tax_birr' class='form-control' value required/> 
                                 <div class='input-group-prepend'> 
                                   <span class='input-group-text bg-gradient-primary text-white'>Birr</span> 
                                 </div> 
@@ -196,7 +197,7 @@ if (isset($_GET['sn'])) {
                                   <label class="col-sm-4 col-form-label">Net Birr:</label>
                                   <div class="col-sm-8">
                                     <div class='input-group'> 
-                                    <input type='number' value='0' id='net_birr' name='net_birr' class='form-control' required/> 
+                                    <input     id='net_birr' name='net_birr' class='form-control' required/> 
                                       <div class='input-group-prepend'> 
                                         <span class='input-group-text bg-gradient-primary text-white'>Birr</span> 
                                       </div> 
@@ -239,6 +240,8 @@ if (isset($_GET['sn'])) {
                             <label class="col-sm-3 col-form-label">Approved By</label>
                             <div class="col-sm-9">
                             <input type="text" name="checked_by" id="items-needed" class="form-control"/>
+                            <input type="text" style="display:none" name="srv_index" value="<?php echo $srv_serial;?>" class="form-control"/>
+                            <input type="text" style="display:none" name="pr_index" value="<?php echo $serial_number;?>" class="form-control"/>
                             </div>
                           </div>
                         </div>

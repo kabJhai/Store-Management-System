@@ -407,6 +407,23 @@ function checkValues() {
   }
 }
 
+function calculatePO(formNum) {
+  let unitPrice = document.getElementById("unit"+formNum);
+  let reqQuantity = document.getElementById("qtyreq"+formNum);
+  let totalPrice = document.getElementById("total"+formNum);
+  let totalSum = document.getElementById("total_sum");
+  let totalTax = document.getElementById("total_tax");
+  let netBirr = document.getElementById("net_birr");
+  let sum = 0.0;
+  totalPrice.value = parseFloat(unitPrice.value) * parseFloat(reqQuantity.value);
+  for (let index = 0; index < formNum; index++) {
+    sum = sum + parseFloat(document.getElementById("total"+formNum).value);
+  }
+  totalSum.value = sum; 
+  totalTax.value = sum*0.15;
+  netBirr.value = parseFloat(totalSum.value) + parseFloat(totalTax.value);
+
+}
 function calculateQuantity(formNum) {
   let totalSum = document.getElementById("total_quantity");
   let sum = 0;
@@ -415,23 +432,6 @@ function calculateQuantity(formNum) {
   }
   totalSum.value = sum; 
 }
-function calculatePO(formNum) {
-  let reqQuantity = document.getElementById("qtyreq"+formNum);
-  let totalPrice = document.getElementById("total"+formNum);
-  let totalSum = document.getElementById("total_sum");
-  let totalTax = document.getElementById("total_tax");
-  let netBirr = document.getElementById("net_birr");
-  let sum = 0.0;
-  totalPrice.value = parseFloat(unitPrice.value) * parseFloat(reqQuantity.value);
-  for (let index = 1; index <= formNum; index++) {
-    sum = sum + parseFloat(document.getElementById("total"+index).value);
-  }
-  totalSum.value = sum; 
-  totalTax.value = sum*0.15;
-  netBirr.value = parseFloat(totalSum.value) + parseFloat(totalTax.value);
-
-}
-
 function calculate(formNum) {
   let unitPrice = document.getElementById("unit"+formNum);
   let reqQuantity = document.getElementById("qtyreq"+formNum);
