@@ -125,13 +125,16 @@ if(!isset($_SESSION['user'])){
                           ?>
                             href="#"
                           <?php  
-                            
-                          }elseif ((strcmp($row['notif_type'],"pc_handle")==0 )&&($_SESSION['did']=="TACON-PC")) {
+                        }elseif (strcmp($row['notif_type'],"arrived")==0) {
+                          ?>
+                            href="<?php echo 'is_instore?sn='.$row['serial_number'];?>"
+                          <?php  
+                        }elseif ((strcmp($row['notif_type'],"pc_handle")==0 )&&($_SESSION['did']=="TACON-PC")) {
                             ?>
                               href="po?sn=<?php echo $row['serial_number'].'&from='.$row['USERID'];?>"
                             <?php  
                               
-                          }else{
+                        }else{
                       ?>
                       href="<?php echo $row['notif_type'].'_approve?from='.$row['USERID'].'&sn='.$row['serial_number'];?>"
                       <?php
