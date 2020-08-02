@@ -43,7 +43,7 @@ include "includes/sidebar.php";
                         <div class="row">
                               <div class="col-md-12">
                                 <div class="form-group row">
-                                  <strong class="col-sm-4 col-form-label">PR/PO/RFQ/SRIV/GITN No:</strong>
+                                  <strong class="col-sm-4 col-form-label">Purchase Order No:</strong>
                                   <div class="col-sm-8">
                                   <input name="pr_po_no" type="number" class="form-control">                                  </div>
                                 </div>
@@ -111,7 +111,7 @@ include "includes/sidebar.php";
                             <label class='col-sm-4 col-form-label'>Total Unit Price</label> 
                             <div class='col-sm-8'> 
                             <div class='input-group'> 
-                                <input type='text' id='total"+count+"' name='total_unit' class='form-control' required/> 
+                                <input type='text' id='total_unit_price' name='total_unit' class='form-control' value="0" required/> 
                                   <div class='input-group-prepend'> 
                                     <span class='input-group-text bg-gradient-primary text-white'>Birr</span> 
                                   </div> 
@@ -124,7 +124,7 @@ include "includes/sidebar.php";
                             <label class='col-sm-4 col-form-label'>Grand Total</label> 
                             <div class='col-sm-8'> 
                             <div class='input-group'> 
-                                <input type='text' id='total"+count+"' name='grand_total' class='form-control' required/> 
+                                <input type='text' id='grand_total' name='grand_total' class='form-control' required/> 
                                   <div class='input-group-prepend'> 
                                     <span class='input-group-text bg-gradient-primary text-white'>Birr</span> 
                                   </div> 
