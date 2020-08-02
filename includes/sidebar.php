@@ -22,25 +22,42 @@
                 <i class="mdi mdi-home menu-icon"></i>
               </a>
             </li>
+            <?php
+          if ($_SESSION['did']=="TACON-PC"){
+          ?>
             <li class="nav-item">
               <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
-                <span class="menu-title">Basic UI Elements</span>
+                <span class="menu-title">Precurement Department Tasks</span>
                 <i class="menu-arrow"></i>
                 <i class="mdi mdi-crosshairs-gps menu-icon"></i>
               </a>
               <div class="collapse" id="ui-basic">
                 <ul class="nav flex-column sub-menu">
-                  <li class="nav-item"> <a class="nav-link" href="../../pages/ui-features/buttons.html">Buttons</a></li>
-                  <li class="nav-item"> <a class="nav-link" href="../../pages/ui-features/typography.html">Typography</a></li>
+                <li class="nav-item">
+                  <a class="nav-link" href="grn">
+                    <span class="menu-title">Good Recieving Note</span>
+                    <i class="mdi mdi-file-document-box menu-icon"></i>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="pr">
+                    <span class="menu-title">Purchase Requisition</span>
+                    <i class="mdi mdi-file-document-box menu-icon"></i>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="orders">
+                    <span class="menu-title">Purchase Orders</span>
+                    <i class="mdi mdi-file-document-box menu-icon"></i>
+                  </a>
+                </li>
                 </ul>
               </div>
             </li>
-            <li class="nav-item">
-              <a class="nav-link" href="grn">
-                <span class="menu-title">Good Recieving Note</span>
-                <i class="mdi mdi-file-document-box menu-icon"></i>
-              </a>
-            </li>
+            <?php
+          }
+            ?>
+
             <li class="nav-item">
               <a class="nav-link" href="../../pages/icons/mdi.html">
                 <span class="menu-title">Search for Item in Store</span>
@@ -51,18 +68,6 @@
               <a class="nav-link" href="srv">
                 <span class="menu-title">Store Requisition Voucher</span>
                 <i class=" mdi mdi-file-export menu-icon"></i>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="pr">
-                <span class="menu-title">Purchase Requisition</span>
-                <i class="mdi mdi-file-document-box menu-icon"></i>
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="orders">
-                <span class="menu-title">Purchase Orders</span>
-                <i class="mdi mdi-file-document-box menu-icon"></i>
               </a>
             </li>
           </ul>
