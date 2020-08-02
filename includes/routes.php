@@ -163,6 +163,7 @@ if(isset($_POST['pr'])){
     $remark = $_POST['remark'];
     $requested_by = $_POST['requested_by'];
     $approved_by = $_POST['approved_by'];
+    $sr = $_POST['srv_index'];
     echo $serial_number;
     $length = count($item);
 
@@ -179,12 +180,13 @@ if(isset($_POST['pr'])){
          requested_by,
          approved_by,
          send_to,
-         deliver_to)
+         deliver_to,
+         srv)
         VALUES
         (".$serial_number.",'".$did."','".$item[$i]."'
         ,'".$description[$i]."','".$unit[$i]."','".$qty[$i]."'
         ,'".$stock_balance[$i]."','".$remark[$i]."','".$requested_by."'
-        ,'".$approved_by."','".$to."','".$deliver_to."')")){
+        ,'".$approved_by."','".$to."','".$deliver_to."','".$sr."')")){
             echo "Successfully saved";
     }else{
         echo "There is an error!";
@@ -224,7 +226,14 @@ if(isset($_POST['po'])){
     $checked_by = $_POST['checked_by'];
     $ordered_by = $_POST['ordered_by'];
 
-    echo $serial_number;
+    $srv_index = $_POST['srv_index'];
+    $pr_index = $_POST['pr_index'];
+
+    if ($srv_index == 0) {
+        $important = $pr_index;
+    }else{
+        $important = $srv_index;
+    }
     $length = count($part_no);
 
     for ($i=0; $i < $length; $i++) { 
@@ -249,7 +258,8 @@ if(isset($_POST['po'])){
          net_birr,
          terms,
          delivery_time,
-         ordered_by
+         ordered_by,
+         important_index
          )
         VALUES
         (".$serial_number.",'".$project_name."','".$part_no[$i]."','".$description[$i]."','".$unit[$i]."','".$qty_req[$i]."',
@@ -262,7 +272,8 @@ if(isset($_POST['po'])){
         '".$net_birr."'
         ,'".$terms."',
         '".$delivery_time."',
-        '".$ordered_by."'
+        '".$ordered_by."',
+        ".$important."
         )")){
             echo "Successfully saved";    
     }else{
@@ -328,7 +339,24 @@ if(isset($_POST['grn'])){
             '".$unit_price[$i]."','".$total_price[$i]."','".$remark[$i]."','".$store_keeper."','".$delivered_by."'
             ,'".$total_qty."','".$total_unit."','".$grand_total."'
             ,'".$receipt_type."','".$sending_store."')")){
+                if(Find_Material($code[$i],$DBcon)){
+                    $query = $DBcon->query("SELECT * FROM material WHERE code = '".$code[$i]."'");
+                    $row=$query->fetch_array();
+                    $available_quantity = $row['available_quantity'];
+                    $available_quantity = $available_quantity + $qty_req[$i];    
+                    $query = $DBcon->query("UPDATE material SET available_quantity = ".$available_quantity."  WHERE code = '".$code[$i]."'");            
+                    Log_Transaction($_SESSION['USERID'],$code[$i],$serial_number,$available_quantity,"grn",$DBcon);
+                }else {
+                    Add_Material($description[$i],$code[$i],$qty_req[$i],$DBcon);
+                    Log_Transaction($_SESSION['USERID'],$code[$i],$serial_number,$qty_req[$i],"grn",$DBcon);
+                }
                 echo "Successfully saved";
+                $query = $DBcon->query("SELECT * FROM po WHERE serial_number = '".$pr_po_no."'");
+                $row=$query->fetch_array();
+                $srv_index = $row['important_index'];
+                $ordered_by = $row['ordered_by'];
+                Send_Notification('Material Arrived',"The requested material has arrived...",$ordered_by,$srv_index,'arrived',0,$DBcon);
+
         }else{
             echo "There is an error!";
         }
@@ -476,5 +504,12 @@ if (isset($_POST['approve_pr'])) {
         Send_Notification('PR Approved',$_SESSION['fn']." ".$_SESSION['ln']." approved your PR...",$uid,$sn,'pr_approved',0,$DBcon);
         Send_Notification('Prepare a PO',$_SESSION['fn']." ".$_SESSION['ln']." approved a PR...",0,$sn,'pc_handle',$uid,$DBcon);
     }
+}
+
+if(isset($_POST['done_srv'])){
+    $sn = $_POST['sn'];
+    $uid = $_POST['uid'];
+    $query = $DBcon->query("UPDATE notifications SET unred = 1 WHERE serial_number = ".$sn." AND notify='".$uid."'");
+    header("Location:../index");
 }
 ?>
