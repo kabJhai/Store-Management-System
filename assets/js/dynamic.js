@@ -357,7 +357,7 @@ function addgrn() {
           <label class='col-sm-3 col-form-label'>Unit Price</label>\
           <div class='col-sm-9'>\
             <div class='input-group'>\
-              <input type='text' id='unit"+count+"' name='unit_price[]' oninput='calculate("+count+")' class='form-control' required >\
+              <input type='text' id='unit"+count+"' name='unit_price[]' oninput='calculateUnitGRN("+count+")' class='form-control' required >\
                 <div class='input-group-prepend'>\
                   <span class='input-group-text bg-gradient-primary text-white'>Birr</span>\
                 </div>\
@@ -437,4 +437,21 @@ function calculate(formNum) {
   let reqQuantity = document.getElementById("qtyreq"+formNum);
   let totalPrice = document.getElementById("total"+formNum);
   totalPrice.value = parseFloat(unitPrice.value) * parseFloat(reqQuantity.value);
+}
+function calculateUnitGRN(formNum) {
+  let unitPrice = document.getElementById("unit"+formNum);
+  let reqQuantity = document.getElementById("qtyreq"+formNum);
+  let totalPrice = document.getElementById("total"+formNum);
+  totalPrice.value = parseFloat(unitPrice.value) * parseFloat(reqQuantity.value);
+  let totalSum = document.getElementById("total_unit_price");
+  let grandTotal = document.getElementById("grand_total");
+  let sumUnit = 0;
+  let sumTotal = 0;
+  for (let index = 1; index <= formNum; index++) {
+    sumUnit = sumUnit + parseFloat(document.getElementById("unit"+index).value);
+    sumTotal = sumTotal + parseFloat(document.getElementById("total"+index).value);
+  }
+  totalSum.value = sumUnit; 
+  grandTotal.value = sumTotal; 
+
 }
