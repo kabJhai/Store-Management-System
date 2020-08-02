@@ -95,6 +95,7 @@ if (isset($_GET['sn'])) {
                           <div class="form-group row">
                             <input name="sn"  style="display:none" value="<?php echo $serial_number; ?>">
                             <input name="uid"  style="display:none" value="<?php echo $_SESSION['USERID']; ?>">
+                            <input name="nid"  style="display:none" value="<?php echo $_SESSION['USERID']; ?>">
                             <button name="request_siv" class="btn btn-gradient-primary btn-icon-text col-sm-3 floating">
                               Request SIV</button>
                               <div class="col-sm-2">
