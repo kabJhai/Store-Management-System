@@ -373,7 +373,8 @@ if(isset($_POST['grn'])){
             $message="Could not save GRN try again later!";
             $type = "error";
         }
-    }    $serial_number++;
+    }
+    $serial_number++;
     $query = $DBcon->query("UPDATE sno SET current_number = ".$serial_number."  WHERE document_type = 'grn'");
     header("Location:../index?msg='".$message."'&typ='".$type."'");
 
@@ -434,13 +435,18 @@ if (isset($_POST['approve'])) {
         '".$uid."',
         '".$sn."'
         )")){
-            echo "Successfully saved notification";
-        }else{
-        echo "There is an error notification!";
-        }
-    
-    }
+                $message="SRV approval succesfull";
+                $type = "success";
+                header("Location:../index?msg='".$message."'&typ='".$type."'");
 
+        }else{
+            $message="SRV approval error, try again later";
+            $type = "error";
+            header("Location:../srv_approve?from='".$uid."'&sn='".$sn."'&msg='".$message."'&typ='".$type."'");
+
+        }
+
+    }
 }
 
 if (isset($_POST['request_siv'])) {
