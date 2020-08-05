@@ -284,11 +284,13 @@ if(isset($_POST['po'])){
         '".$ordered_by."',
         ".$important."
         )")){
-            echo "Successfully saved";    
+            $message="PO Successfully saved";
+            $type = "success";
     }else{
-        echo "There is an error!";
+        $message="Could not save PO try again later!";
+        $type = "error";
     }
-    }
+}
     $query = $DBcon->query("SELECT * FROM heads WHERE DID = 'TACON-PC'");
     $row=$query->fetch_array();
     $head_id = $row['USERID'];
@@ -296,7 +298,7 @@ if(isset($_POST['po'])){
     Send_Notification('PO Approval',$_SESSION['fn']." ".$_SESSION['ln'].' is waiting for your approval...',$head_id,$serial_number,'po_approve',$_SESSION['USERID'],$DBcon);
     $serial_number++;
     $query = $DBcon->query("UPDATE sno SET current_number = ".$serial_number."  WHERE document_type = 'po'");
-
+    header("Location:../index?msg='".$message."'&typ='".$type."'");
 }
 
 if(isset($_POST['grn'])){
