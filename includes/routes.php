@@ -484,9 +484,9 @@ if (isset($_POST['request_siv'])) {
             $message="SIV request error, try again later";
             $type = "error";
             header("Location:../is_instore?sn='".$sn."'&msg='".$message."'&typ='".$type."'");
+}
+}
 
-}
-}
 //Approve PO
 if (isset($_POST['approve_po'])) {
     echo "HERE";
@@ -494,13 +494,18 @@ if (isset($_POST['approve_po'])) {
     $uid = $_POST['uid'];
     try {
         if($query = $DBcon->query("UPDATE po SET is_approved = 1,checked_by='".$_SESSION['fn']." ".$_SESSION['ln']."' WHERE serial_number = ".$sn)){
-            echo "Success";
+            $message="PO Approval succesfull";
+            $type = "success";
             $query = $DBcon->query("UPDATE notifications SET unred = 1 WHERE serial_number = ".$sn." AND USERID='".$uid."'");
             Send_Notification('PO Approved',$_SESSION['fn']." ".$_SESSION['ln']." approved your PR...",$uid,$sn,'',0,$DBcon);
+        }else{
+            $message="PO Approval error, try again later";
+            $type = "error";
         }
         } catch (Exception $th) {
             echo $th->getmessage();
     }
+        header("Location:../index?msg='".$message."'&typ='".$type."'");
 }
 //PO Completed
 if (isset($_POST['po_completed'])) {
