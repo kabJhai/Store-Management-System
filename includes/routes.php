@@ -361,22 +361,24 @@ if(isset($_POST['grn'])){
                     Add_Material($description[$i],$code[$i],$qty_req[$i],$DBcon);
                     Log_Transaction($_SESSION['USERID'],$code[$i],$serial_number,$qty_req[$i],"grn",$DBcon);
                 }
-                echo "Successfully saved";
                 $query = $DBcon->query("SELECT * FROM po WHERE serial_number = '".$pr_po_no."'");
                 $row=$query->fetch_array();
                 $srv_index = $row['important_index'];
                 $ordered_by = $row['ordered_by'];
                 Send_Notification('Material Arrived',"The requested material has arrived...",$ordered_by,$srv_index,'arrived',0,$DBcon);
 
+                $message="GRN Successfully saved";
+                $type = "success";
         }else{
-            echo "There is an error!";
+            $message="Could not save GRN try again later!";
+            $type = "error";
         }
-    }
-    $serial_number++;
+    }    $serial_number++;
     $query = $DBcon->query("UPDATE sno SET current_number = ".$serial_number."  WHERE document_type = 'grn'");
+    header("Location:../index?msg='".$message."'&typ='".$type."'");
 
 }
-
+//TODO: Handle notification for registration
 if(isset($_POST['register'])){
     $fn = $_POST['fn'];
     $ln = $_POST['ln'];
