@@ -514,13 +514,19 @@ if (isset($_POST['po_completed'])) {
     $uid = $_POST['uid'];
     try {
         if($query = $DBcon->query("UPDATE po SET is_done = 1 WHERE serial_number = ".$sn)){
-            echo "Success";
+            $message="PO Completed succesfully";
+            $type = "success";
             $query = $DBcon->query("UPDATE notifications SET unred = 1 WHERE serial_number = ".$sn." AND USERID='".$uid."'");
             Send_Notification('PO Approved',$_SESSION['fn']." ".$_SESSION['ln']." approved your PR...",$uid,$sn,'',0,$DBcon);
+        }else{
+            $message="PO Completion error, try again later";
+            $type = "error";
+
         }
         } catch (Exception $th) {
             echo $th->getmessage();
     }
+    header("Location:../index?msg='".$message."'&typ='".$type."'");
 }
 
 //Approve PR
