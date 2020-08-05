@@ -76,7 +76,7 @@ include "includes/sidebar.php";
                           <div class="form-group row">
                             <div class="col-sm-3">
                             </div>
-                            <button type="button" onclick="printReport()" name="approve" class="btn btn-gradient-success btn-icon-text col-sm-4 floating">
+                            <button type="button" onclick="printReport()" id="print_button" name="approve" class="btn btn-gradient-success btn-icon-text col-sm-4 floating">
                               Print</button>
                             <div class="col-sm-3">
                             </div>

@@ -13392,9 +13392,11 @@ dl {
 .floating{
   margin-top: 3%
 }
-/*# sourceMappingURL=style.css.map */
+
 .grand_total{
   background-color: rgba(40,40,40,0.5);
   color: #fff;
   font-weight: bold;
 }
+
+/*# sourceMappingURL=style.css.map */
