@@ -35,6 +35,8 @@ if (isset($_POST['logout'])) {
 }
 
 if(isset($_POST['srv'])){
+    $message = "";
+    $type = "";
     $serial_number = $_POST['serial_number'];
     $did = $_POST['DID'];
     $code = $_POST['code'];
@@ -49,7 +51,6 @@ if(isset($_POST['srv'])){
     $approved_by = $_POST['approved_by'];
     echo $serial_number;
     $length = count($code);
-
     for ($i=0; $i < $length; $i++) { 
         try{
                 if($query = $DBcon->query("INSERT INTO
@@ -71,10 +72,11 @@ if(isset($_POST['srv'])){
                 (".$serial_number.",'".$did."','".$code[$i]."','".$description[$i]."','".$unit[$i]."','".$qty_req[$i]."','0',
                 '".$unit_price[$i]."','".$total_price[$i]."','".$remark[$i]."','".$requested_by."','".$approved_by."',
                 '".$_SESSION['USERID']."')")){
-                    echo "Successfully saved";
-
+                    $message="SRV Successfully saved";
+                    $type = "success";
             }else{
-                echo "There is an error!";
+                $message="Could not save srv, try again later!";
+                $type = "error";
             }
         }catch (Exception $e) {
             echo 'Caught exception: ',  $e->getMessage(), "\n";
@@ -85,9 +87,9 @@ if(isset($_POST['srv'])){
         $head_id = $row['USERID'];
         Send_Notification('SRV Approval',$_SESSION['fn']." ".$_SESSION['ln'].' is waiting for your approval...',$head_id,$serial_number,'srv',$_SESSION['USERID'],$DBcon);
     
-    $serial_number++;
-    $query = $DBcon->query("UPDATE sno SET current_number = ".$serial_number."  WHERE document_type = 'srv'");
-
+        $serial_number++;
+        $query = $DBcon->query("UPDATE sno SET current_number = ".$serial_number."  WHERE document_type = 'srv'");
+        header("Location:../index?msg='".$message."'&typ='".$type."'");
 }
 
 if(isset($_POST['siv'])){
