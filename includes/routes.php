@@ -476,11 +476,16 @@ if (isset($_POST['request_siv'])) {
         '".$uid."',
         'rsiv'
         )")){
-            echo "Successfully saved notification";
-        }else{
-        echo "There is an error notification!";
-        }
+                $message="SIV request succesfull";
+                $type = "success";
+                header("Location:../index?msg='".$message."'&typ='".$type."'");
 
+        }else{
+            $message="SIV request error, try again later";
+            $type = "error";
+            header("Location:../is_instore?sn='".$sn."'&msg='".$message."'&typ='".$type."'");
+
+}
 }
 //Approve PO
 if (isset($_POST['approve_po'])) {
