@@ -142,8 +142,11 @@ if(isset($_POST['siv'])){
                 //Update the bin log
                 Log_Transaction($uid,$code[$i],$serial_number,$stock_balance,"siv",$DBcon);
                 $query = $DBcon->query("UPDATE srv SET is_provided = 1  WHERE serial_number = '".$sn."' AND code='".$code[$i]."'");
+                    $message="SRV Successfully saved";
+                    $type = "success";
             }else{
-                echo "There is an error!";
+                $message="Could not save srv, try again later!";
+                $type = "error";
             }
         }
         $serial_number++;
