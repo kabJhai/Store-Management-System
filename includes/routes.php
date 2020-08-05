@@ -521,7 +521,6 @@ if (isset($_POST['po_completed'])) {
         }else{
             $message="PO Completion error, try again later";
             $type = "error";
-
         }
         } catch (Exception $th) {
             echo $th->getmessage();
@@ -534,11 +533,17 @@ if (isset($_POST['approve_pr'])) {
     $sn = $_POST['sn'];
     $uid = $_POST['uid'];
     if($query = $DBcon->query("UPDATE pr SET is_approved = 1,approved_by='".$_SESSION['fn']." ".$_SESSION['ln']."' WHERE serial_number = ".$sn)){
-        echo "Success";
+        $message="PR Approved succesfully";
+        $type = "success";
         $query = $DBcon->query("UPDATE notifications SET unred = 1 WHERE serial_number = ".$sn." AND USERID='".$uid."'");
         Send_Notification('PR Approved',$_SESSION['fn']." ".$_SESSION['ln']." approved your PR...",$uid,$sn,'pr_approved',0,$DBcon);
         Send_Notification('Prepare a PO',$_SESSION['fn']." ".$_SESSION['ln']." approved a PR...",0,$sn,'pc_handle',$uid,$DBcon);
+    }else{
+        $message="PR approval error, try again later";
+        $type = "error";
     }
+    header("Location:../index?msg='".$message."'&typ='".$type."'");
+
 }
 
 if(isset($_POST['done_srv'])){
