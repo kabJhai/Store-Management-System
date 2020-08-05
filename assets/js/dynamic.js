@@ -455,3 +455,12 @@ function calculateUnitGRN(formNum) {
   grandTotal.value = sumTotal; 
 
 }
+function printReport(){
+  var restore_page = document.body.innerHTML;
+  document.getElementById("sidebar").style = "display:none";
+  document.getElementById("nav_bar").style = "display:none";
+  var print_content = document.getElementById("paper").innerHTML;
+  document.body.innerHTML = print_content;
+  window.print();
+  document.body.innerHTML = restore_page;
+}

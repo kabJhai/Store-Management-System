@@ -4,7 +4,7 @@ include "includes/navbar.php";
 include "includes/sidebar.php";
 ?>
   <div class="main-panel">
-  <div class="content-wrapper">
+  <div class="content-wrapper" id="paper">
           <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
@@ -71,6 +71,19 @@ include "includes/sidebar.php";
                           <td> - </td>
                       </tbody>
                     </table>
+                    <div class="row">
+                        <div class="col-md-12">
+                          <div class="form-group row">
+                            <div class="col-sm-3">
+                            </div>
+                            <button type="button" onclick="printReport()" name="approve" class="btn btn-gradient-success btn-icon-text col-sm-4 floating">
+                              Print</button>
+                            <div class="col-sm-3">
+                            </div>
+                            </div>
+                        </div>
+                      </div>
+
                   </div>
                 </div>
               </div>
