@@ -550,6 +550,9 @@ if(isset($_POST['done_srv'])){
     $sn = $_POST['sn'];
     $uid = $_POST['uid'];
     $query = $DBcon->query("UPDATE notifications SET unred = 1 WHERE serial_number = ".$sn." AND notify='".$uid."'");
+    $message="Request completed";
+    $type = "success";
     header("Location:../index");
+    header("Location:../index?msg='".$message."'&typ='".$type."'");
 }
 ?>
