@@ -465,3 +465,31 @@ function printReport(){
   window.print();
   document.body.innerHTML = restore_page;
 }
+
+function selected(type) {
+  let day = document.getElementById('day');
+  let month = document.getElementById('month');
+  let year = document.getElementById('year');
+  if (type=="day") {
+    if(day.value==""){
+      if (month.value=="") {
+        month.removeAttribute("required");
+      }
+      if (year.value=="") {
+        year.removeAttribute("required");
+      }
+    }else{
+    month.setAttribute("required","");
+    year.setAttribute("required","");
+    }
+  }
+  if (type=="month") {
+    if(month.value==""){
+      if (year.value=="") {
+        year.removeAttribute("required");
+      }
+    }else{
+    year.setAttribute("required","");
+    }
+  }
+}

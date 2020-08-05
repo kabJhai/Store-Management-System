@@ -2,18 +2,97 @@
 include "includes/head.php";
 include "includes/navbar.php";
 include "includes/sidebar.php";
+$q = "";
+if(isset($_GET['code'])||isset($_GET['name'])||isset($_GET['date'])){
+  $code = $_GET['code'];
+  $date = $_GET['date'];
+  $name =  $_GET['name'];
+  $count = 0;
+  if (strlen($code)>0) {
+    $q = "code = '".$code."'";
+    $count = 1;
+  }
+  if (strlen($date)>0) {
+    if ($count==1) {
+      $q = $q." AND ";
+    }
+    $q = $q."done_date Like '".$date."%'";
+    $count = 1;
+  }
+  // if (strlen($name)>0) {
+  //   if ($count==1) {
+  //     $q = $q." AND (";
+  //   }
+  //   $query = $DBcon->query("SELECT * FROM material WHERE material_name LIKE '%".$name."' OR  material_name LIKE '".$name."%' OR   material_name LIKE '%".$searched."%'");
+  //   while ($row = $query->fetch_assoc()) {
+  //     $query1 = $DBcon->query("SELECT * FROM bin_log WHERE code=".$row['code']);
+  //     $i = mysqli_num_rows($query1);
+  //     if ($i >0) {
+  //       while ($row1 = $query1->fetch_assoc()) {
+  //         $q = $q." OR ";
+  //       }
+  //     }
+  //   }
+  //   if ($count==1) {
+  //     $q = $q.")";
+  //   }
+
+  // }
+  
+}
 ?>
   <div class="main-panel">
   <div class="content-wrapper" id="paper">
           <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
+                  <form method="get">
                   <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Item name / CODE / SIV" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                  
+                    Filter by:<input type="text" class="form-control" placeholder="Item Code" name="code" aria-describedby="basic-addon2">
+                    <input type="text" class="form-control" placeholder="Item Name" name="name" aria-describedby="basic-addon2">
+
+                    <select class="form-control" id="day" name="day" oninput="selected('day')">
+                      <option value="">Day</option>
+                      <?php
+                      $i = 1;
+                      while ($i <= 30) {
+                      ?>
+                        <option value="<?php if($i < 10){echo "0".$i;}else{echo $i;}?>"><?php if($i < 10){echo "0".$i;}else{echo $i;}?></option>
+                      <?php
+                          $i++;
+                      }
+                      ?>
+                    </select>
+                    <select class="form-control" id="month" name="month">
+                      <option value="">Month</option>
+                      <?php
+                      $i = 1;
+                      while ($i <= 12) {
+                      ?>
+                        <option value="<?php if($i < 10){echo "0".$i;}else{echo $i;}?>"><?php if($i < 10){echo "0".$i;}else{echo $i;}?></option>
+                      <?php
+                          $i++;
+                      }
+                      ?>
+                    </select>
+                    <select class="form-control" id="year" name="year">
+                      <option value="">Year</option>
+                      <?php
+                      $year = date("Y");
+                      while ($year >= 2000) {
+                      ?>
+                        <option value="<?php echo $year;?>"><?php echo $year;?></option>
+                      <?php
+                          $year = $year - 1;
+                      }
+                      ?>
+                    </select>
                     <div class="input-group-append">
-                      <button class="btn btn-outline-secondary" type="button">Search</button>
+                      <button class="btn btn-outline-secondary" type="submit">Search</button>
                     </div>
                   </div>
+                  </form>
                     <h4 class="card-title">Material Movement Report</h4>
                     </p>
                     <strong>Date <span id="date"></span></strong><br/>
@@ -40,7 +119,10 @@ include "includes/sidebar.php";
                           $i = 1;
                           $total_quantity = 0;
                           $grand_total = 0;
-                          $query = $DBcon->query("SELECT * FROM bin_log");
+                          if (strlen($q)>0) {
+                            $q = " WHERE ".$q;
+                          }  
+                          $query = $DBcon->query("SELECT * FROM bin_log ".$q);
                           while ($row = $query->fetch_assoc()) {
                       ?>
 
