@@ -3,19 +3,36 @@ include "includes/head.php";
 include "includes/navbar.php";
 include "includes/sidebar.php";
 $q = "";
-if(isset($_GET['code'])||isset($_GET['name'])||isset($_GET['date'])){
+if(isset($_GET['code'])||isset($_GET['name'])||isset($_GET['year'])){
   $code = $_GET['code'];
-  $date = $_GET['date'];
+  $day = $_GET['day'];
+  $month = $_GET['month'];
+  $year = $_GET['year'];
   $name =  $_GET['name'];
   $count = 0;
   if (strlen($code)>0) {
     $q = "code = '".$code."'";
     $count = 1;
   }
-  if (strlen($date)>0) {
+  if (strlen($day)>0) {
     if ($count==1) {
       $q = $q." AND ";
     }
+    $date = $year."-".$month."-".$day;
+    $q = $q."done_date Like '".$date."%'";
+    $count = 1;
+  }elseif (strlen($month)>0) {
+    if ($count==1) {
+      $q = $q." AND ";
+    }
+    $date = $year."-".$month;
+    $q = $q."done_date Like '".$date."%'";
+    $count = 1;
+  }elseif ((strlen($year)>0)) {
+    if ($count==1) {
+      $q = $q." AND ";
+    }
+    $date = $year;
     $q = $q."done_date Like '".$date."%'";
     $count = 1;
   }
