@@ -194,9 +194,12 @@ if(isset($_POST['pr'])){
         ,'".$description[$i]."','".$unit[$i]."','".$qty[$i]."'
         ,'".$stock_balance[$i]."','".$remark[$i]."','".$requested_by."'
         ,'".$approved_by."','".$to."','".$deliver_to."','".$sr."')")){
-            echo "Successfully saved";
+            $message="PR Successfully saved";
+            $type = "success";
     }else{
-        echo "There is an error!";
+        $message="Could not save PR try again later!";
+        $type = "error";
+    }
     }
     $query = $DBcon->query("SELECT * FROM heads WHERE DID = 'TACON-PC'");
     $row=$query->fetch_array();
@@ -204,8 +207,7 @@ if(isset($_POST['pr'])){
     Send_Notification('PR Request',$_SESSION['fn']." ".$_SESSION['ln'].' is waiting for your approval...',$head_id,$serial_number,'pr',$_SESSION['USERID'],$DBcon);
     $serial_number++;
     $query = $DBcon->query("UPDATE sno SET current_number = ".$serial_number."  WHERE document_type = 'pr'");
-
-}
+    header("Location:../index?msg='".$message."'&typ='".$type."'");
 }
 
 
