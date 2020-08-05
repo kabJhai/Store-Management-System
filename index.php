@@ -9,17 +9,12 @@ include "includes/sidebar.php";
                 <div class="card">
                   <div class="card-body">
                   <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Item name or CODE" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                    <input type="text" class="form-control" placeholder="Item name / CODE / SIV" aria-label="Recipient's username" aria-describedby="basic-addon2">
                     <div class="input-group-append">
                       <button class="btn btn-outline-secondary" type="button">Search</button>
                     </div>
                   </div>
-                  <?php
-                      $query = $DBcon->query("SELECT * FROM material");
-                      $row=$query->fetch_array();
-                    ?>
-
-                    <h4 class="card-title">Inventory Report</h4>
+                    <h4 class="card-title">Material Movement Report</h4>
                     </p>
                     <strong>Date <span id="date"></span></strong><br/>
                         <script>
@@ -32,11 +27,12 @@ include "includes/sidebar.php";
                         <tr>
                         <th> S/N </th>
                         <th> Item-Code </th>
-                        <th> Material Description </th>
-                        <th> Available Quantity </th>
-                        <th> Unit Price </th>
-                        <th> Total Price </th>
-                        <th> Bought On </th>
+                        <th> Description </th>
+                        <th> Stock Balance</th>
+                        <th> Issued / Added</th>
+                        <th> Movement Type </th>
+                        <th> Recipient </th>
+                        <th> Action Date </th>
                         </tr>
                       </thead>
                       <tbody>
@@ -44,7 +40,7 @@ include "includes/sidebar.php";
                           $i = 1;
                           $total_quantity = 0;
                           $grand_total = 0;
-                          $query = $DBcon->query("SELECT * FROM material");
+                          $query = $DBcon->query("SELECT * FROM bin_log");
                           while ($row = $query->fetch_assoc()) {
                       ?>
 
@@ -52,29 +48,38 @@ include "includes/sidebar.php";
                           <td class="py-1">
                               <?php echo $i;?>
                           </td>
-                          <td> <?php echo $row['code'];?> </td>
+                          <td> <?php echo $row['CODE'];?> </td>
                           <td>
-                            <?php echo $row['material_name'];?>
+                          <?php
+                              $query1 = $DBcon->query("SELECT * FROM material WHERE code=".$row['CODE']);
+                              $row1=$query1->fetch_array();                            
+                              echo $row1['material_name'];
+                              ?>
                           </td>
-                          <td> <?php echo $row['available_quantity'];$total_quantity=$row['available_quantity']+$total_quantity;?> </td>
-                          <td> <?php echo $row['unit_price'];?> </td>
-                          <td> <?php echo $row['available_quantity']*$row['unit_price'];$grand_total=($row['available_quantity']*$row['unit_price'])+$grand_total;?> </td>
-                          <td> <?php echo $row['bought_on'];?> </td>
+                          <td> <?php echo $row['balance'];?> </td>
+                          <td class="<?php if(strcmp($row['action_type'],'grn')==0){echo "success";}else{echo "danger";}?>">
+                           <?php if(strcmp($row['action_type'],'grn')==0){
+                              $query1 = $DBcon->query("SELECT * FROM grn WHERE code='".$row['CODE']."' AND serial_number=".$row['serial_number']);
+                              $row1=$query1->fetch_array();
+                              echo '<i class="mdi mdi-arrow-up"></i>'.$row1['qty'];
+                                      }else{
+                                        $query1 = $DBcon->query("SELECT * FROM siv WHERE code='".$row['CODE']."' AND serial_number=".$row['serial_number']);
+                                        $row1=$query1->fetch_array();
+                                        echo '<i class="mdi mdi-arrow-down"></i>'.$row1['qty_requested'];
+                                          }?> 
+                          </td>
+                          <td> <?php if(strcmp($row['action_type'],'grn')==0){echo "Purchased";}else{echo "Moved";}?> </td>
+                          <td> <?php 
+                          $query1 = $DBcon->query("SELECT * FROM employee WHERE USERID=".$row['USERID']);
+                          $row1=$query1->fetch_array();                            
+                          echo $row1['first_name'].' '.$row1['last_name'];
+                          ?> </td>
+                          <td> <?php echo $row['done_date'];?> </td>
                         </tr>
                         <?php
                             $i++;
                           } 
                       ?>
-                          <td class="py-1">
-                          </td>
-                          <td> </td>
-                          <td class="grand_total">
-                            Total
-                          </td>
-                          <td class="grand_total"> <?php echo $total_quantity;?> </td>
-                          <td class="grand_total"> </td>
-                          <td class="grand_total"> <?php echo $grand_total." ETB";?> </td>
-                          <td> - </td>
                       </tbody>
                     </table>
                     <div class="row">
