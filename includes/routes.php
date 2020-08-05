@@ -75,7 +75,7 @@ if(isset($_POST['srv'])){
                     $message="SRV Successfully saved";
                     $type = "success";
             }else{
-                $message="Could not save srv, try again later!";
+                $message="Could not save SRV, try again later!";
                 $type = "error";
             }
         }catch (Exception $e) {
@@ -142,10 +142,10 @@ if(isset($_POST['siv'])){
                 //Update the bin log
                 Log_Transaction($uid,$code[$i],$serial_number,$stock_balance,"siv",$DBcon);
                 $query = $DBcon->query("UPDATE srv SET is_provided = 1  WHERE serial_number = '".$sn."' AND code='".$code[$i]."'");
-                    $message="SRV Successfully saved";
+                    $message="SIV Successfully saved";
                     $type = "success";
             }else{
-                $message="Could not save srv, try again later!";
+                $message="Could not save SIV try again later!";
                 $type = "error";
             }
         }
@@ -153,6 +153,8 @@ if(isset($_POST['siv'])){
         $query = $DBcon->query("UPDATE notifications SET unred = 1 WHERE serial_number = ".$sn." AND USERID='".$uid."'");
         $query = $DBcon->query("UPDATE sno SET current_number = ".$serial_number."  WHERE document_type = 'siv'");
         Send_Notification("SIV Done",$_SESSION['fn']." ".$_SESSION['ln']." finished SIV...",$uid,$serial_number,"sivdone",0,$DBcon);
+        header("Location:../index?msg='".$message."'&typ='".$type."'");
+
 }
 
 if(isset($_POST['pr'])){
