@@ -2,24 +2,61 @@
 include "includes/head.php";
 include "includes/navbar.php";
 include "includes/sidebar.php";
+$q = "";
+if(isset($_GET['code'])||isset($_GET['name'])){
+  if (isset($_GET['name'])==0) {
+    $name = "";
+  }else {
+    $name =  $_GET['name'];    
+  }
+  if (isset($_GET['code'])==0) {
+    $code = "";
+  }else {
+    $code =  $_GET['code'];    
+  }
+  $count = 0;
+  if (strlen($code)>0) {
+    $q = "code = '".$code."'";
+    $count = 1;
+  }
+  if (strlen($name)>0) {
+    if ($count==1) {
+      $q = $q." AND (";
+    }
+    $query = $DBcon->query("SELECT * FROM material WHERE material_name LIKE '".$name."%'");
+    while ($row = $query->fetch_assoc()) {
+      $q = $q." code = ".$row['code'];
+    }
+    if ($count==1) {
+      $q = $q.")";
+    }
+
+  }
+  
+}
 ?>
   <div class="main-panel">
   <div class="content-wrapper" id="paper">
           <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                  <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Item name or CODE" aria-label="Recipient's username" aria-describedby="basic-addon2">
-                    <div class="input-group-append">
-                      <button class="btn btn-outline-secondary" type="button">Search</button>
-                    </div>
-                  </div>
                   <?php
                       $query = $DBcon->query("SELECT * FROM material");
                       $row=$query->fetch_array();
                     ?>
+                  <div class="card-body">
+                  <form method="get" id="form">
+                  <div class="input-group mb-3">
+                  
+                    <input type="text" class="form-control" placeholder="Item Code" name="code"  id="code"  oninput="filter_cn('code')" aria-describedby="basic-addon2" >
+                    <input type="text" class="form-control" placeholder="Item Name" name="name" id="name" oninput="filter_cn('name')" aria-describedby="basic-addon2">
+                    <div class="input-group-append">
+                      <button class="btn btn-outline-secondary" type="submit">Search</button>
+                    </div>
+                  </div>
+                  </form>
 
-                    <h4 class="card-title">Inventory Report</h4>
+                    <h4 class="card-title">Materials</h4>
                     </p>
                     <strong>Date <span id="date"></span></strong><br/>
                         <script>
@@ -44,7 +81,10 @@ include "includes/sidebar.php";
                           $i = 1;
                           $total_quantity = 0;
                           $grand_total = 0;
-                          $query = $DBcon->query("SELECT * FROM material");
+                          if (strlen($q)>0) {
+                            $q = " WHERE ".$q;
+                          }  
+                          $query = $DBcon->query("SELECT * FROM material ".$q);
                           while ($row = $query->fetch_assoc()) {
                       ?>
 
@@ -74,7 +114,7 @@ include "includes/sidebar.php";
                           <td class="grand_total"> <?php echo $total_quantity;?> </td>
                           <td class="grand_total"> </td>
                           <td class="grand_total"> <?php echo $grand_total." ETB";?> </td>
-                          <td> - </td>
+                          <td>  </td>
                       </tbody>
                     </table>
                     <div class="row">
@@ -82,6 +122,8 @@ include "includes/sidebar.php";
                           <div class="form-group row">
                             <div class="col-sm-3">
                             </div>
+                            <button type="button" onclick="printReport('inventory')" id="print_button" name="approve" class="btn btn-gradient-primary btn-icon-text col-sm-6 floating">
+                              Print</button>
                             <div class="col-sm-3">
                             </div>
                             </div>
