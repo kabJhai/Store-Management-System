@@ -4,15 +4,18 @@ include "includes/navbar.php";
 include "includes/sidebar.php";
 $q = "";
 if(isset($_GET['code'])||isset($_GET['name'])){
+  $search = "";
   if (isset($_GET['name'])==0) {
     $name = "";
   }else {
-    $name =  $_GET['name'];    
+    $name =  $_GET['name'];  
+    $search = "Name:".$name."";   
   }
   if (isset($_GET['code'])==0) {
     $code = "";
   }else {
-    $code =  $_GET['code'];    
+    $code =  $_GET['code']; 
+    $search = "Code:".$code."";    
   }
   $count = 0;
   if (strlen($code)>0) {
@@ -64,6 +67,17 @@ if(isset($_GET['code'])||isset($_GET['name'])){
                         document.getElementById('date').innerHTML = d.getDate()+" - "+(d.getUTCMonth()+1)+" - "+d.getFullYear();
                       </script>
 
+                      <?php
+                          $i = 1;
+                          $total_quantity = 0;
+                          $grand_total = 0;
+                          if (strlen($q)>0) {
+                            $q = " WHERE ".$q;
+                          }  
+                          $query = $DBcon->query("SELECT * FROM material ".$q);
+                          $count = mysqli_num_rows($query);
+                          if($count > 0){
+                            ?>
                     <table class="table table-striped">
                       <thead>
                         <tr>
@@ -77,15 +91,9 @@ if(isset($_GET['code'])||isset($_GET['name'])){
                         </tr>
                       </thead>
                       <tbody>
+
                       <?php
-                          $i = 1;
-                          $total_quantity = 0;
-                          $grand_total = 0;
-                          if (strlen($q)>0) {
-                            $q = " WHERE ".$q;
-                          }  
-                          $query = $DBcon->query("SELECT * FROM material ".$q);
-                          while ($row = $query->fetch_assoc()) {
+                      while ($row = $query->fetch_assoc()) {
                       ?>
 
                         <tr>
@@ -127,9 +135,20 @@ if(isset($_GET['code'])||isset($_GET['name'])){
                             <div class="col-sm-3">
                             </div>
                             </div>
-                        </div>
-                      </div>
-
+                        <?php }else {
+                          ?>
+                    <div class="row">
+                        <div class="col-md-12">
+                          <div class="form-group row">
+                            <div class="col-sm-3">
+                            </div>
+                            <p class="text-danger text-capitalize display-5 align-self-center">  
+                                    Couldn't find anything matching your search "<span class="h6"><?php echo $search?>"</p>
+                            <div class="col-sm-3">
+                            </div>
+                            </div>
+                          <?php
+                        }?>
                   </div>
                 </div>
               </div>
