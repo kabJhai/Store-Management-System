@@ -17,12 +17,12 @@ if(!isset($_SESSION['user'])){
             <span class="mdi mdi-menu"></span>
           </button>
           <div class="search-field d-none d-md-block">
-            <form class="d-flex align-items-center h-100" action="#">
+            <form class="d-flex align-items-center h-100" action="search" method="get">
               <div class="input-group">
                 <div class="input-group-prepend bg-transparent">
                   <i class="input-group-text border-0 mdi mdi-magnify"></i>
                 </div>
-                <input type="text" class="form-control bg-transparent border-0" placeholder="Search projects">
+                <input type="text" class="form-control bg-transparent border-0" name="code" placeholder="Search for Item by Code">
               </div>
             </form>
           </div>

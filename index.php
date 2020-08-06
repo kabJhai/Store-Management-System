@@ -7,15 +7,18 @@ if(isset($_GET['code'])||isset($_GET['name'])||isset($_GET['year'])){
   $day = $_GET['day'];
   $month = $_GET['month'];
   $year = $_GET['year'];
+  $search = "";
   if (isset($_GET['name'])==0) {
     $name = "";
   }else {
-    $name =  $_GET['name'];    
+    $name =  $_GET['name']; 
+    $search = "Name:".$name."";   
   }
   if (isset($_GET['code'])==0) {
     $code = "";
   }else {
-    $code =  $_GET['code'];    
+    $code =  $_GET['code'];  
+    $search = "Code:".$code."";   
   }
   $count = 0;
   if (strlen($code)>0) {
@@ -29,6 +32,8 @@ if(isset($_GET['code'])||isset($_GET['name'])||isset($_GET['year'])){
     $date = $year."-".$month."-".$day;
     $q = $q."done_date Like '".$date."%'";
     $count = 1;
+    $search = $search." Date:".$date."";   
+
   }elseif (strlen($month)>0) {
     if ($count==1) {
       $q = $q." AND ";
@@ -36,6 +41,7 @@ if(isset($_GET['code'])||isset($_GET['name'])||isset($_GET['year'])){
     $date = $year."-".$month;
     $q = $q."done_date Like '".$date."%'";
     $count = 1;
+    $search = $search." Date:".$date."";   
   }elseif ((strlen($year)>0)) {
     if ($count==1) {
       $q = $q." AND ";
@@ -43,17 +49,20 @@ if(isset($_GET['code'])||isset($_GET['name'])||isset($_GET['year'])){
     $date = $year;
     $q = $q."done_date Like '".$date."%'";
     $count = 1;
+    $search = $search." Date:".$date."";   
   }
   if (strlen($name)>0) {
     if ($count==1) {
-      $q = $q." AND (";
+      $q = $q." AND ";
     }
     $query = $DBcon->query("SELECT * FROM material WHERE material_name LIKE '".$name."%'");
-    while ($row = $query->fetch_assoc()) {
-      $q = $q." code = ".$row['code'];
-    }
-    if ($count==1) {
-      $q = $q.")";
+    $count = mysqli_num_rows($query);
+    if($count > 0){
+      while ($row = $query->fetch_assoc()) {
+        $q = $q." code = ".$row['code'];
+      }
+    }else{
+      $q = $q." code = -9999";
     }
 
   }
@@ -120,7 +129,18 @@ if(isset($_GET['code'])||isset($_GET['name'])||isset($_GET['year'])){
                         document.getElementById('date').innerHTML = d.getDate()+" - "+(d.getUTCMonth()+1)+" - "+d.getFullYear();
                       </script>
 
-                    <table class="table table-striped">
+                      <?php
+                          $i = 1;
+                          $total_quantity = 0;
+                          $grand_total = 0;
+                          if (strlen($q)>0) {
+                            $q = " WHERE ".$q;
+                          }  
+                          $query = $DBcon->query("SELECT * FROM bin_log ".$q);
+                          $count = mysqli_num_rows($query);
+                          if($count > 0){
+                            ?>
+                <table class="table table-striped">
                       <thead>
                         <tr>
                         <th> S/N </th>
@@ -135,55 +155,47 @@ if(isset($_GET['code'])||isset($_GET['name'])||isset($_GET['year'])){
                       </thead>
                       <tbody>
                       <?php
-                          $i = 1;
-                          $total_quantity = 0;
-                          $grand_total = 0;
-                          if (strlen($q)>0) {
-                            $q = " WHERE ".$q;
-                          }  
-                          $query = $DBcon->query("SELECT * FROM bin_log ".$q);
-                          while ($row = $query->fetch_assoc()) {
-                      ?>
-
-                        <tr>
-                          <td class="py-1">
-                              <?php echo $i;?>
-                          </td>
-                          <td> <?php echo $row['CODE'];?> </td>
-                          <td>
+                            while ($row = $query->fetch_assoc()) {
+                        ?>
+                          <tr>
+                            <td class="py-1">
+                                <?php echo $i;?>
+                            </td>
+                            <td> <?php echo $row['CODE'];?> </td>
+                            <td>
+                            <?php
+                                $query1 = $DBcon->query("SELECT * FROM material WHERE code=".$row['CODE']);
+                                $row1=$query1->fetch_array();                            
+                                echo $row1['material_name'];
+                                ?>
+                            </td>
+                            <td> <?php echo $row['balance'];?> </td>
+                            <td class="<?php if(strcmp($row['action_type'],'grn')==0){echo "success";}else{echo "danger";}?>">
+                            <?php if(strcmp($row['action_type'],'grn')==0){
+                                $query1 = $DBcon->query("SELECT * FROM grn WHERE code='".$row['CODE']."' AND serial_number=".$row['serial_number']);
+                                $row1=$query1->fetch_array();
+                                echo '<i class="mdi mdi-arrow-up"></i>'.$row1['qty'];
+                                        }else{
+                                          $query1 = $DBcon->query("SELECT * FROM siv WHERE code='".$row['CODE']."' AND serial_number=".$row['serial_number']);
+                                          $row1=$query1->fetch_array();
+                                          echo '<i class="mdi mdi-arrow-down"></i>'.$row1['qty_requested'];
+                                            }?> 
+                            </td>
+                            <td> <?php if(strcmp($row['action_type'],'grn')==0){echo "Purchased";}else{echo "Moved";}?> </td>
+                            <td> <?php 
+                            $query1 = $DBcon->query("SELECT * FROM employee WHERE USERID=".$row['USERID']);
+                            $row1=$query1->fetch_array();                            
+                            echo $row1['first_name'].' '.$row1['last_name'];
+                            ?> </td>
+                            <td> <?php echo $row['done_date'];?> </td>
+                          </tr>
                           <?php
-                              $query1 = $DBcon->query("SELECT * FROM material WHERE code=".$row['CODE']);
-                              $row1=$query1->fetch_array();                            
-                              echo $row1['material_name'];
-                              ?>
-                          </td>
-                          <td> <?php echo $row['balance'];?> </td>
-                          <td class="<?php if(strcmp($row['action_type'],'grn')==0){echo "success";}else{echo "danger";}?>">
-                           <?php if(strcmp($row['action_type'],'grn')==0){
-                              $query1 = $DBcon->query("SELECT * FROM grn WHERE code='".$row['CODE']."' AND serial_number=".$row['serial_number']);
-                              $row1=$query1->fetch_array();
-                              echo '<i class="mdi mdi-arrow-up"></i>'.$row1['qty'];
-                                      }else{
-                                        $query1 = $DBcon->query("SELECT * FROM siv WHERE code='".$row['CODE']."' AND serial_number=".$row['serial_number']);
-                                        $row1=$query1->fetch_array();
-                                        echo '<i class="mdi mdi-arrow-down"></i>'.$row1['qty_requested'];
-                                          }?> 
-                          </td>
-                          <td> <?php if(strcmp($row['action_type'],'grn')==0){echo "Purchased";}else{echo "Moved";}?> </td>
-                          <td> <?php 
-                          $query1 = $DBcon->query("SELECT * FROM employee WHERE USERID=".$row['USERID']);
-                          $row1=$query1->fetch_array();                            
-                          echo $row1['first_name'].' '.$row1['last_name'];
-                          ?> </td>
-                          <td> <?php echo $row['done_date'];?> </td>
-                        </tr>
-                        <?php
-                            $i++;
-                          } 
-                      ?>
-                      </tbody>
-                    </table>
-                    <div class="row">
+                              $i++;
+                            }
+                            ?>
+                        </tbody>
+                      </table>
+                      <div class="row">
                         <div class="col-md-12">
                           <div class="form-group row">
                             <div class="col-sm-3">
@@ -195,6 +207,24 @@ if(isset($_GET['code'])||isset($_GET['name'])||isset($_GET['year'])){
                           </div>
                         </div>
                      </div>
+
+                      <?php
+                          }else{
+                            ?>
+                            <div class="row">
+                              <div class="col-md-12">
+                                <div class="form-group row">
+                                  <div class="col-sm-2">
+                                  <p class="text-danger text-capitalize display-5 align-self-center">  
+                                    Couldn't find anything matching your search "<span class="h6"><?php echo $search?>"</p>
+                                  <div class="col-sm-1">
+                                  </div>
+                                </div>
+                              </div>
+                          </div>
+                            <?php
+                          } 
+                      ?>
 
                   </div>
                 </div>
