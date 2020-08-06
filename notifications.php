@@ -29,7 +29,7 @@ include "includes/sidebar.php";
                     <table class="table">
                       <tbody>
                       <?php
-                          $query = $DBcon->query("SELECT * FROM notifications WHERE notify=".$_SESSION['USERID']);
+                          $query = $DBcon->query("SELECT * FROM notifications WHERE notify=".$_SESSION['USERID']." ORDER by id DESCA");
                           while ($row = $query->fetch_assoc()) {
                       ?>
 

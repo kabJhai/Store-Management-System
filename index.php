@@ -143,11 +143,11 @@ if(isset($_GET['code'])||isset($_GET['name'])||isset($_GET['year'])){
                 <table class="table table-striped">
                       <thead>
                         <tr>
-                        <th> S/N </th>
+                        <th> Invoice Number</th>
                         <th> Item-Code </th>
                         <th> Description </th>
                         <th> Stock Balance</th>
-                        <th> Issued / Added</th>
+                        <th> Action</th>
                         <th> Movement Type </th>
                         <th> Recipient </th>
                         <th> Action Date </th>
@@ -159,7 +159,7 @@ if(isset($_GET['code'])||isset($_GET['name'])||isset($_GET['year'])){
                         ?>
                           <tr>
                             <td class="py-1">
-                                <?php echo $i;?>
+                                <?php echo $row['serial_number'];;?>
                             </td>
                             <td> <?php echo $row['CODE'];?> </td>
                             <td>

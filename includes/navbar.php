@@ -75,7 +75,8 @@ if(!isset($_SESSION['user'])){
                     ?>
                       <a class="dropdown-item preview-item" 
                       <?php
-                      if(strcasecmp($row['notif_type']," ")>0){
+echo strcasecmp($row['notif_type']," ");
+if(strcasecmp($row['notif_type']," ")>0){
                         if(strcmp($row['notif_type'],"rsiv")==0){
                           ?>
                           href="<?php echo 'sivfled?from='.$row['USERID'].'&sn='.$row['serial_number'];?>"
