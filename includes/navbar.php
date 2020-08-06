@@ -30,7 +30,7 @@ if(!isset($_SESSION['user'])){
             <li class="nav-item nav-profile dropdown">
               <a class="nav-link dropdown-toggle" id="profileDropdown" href="#" data-toggle="dropdown" aria-expanded="false">
                 <div class="nav-profile-img">
-                  <img src="assets/images/faces/face1.jpg" alt="image">
+                  <img src="assets/images/user.jpg" alt="image">
                   <span class="availability-status online"></span>
                 </div>
                 <div class="nav-profile-text">
@@ -38,9 +38,6 @@ if(!isset($_SESSION['user'])){
                 </div>
               </a>
               <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
-                <a class="dropdown-item" href="#">
-                  <i class="mdi mdi-cached mr-2 text-success"></i> Activity Log </a>
-                <div class="dropdown-divider"></div>
                 <form method="POST" action="includes/routes">
                 <button class="dropdown-item" type="submit" name="logout">
                   <i class="mdi mdi-logout mr-2 text-primary"></i> Signout </button>
