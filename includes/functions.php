@@ -62,7 +62,7 @@ function Send_Notification($title,$body,$to,$serial_number,$type,$userId=0,$DBco
 }
 
 //Add the material into database 
-function Add_Material($name,$code,$available_quantity,$DBcon)
+function Add_Material($name,$code,$available_quantity,$unit,$DBcon)
 {
         //Notification
         if($query = $DBcon->query("INSERT INTO
@@ -70,13 +70,15 @@ function Add_Material($name,$code,$available_quantity,$DBcon)
         (
         material_name,
         code,
-        available_quantity
+        available_quantity,
+        unit_price
           )
       VALUES
       (
       '".$name."',
       ".$code.",
-      ".$available_quantity."
+      ".$available_quantity.",
+      ".$unit."
       )")){
           echo "Successfully saved material";
       }else{

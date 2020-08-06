@@ -358,7 +358,7 @@ if(isset($_POST['grn'])){
                     $query = $DBcon->query("UPDATE material SET available_quantity = ".$available_quantity."  WHERE code = '".$code[$i]."'");            
                     Log_Transaction($_SESSION['USERID'],$code[$i],$serial_number,$available_quantity,"grn",$DBcon);
                 }else {
-                    Add_Material($description[$i],$code[$i],$qty_req[$i],$DBcon);
+                    Add_Material($description[$i],$code[$i],$qty_req[$i],$unit_price,$DBcon);
                     Log_Transaction($_SESSION['USERID'],$code[$i],$serial_number,$qty_req[$i],"grn",$DBcon);
                 }
                 $query = $DBcon->query("SELECT * FROM po WHERE serial_number = '".$pr_po_no."'");
