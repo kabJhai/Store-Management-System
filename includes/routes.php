@@ -555,4 +555,11 @@ if(isset($_POST['done_srv'])){
     header("Location:../index");
     header("Location:../index?msg='".$message."'&typ='".$type."'");
 }
+if(isset($_POST['mark_all'])){
+    $uid = $_POST['uid'];
+    $query = $DBcon->query("UPDATE notifications SET unred = 1 WHERE notify='".$uid."'");
+    $message="Request completed";
+    $type = "success";
+    header("Location:../notifications?msg='".$message."'&typ='".$type."'");
+}
 ?>
