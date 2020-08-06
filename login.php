@@ -22,7 +22,7 @@ include "includes/head.php";
                   <div class="mt-3">
                     <button class="btn btn-block btn-gradient-primary btn-lg font-weight-medium auth-form-btn" name="login">LOG IN</button>
                   </div>
-                  <div class="text-center mt-4 font-weight-light"> New Employee? <a href="register.php" class="text-primary">Create Account</a>
+                  <div class="text-center mt-4 font-weight-light"> New Employee? <a href="register" class="text-primary">Create Account</a>
                   </div>
                 </form>
               </div>
@@ -45,4 +45,37 @@ include "includes/head.php";
     <script src="../../assets/js/misc.js"></script>
     <!-- endinject -->
   </body>
+  <script src="assets/js/jquery-3.4.1.min.js"></script>
+<script src="assets/js/toaster.min.js"></script>
+
+<?php
+    if (isset($_GET['typ'])) {
+?>
+<script>
+
+                    toastr[<?php echo $_GET['typ']?>](<?php echo $_GET['msg']?>)
+
+                    toastr.options = {
+                      "closeButton": false,
+                      "debug": false,
+                      "newestOnTop": true,
+                      "progressBar": false,
+                      "positionClass": "toast-top-right",
+                      "preventDuplicates": false,
+                      "onclick": null,
+                      "showDuration": "900",
+                      "hideDuration": "1000",
+                      "timeOut": "5000",
+                      "extendedTimeOut": "1000",
+                      "showEasing": "swing",
+                      "hideEasing": "linear",
+                      "showMethod": "fadeIn",
+                      "hideMethod": "fadeOut"
+                    }
+</script>
+<?php
+    }
+
+?>
+
 </html>

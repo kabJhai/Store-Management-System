@@ -8,7 +8,7 @@ if(isset($_POST['login'])){
     $query = $DBcon->query("SELECT * FROM employee WHERE email = '".$email."'");
     $count = mysqli_num_rows($query);
     if($count == 0) {
-        header("Location:../login");
+        header("Location:../login?msg='Invalid Credentials'&typ='error'");
     }else{
         $row=$query->fetch_array();
         $password_db = $row['pass'];
@@ -23,7 +23,7 @@ if(isset($_POST['login'])){
             $_SESSION['department_name'] = $row['department_name'];
             header("Location:../index");
         }else{
-            header("Location:../login");
+            header("Location:../login?msg='Invalid Credentials'&typ='error'");
         }
     }
 }
@@ -379,7 +379,7 @@ if(isset($_POST['grn'])){
     header("Location:../index?msg='".$message."'&typ='".$type."'");
 
 }
-//TODO: Handle notification for registration
+
 if(isset($_POST['register'])){
     $fn = $_POST['fn'];
     $ln = $_POST['ln'];
@@ -407,10 +407,10 @@ if(isset($_POST['register'])){
         '".$password."',
         '".$department."'
         )")){
-            echo "Successfully saved";
-    
+        header("Location:../login?msg='Registration Successful. Please Login'&typ='success'");
     }else{
-        echo "There is an error!";
+        header("Location:../register?msg='Request not completed successfully, try again'&typ='error'");
+
     }
 }
 
