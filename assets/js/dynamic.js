@@ -455,11 +455,14 @@ function calculateUnitGRN(formNum) {
   grandTotal.value = sumTotal; 
 
 }
-function printReport(){
+function printReport(type){
   var restore_page = document.body.innerHTML;
   document.getElementById("sidebar").style = "display:none";
   document.getElementById("nav_bar").style = "display:none";
   document.getElementById("print_button").style = "display:none";
+  if (type=="movement") {
+    document.getElementById("form").style = "display:none";
+  }
   var print_content = document.getElementById("paper").innerHTML;
   document.body.innerHTML = print_content;
   window.print();
@@ -490,6 +493,25 @@ function selected(type) {
       }
     }else{
     year.setAttribute("required","");
+    }
+  }
+}
+
+function filter_cn(type) {
+  let name = document.getElementById('name');
+  let code = document.getElementById('code');
+  if (type=="name") {
+    if (name.value == "") {
+      code.removeAttribute("disabled");
+    }else{
+      code.setAttribute("disabled","");
+    }
+  }
+  if (type=="code") {
+    if (code.value == "") {
+      name.removeAttribute("disabled");
+    }else{
+      name.setAttribute("disabled","");
     }
   }
 }

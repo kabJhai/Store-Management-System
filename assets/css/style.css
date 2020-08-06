@@ -1,3 +1,17 @@
+.grand_total{
+  background-color: rgba(40,40,40,0.5);
+  color: #fff;
+  font-weight: bold;
+}
+
+.success{
+  color: green;
+  font-weight: bold;
+}
+.danger{
+  color: red;
+  font-weight: bold;
+}
 /*-------------------------------------------------------------------
   ===== Table of Contents =====
 
@@ -13393,19 +13407,6 @@ dl {
   margin-top: 3%
 }
 
-.grand_total{
-  background-color: rgba(40,40,40,0.5);
-  color: #fff;
-  font-weight: bold;
-}
 
-.success{
-  color: green;
-  font-weight: bold;
-}
-.danger{
-  color: red;
-  font-weight: bold;
-}
 
 /*# sourceMappingURL=style.css.map */
