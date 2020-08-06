@@ -4,11 +4,19 @@ include "includes/navbar.php";
 include "includes/sidebar.php";
 $q = "";
 if(isset($_GET['code'])||isset($_GET['name'])||isset($_GET['year'])){
-  $code = $_GET['code'];
   $day = $_GET['day'];
   $month = $_GET['month'];
   $year = $_GET['year'];
-  $name =  $_GET['name'];
+  if (isset($_GET['name'])==0) {
+    $name = "";
+  }else {
+    $name =  $_GET['name'];    
+  }
+  if (isset($_GET['code'])==0) {
+    $code = "";
+  }else {
+    $code =  $_GET['code'];    
+  }
   $count = 0;
   if (strlen($code)>0) {
     $q = "code = '".$code."'";
@@ -36,25 +44,19 @@ if(isset($_GET['code'])||isset($_GET['name'])||isset($_GET['year'])){
     $q = $q."done_date Like '".$date."%'";
     $count = 1;
   }
-  // if (strlen($name)>0) {
-  //   if ($count==1) {
-  //     $q = $q." AND (";
-  //   }
-  //   $query = $DBcon->query("SELECT * FROM material WHERE material_name LIKE '%".$name."' OR  material_name LIKE '".$name."%' OR   material_name LIKE '%".$searched."%'");
-  //   while ($row = $query->fetch_assoc()) {
-  //     $query1 = $DBcon->query("SELECT * FROM bin_log WHERE code=".$row['code']);
-  //     $i = mysqli_num_rows($query1);
-  //     if ($i >0) {
-  //       while ($row1 = $query1->fetch_assoc()) {
-  //         $q = $q." OR ";
-  //       }
-  //     }
-  //   }
-  //   if ($count==1) {
-  //     $q = $q.")";
-  //   }
+  if (strlen($name)>0) {
+    if ($count==1) {
+      $q = $q." AND (";
+    }
+    $query = $DBcon->query("SELECT * FROM material WHERE material_name LIKE '".$name."%'");
+    while ($row = $query->fetch_assoc()) {
+      $q = $q." code = ".$row['code'];
+    }
+    if ($count==1) {
+      $q = $q.")";
+    }
 
-  // }
+  }
   
 }
 ?>
@@ -63,11 +65,11 @@ if(isset($_GET['code'])||isset($_GET['name'])||isset($_GET['year'])){
           <div class="col-lg-12 grid-margin stretch-card">
                 <div class="card">
                   <div class="card-body">
-                  <form method="get">
+                  <form method="get" id="form">
                   <div class="input-group mb-3">
                   
-                    Filter by:<input type="text" class="form-control" placeholder="Item Code" name="code" aria-describedby="basic-addon2">
-                    <input type="text" class="form-control" placeholder="Item Name" name="name" aria-describedby="basic-addon2">
+                    <input type="text" class="form-control" placeholder="Item Code" name="code"  id="code"  oninput="filter_cn('code')" aria-describedby="basic-addon2" >
+                    <input type="text" class="form-control" placeholder="Item Name" name="name" id="name" oninput="filter_cn('name')" aria-describedby="basic-addon2">
 
                     <select class="form-control" id="day" name="day" oninput="selected('day')">
                       <option value="">Day</option>
@@ -81,7 +83,7 @@ if(isset($_GET['code'])||isset($_GET['name'])||isset($_GET['year'])){
                       }
                       ?>
                     </select>
-                    <select class="form-control" id="month" name="month">
+                    <select class="form-control" id="month"  oninput="selected('month')" name="month">
                       <option value="">Month</option>
                       <?php
                       $i = 1;
@@ -112,7 +114,7 @@ if(isset($_GET['code'])||isset($_GET['name'])||isset($_GET['year'])){
                   </form>
                     <h4 class="card-title">Material Movement Report</h4>
                     </p>
-                    <strong>Date <span id="date"></span></strong><br/>
+                    <strong>Report Generated On <span id="date"></span></strong><br/>
                         <script>
                         var d = new Date();
                         document.getElementById('date').innerHTML = d.getDate()+" - "+(d.getUTCMonth()+1)+" - "+d.getFullYear();
@@ -186,11 +188,13 @@ if(isset($_GET['code'])||isset($_GET['name'])||isset($_GET['year'])){
                           <div class="form-group row">
                             <div class="col-sm-3">
                             </div>
+                            <button type="button" onclick="printReport('movement')" id="print_button" name="approve" class="btn btn-gradient-primary btn-icon-text col-sm-6 floating">
+                              Print Report</button>
                             <div class="col-sm-3">
                             </div>
-                            </div>
+                          </div>
                         </div>
-                      </div>
+                     </div>
 
                   </div>
                 </div>

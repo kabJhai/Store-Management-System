@@ -68,7 +68,7 @@ include "includes/sidebar.php";
                           <td class="grand_total"> <?php echo $total_quantity;?> </td>
                           <td class="grand_total"> </td>
                           <td class="grand_total"> <?php echo $grand_total." ETB";?> </td>
-                          <td> - </td>
+                          <td>  </td>
                       </tbody>
                     </table>
                     <div class="row">
@@ -76,7 +76,7 @@ include "includes/sidebar.php";
                           <div class="form-group row">
                             <div class="col-sm-3">
                             </div>
-                            <button type="button" onclick="printReport()" id="print_button" name="approve" class="btn btn-gradient-success btn-icon-text col-sm-4 floating">
+                            <button type="button" onclick="printReport('inventory')" id="print_button" name="approve" class="btn btn-gradient-primary btn-icon-text col-sm-4 floating">
                               Print</button>
                             <div class="col-sm-3">
                             </div>
