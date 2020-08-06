@@ -66,7 +66,7 @@
             ?>
 
             <li class="nav-item">
-              <a class="nav-link" href="../../pages/icons/mdi.html">
+              <a class="nav-link" href="search">
                 <span class="menu-title">Search for Item in Store</span>
                 <i class="mdi mdi-file-find menu-icon"></i>
               </a>
