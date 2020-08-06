@@ -211,16 +211,16 @@ if(isset($_GET['code'])||isset($_GET['name'])||isset($_GET['year'])){
                       <?php
                           }else{
                             ?>
-                            <div class="row">
-                              <div class="col-md-12">
-                                <div class="form-group row">
-                                  <div class="col-sm-2">
-                                  <p class="text-danger text-capitalize display-5 align-self-center">  
+                    <div class="row">
+                        <div class="col-md-12">
+                          <div class="form-group row">
+                            <div class="col-sm-3">
+                            </div>
+                            <p class="text-danger text-capitalize display-5 align-self-center">  
                                     Couldn't find anything matching your search "<span class="h6"><?php echo $search?>"</p>
-                                  <div class="col-sm-1">
-                                  </div>
-                                </div>
-                              </div>
+                            <div class="col-sm-3">
+                            </div>
+                            </div>
                           </div>
                             <?php
                           } 
