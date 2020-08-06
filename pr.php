@@ -32,7 +32,8 @@ include "includes/sidebar.php";
                                 <div class="form-group row">
                                   <strong class="col-sm-4 col-form-label">From:</strong>
                                   <div class="col-sm-8">
-                                  <input class="form-control issuing" name="DID" type="text" value="ICT Department">                                  </div>
+                                  <input class="form-control issuing" name="DID" type="text" value="">
+                                   </div>
                                 </div>
                               </div>
                         </div>
